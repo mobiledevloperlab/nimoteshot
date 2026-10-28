@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F8F9FA">
+  <meta name="description" content="NimoteShot creates bilingual app store screenshots from real captures.">
+  <title>NimoteShot — App screenshot studio</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/nimoteshot-icon.svg">
+  <link rel="stylesheet" href="/style.css">
+  <script defer src="/editor-i18n.js"></script>
+  <script defer src="/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/"><img class="brand-icon" src="/assets/nimoteshot-icon.svg" width="34" height="34" alt=""><span>NimoteShot</span></a>
+    <nav><span class="status"><i></i><span data-i18n="local">本地优先</span></span><button id="theme" class="icon-button" type="button" aria-label="Theme">◐</button><label class="language-select"><span class="visually-hidden">Language</span><select id="language" aria-label="Language"><option value="zh">中文</option><option value="en">English</option><option value="ja">日本語</option><option value="ko">한국어</option><option value="es">Español</option></select></label></nav>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow" data-i18n="eyebrow">应用商店截图工作台</p>
+        <h1 data-i18n-html="headline">把真实产品体验，<br><em>变成清晰的商店故事。</em></h1>
+        <p class="hero-text" data-i18n="intro">上传真实界面，选择视觉模型与设计方向，一次生成多语言、多设备尺寸的上架截图。</p>
+        <div class="hero-actions"><a href="#workspace" class="button primary" data-i18n="start">开始制作 <b>↓</b></a><span data-i18n="localNote">图片与密钥只在本地服务中处理</span></div>
+        <div class="metrics"><span><b>6</b><small data-i18n="formatMetric">设备规格</small></span><span><b>5</b><small data-i18n="languageMetric">输出语言</small></span><span><b>1–40</b><small data-i18n="captureMetric">真实 PNG</small></span></div>
+      </div>
+      <section id="nimotecode-demo" class="hero-visual demo-carousel" aria-label="NimoteCode demo">
+        <div class="demo-caption"><div><p class="eyebrow" data-i18n="demoEyebrow">精选应用 · 真实作品</p><h2>NimoteCode</h2><p data-i18n="demoIntro">把开发工作台，装进口袋。</p></div><span class="demo-badge" data-i18n="demoBadge">截图生成示例</span></div><p class="demo-source" data-i18n="demoSource">基于 NimoteCode 真实界面，由 NimoteShot 生成的应用商店截图。</p><div class="demo-features"><span>SSH</span><span>Git</span><span>Terminal</span><span>AI coding</span></div>
+        <div class="carousel-viewport" tabindex="0" aria-label="NimoteCode screenshots">
+          <div class="hero-gallery" id="demo-gallery">
+            <a href="/assets/demo-previews/01_feature.png" target="_blank" rel="noopener"><img src="/assets/demo-previews/01_feature.png" width="1320" height="2868" decoding="async" alt="Generated Nimote Code store screenshot 1" loading="eager"></a><a href="/assets/demo-previews/02_feature.png" target="_blank" rel="noopener"><img src="/assets/demo-previews/02_feature.png" width="1320" height="2868" decoding="async" alt="Generated Nimote Code store screenshot 2" loading="lazy"></a><a href="/assets/demo-previews/03_feature.png" target="_blank" rel="noopener"><img src="/assets/demo-previews/03_feature.png" width="1320" height="2868" decoding="async" alt="Generated Nimote Code store screenshot 3" loading="lazy"></a><a href="/assets/demo-previews/04_feature.png" target="_blank" rel="noopener"><img src="/assets/demo-previews/04_feature.png" width="1320" height="2868" decoding="async" alt="Generated Nimote Code store screenshot 4" loading="lazy"></a><a href="/assets/demo-previews/05_feature.png" target="_blank" rel="noopener"><img src="/assets/demo-previews/05_feature.png" width="1320" height="2868" decoding="async" alt="Generated Nimote Code store screenshot 5" loading="lazy"></a><a href="/assets/demo-previews/06_feature.png" target="_blank" rel="noopener"><img src="/assets/demo-previews/06_feature.png" width="1320" height="2868" decoding="async" alt="Generated Nimote Code store screenshot 6" loading="lazy"></a><a href="/assets/demo-previews/07_feature.png" target="_blank" rel="noopener"><img src="/assets/demo-previews/07_feature.png" width="1320" height="2868" decoding="async" alt="Generated Nimote Code store screenshot 7" loading="lazy"></a><a href="/assets/demo-previews/08_feature.png" target="_blank" rel="noopener"><img src="/assets/demo-previews/08_feature.png" width="1320" height="2868" decoding="async" alt="Generated Nimote Code store screenshot 8" loading="lazy"></a>
+          </div>
+        </div>
+        <p class="demo-hint" data-i18n="demoHint">浏览真实界面，点击截图查看大图。</p><div class="carousel-controls"><button class="carousel-button" id="demo-previous" type="button" aria-label="Previous examples">←</button><div class="carousel-dots" id="demo-dots" aria-label="Example pages"></div><button class="carousel-button" id="demo-next" type="button" aria-label="Next examples">→</button></div>
+      </section>
+    </section>
+
+    <section id="workspace" class="workspace">
+      <div class="workspace-heading"><div><p class="eyebrow" data-i18n="builderEyebrow">截图生成器</p><h2 data-i18n="builderTitle">用四步完成一套截图</h2></div><p data-i18n="builderNote">先补足产品上下文，再让模型从真实界面中提炼准确文案。</p></div>
+      <div class="studio-layout"><aside class="studio-sidebar"><p id="step-counter" class="eyebrow" aria-live="polite"></p><ol class="steps" aria-label="Workflow"><li class="active"><button type="button" data-step-target="product"><b>01</b><span data-i18n="stepProduct">产品信息</span></button></li><li><button type="button" data-step-target="captures"><b>02</b><span data-i18n="stepCaptures">真实截图</span></button></li><li><button type="button" data-step-target="style"><b>03</b><span data-i18n="stepStyle">视觉风格</span></button></li><li><button type="button" data-step-target="model"><b>04</b><span data-i18n="stepModel">视觉模型</span></button></li></ol><p id="step-guidance" class="sidebar-note"></p></aside>
+      <form id="studio-form" novalidate>
+        <section class="panel" tabindex="-1" id="product">
+          <div class="panel-head"><span>01</span><div><h3 data-i18n="productTitle">告诉我们产品是什么</h3><p data-i18n="productNote">填写功能简介，或提供公开官网。两者都提供时，模型会交叉参考。</p></div></div>
+          <div class="field-grid product-fields"><label class="field full"><span data-i18n="appName">应用名称</span><input id="brand" maxlength="40" autocomplete="off" required><small data-i18n="appNameHint">示例：Nimote Code、Focus Habit</small></label><label class="field"><span data-i18n="description">核心功能与目标用户</span><textarea id="description" maxlength="1200" rows="4"></textarea><small data-i18n="descriptionHint">示例：面向开发者的移动 IDE，支持 SSH、Git 和终端。写 1–3 句话；有官网时可留空。</small></label><label class="field"><span data-i18n="website">公开产品官网（可选）</span><input id="website" type="url" inputmode="url" placeholder="https://example.com"><small data-i18n="websiteHint">示例：https://example.com。仅读取公开 HTML 文本作为文案参考。</small></label><details class="design-options field full"><summary data-i18n="optionalDesign">设计提示词与补充要求（可选）</summary><div class="field-grid"><label class="field full"><span data-i18n="promptPreset">设计提示词预设</span><select id="prompt-preset"></select><small id="preset-description"></small></label><label class="field full"><span data-i18n="designPrompt">自定义版型与设计提示词（可选）</span><textarea id="design-prompt" maxlength="2000" rows="3"></textarea><small data-i18n="designPromptHint">示例：突出手机样机，使用杂志感大标题和大量留白；避免渐变。此要求会和所选风格一起交给模型。</small></label></div></details><fieldset class="field full locale-field"><legend data-i18n="outputLanguages">输出语言</legend><small data-i18n="outputLanguagesHint">英文始终生成；再选择 1–4 种本地化文案。</small><div id="locale-list" class="locale-list"></div></fieldset></div>
+        </section>
+
+        <section class="panel" tabindex="-1" id="captures">
+          <div class="panel-head"><span>02</span><div><h3 data-i18n="capturesTitle">上传真实产品界面</h3><p data-i18n="capturesNote">先说明截图来自什么设备，再选择要交付的商店规格；系统会保留原始界面比例。</p></div></div>
+          <div class="format-setup">
+            <fieldset class="field capture-profile"><legend data-i18n="sourceProfile">原始截图设备与方向</legend><small data-i18n="sourceProfileHint">选择最接近上传图片的设备与方向；系统会优先匹配相同画面比例。</small><div class="segmented" role="radiogroup"><label><input type="radio" name="source-profile" value="iphone_portrait" checked><span data-i18n="sourceIphone">iPhone · 竖屏</span></label><label><input type="radio" name="source-profile" value="iphone_landscape"><span data-i18n="sourceIphoneLandscape">iPhone · 横屏</span></label><label><input type="radio" name="source-profile" value="android_portrait"><span data-i18n="sourceAndroid">Android · 竖屏</span></label><label><input type="radio" name="source-profile" value="android_landscape"><span data-i18n="sourceAndroidLandscape">Android · 横屏</span></label><label><input type="radio" name="source-profile" value="ipad_portrait"><span data-i18n="sourceTabletPortrait">iPad / 平板 · 竖屏</span></label><label><input type="radio" name="source-profile" value="ipad_landscape"><span data-i18n="sourceTablet">iPad / 平板 · 横屏</span></label></div></fieldset>
+            <fieldset class="field export-targets"><legend data-i18n="exportTargets">要生成的商店规格</legend><small data-i18n="exportTargetsHint">按需多选。每个规格会导出其对应 App Store 或 Google Play 的常用分辨率。</small><div class="target-grid"><label><input type="checkbox" value="iphone_portrait" checked><span><b data-i18n="targetIphone">iPhone 竖屏</b><small>1320 × 2868 + 6</small></span></label><label><input type="checkbox" value="iphone_landscape"><span><b data-i18n="targetIphoneLandscape">iPhone 横屏</b><small>2868 × 1320 + 2</small></span></label><label><input type="checkbox" value="ipad_portrait"><span><b data-i18n="targetTabletPortrait">iPad 竖屏</b><small>2064 × 2752 + 5</small></span></label><label><input type="checkbox" value="ipad_landscape" checked><span><b data-i18n="targetTablet">iPad 横屏</b><small>2752 × 2064 + 7</small></span></label><label><input type="checkbox" value="android_portrait" checked><span><b data-i18n="targetAndroid">Android 竖屏</b><small>1080 × 1920 + 2</small></span></label><label><input type="checkbox" value="android_landscape" checked><span><b data-i18n="targetAndroidLandscape">Android 横屏</b><small>1920 × 1080 + 2</small></span></label></div></fieldset>
+          </div>
+          <label id="dropzone" class="dropzone" for="files"><input id="files" type="file" accept="image/png,image/jpeg,image/webp" aria-describedby="upload-error" multiple><div class="upload-icon">+</div><strong data-i18n="dropTitle">选择 PNG，或拖放到这里</strong><span data-i18n="dropHint">建议包含手机、横屏、iPad 和不同语言的真实界面</span></label><p id="upload-error" class="upload-error" role="alert"></p><div id="file-list" class="file-list" aria-live="polite"></div>
+        </section>
+
+        <section class="panel" tabindex="-1" id="style">
+          <div class="panel-head"><span>03</span><div><h3 data-i18n="styleTitle">选择设计方向</h3><p data-i18n="styleNote">一个风格会保持所有设备与语言输出的一致性。</p></div></div>
+          <label class="field palette-filter"><span data-i18n="appCategory">按应用类型选择配色</span><select id="app-category"></select></label><div id="style-list" class="style-grid" role="radiogroup"></div>
+        </section>
+
+        <section class="panel" tabindex="-1" id="model">
+          <div class="panel-head"><span>04</span><div><h3 data-i18n="modelTitle">选择视觉模型</h3><p data-i18n="modelNote">模型只分析截图并起草文案；排版、图片和 ZIP 在本地完成。</p></div></div>
+          <div class="provider-note"><strong data-i18n="providerNoteTitle">国内与国际模型均可使用</strong><span data-i18n="providerNote">已预设通义、智谱、豆包、混元、OpenAI、Gemini、Claude 和本地 Ollama。</span></div>
+          <div class="field-grid"><label class="field"><span data-i18n="provider">服务商</span><select id="provider"></select></label><label class="field"><span data-i18n="modelPick">视觉模型</span><select id="model-select"></select></label></div>
+          <label id="key-field" class="field"><span data-i18n="apiKey">API 密钥</span><input id="api-key" type="password" autocomplete="off" placeholder="sk-... 或服务商 API Key"><small id="key-note"></small></label>
+          <div class="config-methods"><div><strong data-i18n="configTitle">配置、测试并复用模型</strong><span id="config-source" data-i18n="configPage">当前页输入的密钥只用于本次生成。</span><span id="config-status" class="config-status" aria-live="polite"></span></div><div class="config-actions"><button id="copy-config" type="button" class="text-button" data-i18n="copyConfig">复制配置提示词</button><button id="save-config" type="button" class="text-button" data-i18n="saveConfig">验证并保存到本机</button></div></div>
+          <details id="advanced" class="advanced"><summary data-i18n="advanced">高级设置：模型 ID 或接口地址</summary><div class="field-grid"><label class="field"><span data-i18n="customModel">自定义模型或接入点 ID</span><input id="model-custom" autocomplete="off" placeholder="示例：gpt-4o 或 ep-2025xxxx"><small id="model-help"></small></label><label class="field"><span data-i18n="baseUrl">API 基础地址</span><input id="base-url" type="url" placeholder="https://api.example.com/v1"><small data-i18n="baseUrlHint">示例：https://api.example.com/v1；仅在需覆盖预设地址时填写。</small></label></div></details>
+          <div id="model-diagnostic" class="model-diagnostic hidden" role="alert"></div><div id="readiness" class="readiness"><div><i></i><span id="readiness-text" data-i18n="readiness">填写信息后即可检查配置</span></div><button id="check" type="button" data-i18n="check">检查配置</button></div>
+        </section>
+
+        <div id="step-error" class="upload-error" role="alert"></div><div class="wizard-actions"><button id="step-back" class="button quiet" type="button"></button><span id="step-summary"></span><button id="step-next" class="button primary" type="button"></button></div><div id="error" class="error hidden" role="alert"></div>
+        <div class="submit"><div><strong data-i18n="submitTitle">准备生成</strong><span data-i18n="submitNote">自动创建任务目录、校验导出并打包 ZIP。</span></div><label><input type="checkbox" id="manual-mode"> <span data-i18n="manualMode">手动设计（无需密钥）</span></label><button id="generate" class="button primary" type="submit"><span data-i18n="generate">生成全部截图</span><b>→</b></button></div>
+      </form></div>
+    </section>
+
+    <section id="progress" class="progress hidden" aria-live="polite"><div class="spinner"></div><div><p data-i18n="working">正在生成</p><h2 id="progress-title"></h2><div class="export-progress"><progress id="export-progress" max="100" value="0"></progress><strong id="export-progress-value">0%</strong></div><span data-i18n="progressNote">请保持本地服务运行，完成后可下载 ZIP。</span><ol id="agent-trace" class="agent-trace" aria-label="Agent activity"></ol></div></section>
+    <section id="result" class="result hidden" aria-live="polite"><div class="result-copy"><p data-i18n="ready">生成完成</p><h2 data-i18n="resultTitle">商店截图已经准备好</h2><span id="result-summary"></span><div id="export-location" class="export-location hidden"><span id="export-path-label"></span><code id="export-path"></code></div><div class="result-actions"><a id="download" class="button primary" href="#" data-i18n="download">下载 ZIP</a><button id="open-export" class="button quiet hidden" type="button"></button></div></div><div id="result-previews" class="preview-grid" aria-label="Generated store screenshot previews"></div></section>
+    <section class="cli-card"><div><p class="eyebrow">CLI</p><h2 data-i18n="cliTitle">也可以从终端一键运行</h2><p data-i18n="cliNote">网页和命令行共享相同的模型、校验与输出流程。</p></div><code>python scripts/nimoteshot.py doctor --provider qwen<br>python scripts/nimoteshot.py generate --brand "My App" --description "What it does"</code></section>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-brand"><a href="/" class="footer-name"><img class="footer-logo" src="/assets/nimoteshot-logo.svg" width="196" height="40" alt="NimoteShot"></a><p data-i18n="footer">真实界面，准确表达。</p></div>
+      <nav class="footer-links" aria-label="Project resources">
+        <a id="footer-guide" href="/docs/guide-zh" target="_blank" rel="noopener" data-i18n="footerGuide">使用指南</a>
+        <a href="/docs/contributing" target="_blank" rel="noopener" data-i18n="footerContribute">参与贡献</a>
+        <a href="/docs/security" target="_blank" rel="noopener" data-i18n="footerSecurity">安全与数据</a>
+        <a href="/docs/license" target="_blank" rel="noopener" data-i18n="footerLicense">许可证</a>
+        <a href="/docs/notices" target="_blank" rel="noopener" data-i18n="footerNotices">第三方声明</a>
+      </nav>
+    </div>
+    <div class="footer-meta"><p>© 2026 NimoteShot contributors</p><p data-i18n="footerTerms">完全开源 · GNU AGPLv3+</p></div>
+  </footer>
+</body>
+</html>
