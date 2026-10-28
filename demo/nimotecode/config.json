@@ -1,0 +1,230 @@
+{
+  "locale": "en-US",
+  "brand": "NIMOTECODE",
+  "base_canvas": [
+    1320,
+    2868
+  ],
+  "output_dir": "demo/nimotecode/exports",
+  "preview_dir": "demo/nimotecode/previews",
+  "sizes": [
+    [
+      1320,
+      2868
+    ],
+    [
+      1290,
+      2796
+    ],
+    [
+      1260,
+      2736
+    ],
+    [
+      1284,
+      2778
+    ],
+    [
+      1242,
+      2688
+    ],
+    [
+      1206,
+      2622
+    ],
+    [
+      1179,
+      2556
+    ]
+  ],
+  "colors": {
+    "ink": "#17191E",
+    "muted": "#60656E",
+    "accent": "#C94863",
+    "frame": "#35383E",
+    "backgrounds": [
+      "#F5F4F2",
+      "#EDF0F3",
+      "#F5EDEF",
+      "#F1F2F4"
+    ]
+  },
+  "fonts": {
+    "regular": "store_screenshots/assets/fonts/Inter.ttf",
+    "bold": "store_screenshots/assets/fonts/Inter.ttf"
+  },
+  "layout": {
+    "side_margin": 0.07,
+    "brand_y": 0.045,
+    "title_y": 0.107,
+    "image_y": 0.252,
+    "image_width": 0.84,
+    "radius": 0.031,
+    "title_size": 116,
+    "title_line_height": 128,
+    "subtitle_size": 62
+  },
+  "screens": [
+    {
+      "output": "01_overview.png",
+      "kind": "feature",
+      "title": [
+        "Your IDE.",
+        "Anywhere."
+      ],
+      "subtitle": "Editor \u00b7 SSH \u00b7 AI \u00b7 Git \u00b7 Terminal",
+      "background": 0,
+      "file": "code-editor.png",
+      "crop": [
+        0.03,
+        0.05,
+        0.97,
+        0.83
+      ]
+    },
+    {
+      "file": "ssh-workspace.png",
+      "output": "02_ssh_workspace.png",
+      "title": [
+        "Code over",
+        "SSH."
+      ],
+      "eyebrow": "SSH DEVELOPMENT",
+      "subtitle": "Remote files. Real work.",
+      "variant": "center",
+      "background": 1,
+      "kind": "feature"
+    },
+    {
+      "file": "ai-assistant.png",
+      "output": "03_ai_agent.png",
+      "title": [
+        "Ask AI about",
+        "your code."
+      ],
+      "eyebrow": "AI CODING",
+      "subtitle": "Reads your project files.",
+      "variant": "center",
+      "background": 2,
+      "kind": "feature"
+    },
+    {
+      "file": "code-editor.png",
+      "output": "04_mobile_ide.png",
+      "title": [
+        "Code on",
+        "your phone."
+      ],
+      "eyebrow": "MOBILE IDE",
+      "subtitle": "Edit real projects.",
+      "variant": "center",
+      "background": 0,
+      "kind": "feature"
+    },
+    {
+      "file": "source-control.png",
+      "output": "05_source_control.png",
+      "title": [
+        "Git at a",
+        "glance."
+      ],
+      "eyebrow": "SOURCE CONTROL",
+      "subtitle": "Changes and history.",
+      "variant": "center",
+      "background": 3,
+      "kind": "feature"
+    },
+    {
+      "file": "terminal.png",
+      "output": "06_terminal.png",
+      "title": [
+        "A terminal",
+        "for touch."
+      ],
+      "eyebrow": "MOBILE TERMINAL",
+      "subtitle": "Commands at hand.",
+      "variant": "center",
+      "background": 0,
+      "kind": "feature"
+    },
+    {
+      "file": "workspaces.png",
+      "output": "07_workspaces.png",
+      "title": [
+        "Choose your",
+        "workspace."
+      ],
+      "eyebrow": "WORKSPACES",
+      "subtitle": "Local or remote projects.",
+      "variant": "center",
+      "background": 3,
+      "kind": "feature"
+    },
+    {
+      "output": "08_code_navigation.png",
+      "kind": "feature",
+      "file": "code-editor.png",
+      "title": [
+        "Navigate",
+        "your code."
+      ],
+      "subtitle": "Definitions and references.",
+      "background": 3,
+      "variant": "center",
+      "crop": [
+        0.22,
+        0.02,
+        1.0,
+        0.72
+      ]
+    },
+    {
+      "file": "diagnostics.png",
+      "output": "09_lsp.png",
+      "title": [
+        "Find issues",
+        "as you code."
+      ],
+      "eyebrow": "LANGUAGE TOOLS",
+      "subtitle": "LSP diagnostics in context.",
+      "variant": "center",
+      "background": 1,
+      "kind": "feature"
+    },
+    {
+      "file": "settings.png",
+      "output": "10_settings.png",
+      "title": [
+        "Make it",
+        "yours."
+      ],
+      "eyebrow": "PERSONALIZATION",
+      "subtitle": "Theme, language, scale.",
+      "variant": "center",
+      "background": 0,
+      "kind": "feature"
+    }
+  ],
+  "localizations": {
+    "zh-CN": {
+      "brand": "NIMOTECODE",
+      "fonts": {
+        "regular": "store_screenshots/assets/fonts/NotoSansCJKsc-Regular.otf",
+        "bold": "store_screenshots/assets/fonts/NotoSansCJKsc-Bold.otf"
+      },
+      "screens": {
+        "01_overview.png": {"title": ["随时随地，", "打开你的 IDE。"], "subtitle": "编辑 · SSH · AI · Git · 终端"},
+        "02_ssh_workspace.png": {"title": ["通过 SSH", "远程开发。"], "subtitle": "远程文件，真实项目。"},
+        "03_ai_agent.png": {"title": ["让 AI 理解", "你的代码。"], "subtitle": "基于项目文件协助开发。"},
+        "04_mobile_ide.png": {"title": ["在手机上", "编写代码。"], "subtitle": "随时编辑真实项目。"},
+        "05_source_control.png": {"title": ["Git 变更，", "一目了然。"], "subtitle": "查看修改与历史记录。"},
+        "06_terminal.png": {"title": ["指尖上的", "终端。"], "subtitle": "随时运行所需命令。"},
+        "07_workspaces.png": {"title": ["选择你的", "工作区。"], "subtitle": "本地与远程项目。"},
+        "08_code_navigation.png": {"title": ["快速定位", "代码。"], "subtitle": "查看定义与引用。"},
+        "09_lsp.png": {"title": ["边写代码，", "边发现问题。"], "subtitle": "就地查看 LSP 诊断。"},
+        "10_settings.png": {"title": ["打造你的", "开发环境。"], "subtitle": "调整主题、语言与缩放。"}
+      }
+    }
+  },
+  "source_dir": "demo/nimotecode/originals"
+}
