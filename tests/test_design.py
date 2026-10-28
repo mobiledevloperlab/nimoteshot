@@ -1,5 +1,6 @@
 import copy
 import json
+import sys
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -48,6 +49,7 @@ class DesignTests(unittest.TestCase):
                 self.assertEqual(image.size, size)
                 self.assertEqual(image.mode, 'RGB')
 
+    @unittest.skipUnless(sys.platform.startswith('linux'), 'Exact pixel baselines are generated on Linux')
     def test_visual_baselines(self):
         import hashlib
         baseline=json.loads((ROOT/'tests/visual-baselines.json').read_text())

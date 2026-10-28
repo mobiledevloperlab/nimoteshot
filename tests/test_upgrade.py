@@ -68,10 +68,10 @@ class UpgradeTests(unittest.TestCase):
             get=lambda refresh=False:analyzer.cached_analysis(folder,['same-content'],produce,design.validate_design,refresh=refresh)
             get();get();self.assertEqual(len(calls),1)
             get(True);self.assertEqual(len(calls),2)
-            with analyzer.Cache(folder) as cache:
-                key=next(k for k in cache if not str(k).startswith('lock:'))
-                cache.set(key,'broken JSON');get();self.assertEqual(len(calls),3)
-                cache.set(key,json.dumps(proposal()),expire=-1)
+            cache=next(Path(folder).glob('*.json'))
+            cache.write_text('broken JSON');get();self.assertEqual(len(calls),3)
+            payload=json.loads(cache.read_text());payload['expires_at']=0
+            cache.write_text(json.dumps(payload))
             get();self.assertEqual(len(calls),4)
             analyzer.cached_analysis(folder,['new-image'],produce,design.validate_design)
             self.assertEqual(len(calls),5)

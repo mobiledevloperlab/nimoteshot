@@ -2,11 +2,13 @@
 
 ## Unreleased
 
-- Complete the DeepSeek Flash vision → validated design → deterministic preview/export workflow, with bounded DiskCache reuse, independent copy/layout actions and five-language editing.
+- Complete the DeepSeek Flash vision → validated design → deterministic preview/export workflow, with bounded JSON cache reuse, independent copy/layout actions and five-language editing.
 - Add shared capture validation, safe template tokens, refined detail/paired layouts, text readability limits, multi-device ZIP completeness checks and Chromium/visual/fault-injection coverage.
+- Replace DiskCache after its unsafe-pickle disclosure with an atomic, size-bounded JSON cache; update CI actions to Node 24 and keep exact pixel baselines on their Linux reference platform.
 - Remove unused optional review briefs from `prompts/`; runtime prompts remain in the application.
 - 完善 DeepSeek Flash 视觉分析、Schema 设计校验、本地预览与导出链路，增加有界缓存、独立文案／布局操作和五语言编辑。
 - 补齐图片校验、受限模板、特写／双图构图、文字可读性保护、多设备 ZIP 校验及浏览器／视觉／异常测试；移除未使用的人工复核说明目录。
+- 针对 DiskCache 的不安全 pickle 公告，改用原子写入且限制容量的 JSON 缓存；CI Actions 升级至 Node 24，精确像素基线限定在 Linux 参考平台。
 
 - Re-license project-owned code and documentation under GNU AGPLv3 or later, making NimoteShot fully open source and free to use, modify, and share. Modified versions offered as network services must provide corresponding source under AGPLv3+.
 - 将自有代码和文档改为 GNU AGPLv3 或更高版本：NimoteShot 现为完全开源、可免费使用、修改与分享的软件；以网络服务提供修改版时，须依 AGPLv3+ 提供对应源码。

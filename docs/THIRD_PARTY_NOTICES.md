@@ -21,7 +21,6 @@ NimoteShot 原创贡献采用 [GNU Affero General Public License v3.0 或更高�
 | `demo/nimotecode/originals/` and `previews/` | Redistribution permission not established by this repository / 仓库内尚无可核验的再分发授权记录 | [Demo](../demo/nimotecode/README.md); release gate in [audit](OPEN_SOURCE_AUDIT.md) |
 | Pillow (installed dependency) | HPND; bundled native libraries have additional notices | [Upstream license](https://github.com/python-pillow/Pillow/blob/main/LICENSE) |
 | jsonschema (installed dependency) | MIT | [Upstream license](https://github.com/python-jsonschema/jsonschema/blob/main/COPYING) |
-| DiskCache (installed dependency) | Apache-2.0 | [Upstream license](https://github.com/grantjenks/python-diskcache/blob/master/LICENSE) |
 | Playwright Python (development-only dependency) | Apache-2.0 | [Upstream license](https://github.com/microsoft/playwright-python/blob/main/LICENSE) |
 | OpenAI Python SDK (installed dependency) | Apache-2.0 | [Upstream license](https://github.com/openai/openai-python/blob/main/LICENSE) |
 

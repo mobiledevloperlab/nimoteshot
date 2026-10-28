@@ -14,7 +14,7 @@ The main gaps were unversioned copy-only AI proposals, duplicated template choic
 | --- | --- |
 | `nimoteshot/providers.py`, `models.json` | Default DeepSeek Flash; retain other providers; real image blocks; SDK timeout/retry/error handling |
 | `nimoteshot/captures.py` | Shared PNG/JPEG/WebP verification, size/dimension limits, safe upload filenames |
-| `nimoteshot/analyzer.py` | DiskCache content-addressed analysis, expiry, size eviction, concurrency lock |
+| `nimoteshot/analyzer.py` | JSON content-addressed analysis, expiry, size eviction, concurrency lock |
 | `nimoteshot/planner.py` | Copy regeneration from recorded visual evidence and local layout recommendations |
 | `nimoteshot/design.py`, `design.schema.json`, `templates.json` | Versioned schema, safe repair, closed design tokens and template registry |
 | `nimoteshot/pipeline.py` | Shared orchestration, source/config/analysis archives, compatibility checks |
@@ -39,7 +39,7 @@ Pillow verifies actual PNG/JPEG/WebP contents, at most 32 MiB and 8192 pixels pe
 
 The prompts require visible evidence, distinguish menu visibility from successful behavior, retain uncertainty, and treat screenshot/website text as data. Recorded evidence is displayed for review. Copy regeneration sends evidence, not images, and preserves source mapping, analysis, design and order. Layout regeneration uses recorded page types locally without a model call.
 
-Cache keys include schema/prompt version, actual image hashes, filenames, context, selected model and effective endpoint. `store_screenshots/runs/.vision-cache` uses DiskCache with a seven-day TTL, 64 MiB size limit, LRU eviction and a per-key lock. Failed/invalid results are not cached. Reanalyze explicitly refreshes the entry. Delete the cache directory while idle to clear it. Each exported task also saves `analysis.json`, `config.json` and unchanged originals with SHA-256 manifest.
+Cache keys include schema/prompt version, actual image hashes, filenames, context, selected model and effective endpoint. `store_screenshots/runs/.vision-cache` uses non-executable JSON entries with a seven-day TTL, 64 MiB size limit, LRU eviction, atomic replacement and a per-key lock. Failed/invalid results are not cached. Reanalyze explicitly refreshes the entry. Delete the cache directory while idle to clear it. Each exported task also saves `analysis.json`, `config.json` and unchanged originals with SHA-256 manifest.
 
 ## Design and workflow
 
@@ -55,15 +55,15 @@ Apple requirements checked 2026-10-28 against [official screenshot specification
 
 Only `code-editor.png` and `terminal.png` were selected as real test inputs. Paid test credentials were read from ignored `test.md`; no credentials, profiles, downloaded references, generated outputs or caches are committed.
 
-- Unit/regression suite: 42 discovered, 38 passed, four browser tests skipped by default. Covers existing behavior, JSON/schema failures and repairs, filename/locale/template compatibility, PNG/JPEG/WebP, cache hits/refresh/expiry/corruption, factual-evidence requirements, independent copy/layout behavior, all five publication languages, all six device groups, text safety and 17 pixel baselines.
+- Unit/regression suite: 44 discovered, 39 passed, five browser tests skipped by default. Covers existing behavior, JSON/schema failures and repairs, filename/locale/template compatibility, PNG/JPEG/WebP, cache hits/refresh/expiry/corruption, factual-evidence requirements, independent copy/layout behavior, all five publication languages, all six device groups, text safety and 17 Linux pixel baselines.
 - SDK fault injection uses the real OpenAI SDK with HTTPX MockTransport: 429/503 retries, timeout, connection failure, 401 without retries, recovery after a 429, JSON response request and bounded token output. Submitted credentials are absent from user-facing errors.
-- Dedicated Chromium suite: three tests passed, one live test skipped. Covers no-key manual editing, English/Chinese editing, detail/duo selection, order changes, mobile overflow, light/dark logo loading, ZIP download, malformed-JSON failure followed by manual design, and all five interface languages with edits retained.
+- Dedicated Chromium suite: four tests passed, one live test skipped. Covers no-key manual editing, English/Chinese editing, detail/duo selection, order changes, mobile overflow, light/dark logo loading, ZIP download, malformed-JSON failure followed by manual design, all five interface languages with edits retained, and styled project documentation pages.
 - Opt-in live Chromium test: passed with real DeepSeek Flash joint analysis of the two captures, a separate text-only copy request, local layout recommendation, editing, preview and 28 validated PNGs. Editor/terminal recommendations differ (compact/showcase); no browser JavaScript errors were recorded.
 - Live single-image analysis and a cache replay with the model function disabled: passed, using the same code-editor input. A real response returned evidence as a list; canonicalization was added and tested rather than making another image-analysis call just to reformat it.
 - Final composition export: two captures × two languages × 21 iPhone/iPad portrait/landscape resolutions = 84 RGB/sRGB PNGs. Dimensions, ZIP count/CRC and byte-for-byte original SHA-256 checks passed. iPhone and both iPad contact sheets were visually inspected. The iPad composition test deliberately retains the same real phone captures; it does not establish native iPad capture coverage.
 - Ruff, JavaScript syntax checks, repository-link/JSON checks and diff whitespace checks passed.
 
-Local versions: Python 3.12, Pillow 13.0.0, OpenAI SDK 2.54.0, jsonschema 4.26.0, DiskCache 5.6.3 and Playwright 1.64.1. Chromium was run locally; the configured Windows/macOS CI matrix and other browsers were not run in this environment. Design quality and factual copy still benefit from human review; no claim of guaranteed App Store approval or exhaustive device coverage is made.
+Local versions at the time of the review: Python 3.12, Pillow 13.0.0, OpenAI SDK 2.54.0, jsonschema 4.26.0 and Playwright 1.64.1. Chromium was run locally; the configured Windows/macOS CI matrix and other browsers were not run in this environment. Design quality and factual copy still benefit from human review; no claim of guaranteed App Store approval or exhaustive device coverage is made.
 
 Local review artifacts are in ignored `test_outputs/`: `final-overview_2.png`, the iPad contact sheets, `final-app-store.zip`, `live-single-and-cache.json`, `browser-live-result.json` and `final-multidevice-export.json`.
 

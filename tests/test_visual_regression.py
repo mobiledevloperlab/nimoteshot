@@ -2,6 +2,7 @@
 import copy
 import hashlib
 import json
+import sys
 import unittest
 from pathlib import Path
 
@@ -31,6 +32,7 @@ def visual_cases():
 
 
 class VisualRegressionTests(unittest.TestCase):
+    @unittest.skipUnless(sys.platform.startswith('linux'), 'Exact pixel baselines are generated on Linux')
     def test_representative_light_dark_portrait_and_tablet_layouts(self):
         baseline=json.loads((ROOT/'tests/visual-baselines.json').read_text())
         for name,actual in visual_cases():
