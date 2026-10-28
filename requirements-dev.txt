@@ -1,0 +1,6 @@
+-r store_screenshots/requirements.txt
+ruff==0.17.3
+pip-audit==2.10.1
+detect-secrets==1.5.0
+
+playwright>=1.50,<2

@@ -1,0 +1,34 @@
+name: Bug report
+description: Report a reproducible problem in the web UI, CLI, or renderer.
+title: "bug: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: "Do not include API keys, private captures, or generated archives."
+  - type: input
+    id: command
+    attributes:
+      label: Command or UI action
+      placeholder: "./install.sh" 
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior and error output
+    validations:
+      required: true
+  - type: dropdown
+    id: system
+    attributes:
+      label: Operating system
+      options: [Linux, macOS, Windows, Other]
+    validations:
+      required: true
