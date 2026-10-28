@@ -1,0 +1,229 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "screens"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "screens": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "file",
+          "title_en",
+          "subtitle_en"
+        ],
+        "properties": {
+          "file": {
+            "type": "string",
+            "minLength": 1
+          },
+          "analysis": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "page_type": {
+                "enum": [
+                  "editor",
+                  "terminal",
+                  "git",
+                  "agent",
+                  "files",
+                  "settings",
+                  "other",
+                  "unknown"
+                ]
+              },
+              "evidence": {
+                "type": "string",
+                "maxLength": 1000
+              },
+              "uncertainty": {
+                "type": "string",
+                "maxLength": 1000
+              },
+              "theme": {
+                "type": "string",
+                "maxLength": 1000
+              },
+              "priority": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10
+              }
+            }
+          },
+          "design": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "template": {
+                "enum": [
+                  "balanced",
+                  "showcase",
+                  "compact",
+                  "detail",
+                  "duo"
+                ]
+              },
+              "background": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 3
+              },
+              "scale": {
+                "enum": [
+                  "standard",
+                  "small",
+                  "large"
+                ]
+              },
+              "alignment": {
+                "enum": [
+                  "center",
+                  "left",
+                  "right"
+                ]
+              },
+              "focus_region": {
+                "enum": [
+                  "top",
+                  "center",
+                  "bottom"
+                ]
+              },
+              "secondary_file": {
+                "type": "string",
+                "minLength": 1
+              },
+              "typography": {
+                "enum": [
+                  "standard",
+                  "compact"
+                ]
+              }
+            }
+          },
+          "title_en": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 2,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80,
+              "pattern": "^[^\\r\\n\\t\\x00-\\x1f]+$"
+            }
+          },
+          "subtitle_en": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180,
+            "pattern": "^[^\\r\\n\\t\\x00-\\x1f]+$"
+          },
+          "title_zh": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 2,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80,
+              "pattern": "^[^\\r\\n\\t\\x00-\\x1f]+$"
+            }
+          },
+          "subtitle_zh": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180,
+            "pattern": "^[^\\r\\n\\t\\x00-\\x1f]+$"
+          },
+          "title_ja": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 2,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80,
+              "pattern": "^[^\\r\\n\\t\\x00-\\x1f]+$"
+            }
+          },
+          "subtitle_ja": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180,
+            "pattern": "^[^\\r\\n\\t\\x00-\\x1f]+$"
+          },
+          "title_ko": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 2,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80,
+              "pattern": "^[^\\r\\n\\t\\x00-\\x1f]+$"
+            }
+          },
+          "subtitle_ko": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180,
+            "pattern": "^[^\\r\\n\\t\\x00-\\x1f]+$"
+          },
+          "title_es": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 2,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 80,
+              "pattern": "^[^\\r\\n\\t\\x00-\\x1f]+$"
+            }
+          },
+          "subtitle_es": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 180,
+            "pattern": "^[^\\r\\n\\t\\x00-\\x1f]+$"
+          },
+          "target_files": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "locale_files": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "locale_target_files": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "brand_accent": {
+      "type": "string",
+      "pattern": "^#[0-9a-fA-F]{6}$"
+    }
+  }
+}

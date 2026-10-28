@@ -1,0 +1,300 @@
+{
+  "default_provider": "deepseek",
+  "providers": [
+    {
+      "id": "deepseek",
+      "label_en": "DeepSeek · Flash",
+      "label_zh": "DeepSeek · Flash 视觉",
+      "protocol": "openai_compatible",
+      "env": "DEEPSEEK_API_KEY",
+      "base_url": "https://api.deepseek.com",
+      "default_model": "deepseek-flash",
+      "models": [
+        {
+          "id": "deepseek-flash",
+          "label": "DeepSeek Flash",
+          "note_en": "Vision analysis",
+          "note_zh": "视觉分析",
+          "note_ja": "画像解析",
+          "note_ko": "이미지 분석",
+          "note_es": "Análisis visual"
+        }
+      ],
+      "source": "https://api-docs.deepseek.com/guides/vision/",
+      "label_ja": "DeepSeek · Flash",
+      "label_ko": "DeepSeek · Flash",
+      "label_es": "DeepSeek · Flash"
+    },
+    {
+      "id": "qwen",
+      "label_en": "Alibaba Cloud Model Studio · Qwen",
+      "label_zh": "阿里云百炼 · 通义千问",
+      "protocol": "openai_compatible",
+      "env": "DASHSCOPE_API_KEY",
+      "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "default_model": "qwen3-vl-plus",
+      "models": [
+        {
+          "id": "qwen3-vl-plus",
+          "label": "Qwen3-VL Plus",
+          "note_en": "Recommended visual analysis",
+          "note_zh": "推荐：视觉理解与中文文案",
+          "note_ja": "推奨の画像解析",
+          "note_ko": "권장 이미지 분석",
+          "note_es": "Análisis visual recomendado"
+        }
+      ],
+      "source": "https://help.aliyun.com/en/model-studio/qwen-api-via-dashscope",
+      "label_ja": "Alibaba Cloud · Qwen",
+      "label_ko": "Alibaba Cloud · Qwen",
+      "label_es": "Alibaba Cloud · Qwen"
+    },
+    {
+      "id": "zhipu",
+      "label_en": "Zhipu AI · GLM",
+      "label_zh": "智谱 AI · GLM",
+      "protocol": "openai_compatible",
+      "env": "ZAI_API_KEY",
+      "base_url": "https://open.bigmodel.cn/api/paas/v4",
+      "default_model": "glm-5.3-flash",
+      "models": [
+        {
+          "id": "glm-5.3-flash",
+          "label": "GLM-5.3-Flash",
+          "note_en": "Fast multimodal model",
+          "note_zh": "快速多模态模型",
+          "note_ja": "高速マルチモーダルモデル",
+          "note_ko": "빠른 멀티모달 모델",
+          "note_es": "Modelo multimodal rápido"
+        }
+      ],
+      "source": "https://docs.bigmodel.cn/cn/guide/models/vlm/glm-5.3-flash",
+      "label_ja": "Zhipu AI · GLM",
+      "label_ko": "Zhipu AI · GLM",
+      "label_es": "Zhipu AI · GLM"
+    },
+    {
+      "id": "doubao",
+      "label_en": "Volcengine Ark · Doubao",
+      "label_zh": "火山方舟 · 豆包",
+      "protocol": "openai_compatible",
+      "env": "ARK_API_KEY",
+      "base_url": "https://ark.cn-beijing.volces.com/api/v3",
+      "default_model": "",
+      "models": [],
+      "source": "https://www.volcengine.com/docs/82379",
+      "label_ja": "Volcengine Ark · Doubao",
+      "label_ko": "Volcengine Ark · Doubao",
+      "label_es": "Volcengine Ark · Doubao"
+    },
+    {
+      "id": "hunyuan",
+      "label_en": "Tencent TokenHub · Hunyuan",
+      "label_zh": "腾讯 TokenHub · 混元",
+      "protocol": "openai_compatible",
+      "env": "HUNYUAN_API_KEY",
+      "base_url": "https://tokenhub.tencentmaas.com/v1",
+      "default_model": "hy-vision-2.0-instruct",
+      "models": [
+        {
+          "id": "hy-vision-2.0-instruct",
+          "label": "HY-Vision 2.0 Instruct",
+          "note_en": "Image understanding",
+          "note_zh": "图片理解",
+          "note_ja": "画像理解",
+          "note_ko": "이미지 이해",
+          "note_es": "Comprensión de imágenes"
+        },
+        {
+          "id": "hunyuan-vision-1.5-instruct",
+          "label": "Hunyuan Vision 1.5",
+          "note_en": "Multimodal analysis",
+          "note_zh": "多模态分析",
+          "note_ja": "マルチモーダル解析",
+          "note_ko": "멀티모달 분석",
+          "note_es": "Análisis multimodal"
+        }
+      ],
+      "source": "https://cloud.tencent.com/document/product/1823/136956",
+      "label_ja": "Tencent TokenHub · Hunyuan",
+      "label_ko": "Tencent TokenHub · Hunyuan",
+      "label_es": "Tencent TokenHub · Hunyuan"
+    },
+    {
+      "id": "openai",
+      "label_en": "OpenAI API · ChatGPT models",
+      "label_zh": "OpenAI API · ChatGPT 模型",
+      "protocol": "openai_compatible",
+      "env": "OPENAI_API_KEY",
+      "base_url": "https://api.openai.com/v1",
+      "default_model": "gpt-6.1-terra",
+      "models": [
+        {
+          "id": "gpt-6.1-terra",
+          "label": "GPT-6.1 Terra",
+          "note_en": "Fast visual reasoning",
+          "note_zh": "快速视觉推理",
+          "note_ja": "高速な視覚推論",
+          "note_ko": "빠른 시각 추론",
+          "note_es": "Razonamiento visual rápido"
+        },
+        {
+          "id": "gpt-6.1-sol",
+          "label": "GPT-6.1 Sol",
+          "note_en": "Higher reasoning quality",
+          "note_zh": "更强推理能力",
+          "note_ja": "高品質な推論",
+          "note_ko": "높은 추론 품질",
+          "note_es": "Mayor calidad de razonamiento"
+        }
+      ],
+      "source": "https://developers.openai.com/api/docs/models",
+      "label_ja": "OpenAI API · ChatGPT モデル",
+      "label_ko": "OpenAI API · ChatGPT 모델",
+      "label_es": "OpenAI API · Modelos ChatGPT"
+    },
+    {
+      "id": "codex",
+      "label_en": "Signed-in Codex CLI",
+      "label_zh": "已登录的 Codex CLI",
+      "protocol": "codex_cli",
+      "env": null,
+      "default_model": "gpt-6.1-terra",
+      "models": [
+        {
+          "id": "gpt-6.1-terra",
+          "label": "GPT-6.1 Terra",
+          "note_en": "Uses your local Codex session",
+          "note_zh": "使用本机 Codex 登录会话",
+          "note_ja": "ローカルの Codex セッションを使用",
+          "note_ko": "로컬 Codex 세션 사용",
+          "note_es": "Usa tu sesión local de Codex"
+        },
+        {
+          "id": "gpt-6.1-sol",
+          "label": "GPT-6.1 Sol",
+          "note_en": "Uses your local Codex session",
+          "note_zh": "使用本机 Codex 登录会话",
+          "note_ja": "ローカルの Codex セッションを使用",
+          "note_ko": "로컬 Codex 세션 사용",
+          "note_es": "Usa tu sesión local de Codex"
+        }
+      ],
+      "source": "https://developers.openai.com/codex/cli",
+      "label_ja": "ログイン済み Codex CLI",
+      "label_ko": "로그인된 Codex CLI",
+      "label_es": "Codex CLI con sesión iniciada"
+    },
+    {
+      "id": "gemini",
+      "label_en": "Google Gemini",
+      "label_zh": "Google Gemini",
+      "protocol": "gemini",
+      "env": "GEMINI_API_KEY",
+      "default_model": "gemini-3.8-flash",
+      "models": [
+        {
+          "id": "gemini-3.8-flash",
+          "label": "Gemini 3.8 Flash",
+          "note_en": "Balanced visual analysis",
+          "note_zh": "视觉理解与文案均衡",
+          "note_ja": "バランスの良い画像解析",
+          "note_ko": "균형 잡힌 이미지 분석",
+          "note_es": "Análisis visual equilibrado"
+        },
+        {
+          "id": "gemini-3.5-flash-lite",
+          "label": "Gemini 3.5 Flash-Lite",
+          "note_en": "Lower cost",
+          "note_zh": "较低成本",
+          "note_ja": "低コスト",
+          "note_ko": "낮은 비용",
+          "note_es": "Menor coste"
+        }
+      ],
+      "source": "https://ai.google.dev/gemini-api/docs/models",
+      "label_ja": "Google Gemini",
+      "label_ko": "Google Gemini",
+      "label_es": "Google Gemini"
+    },
+    {
+      "id": "claude",
+      "label_en": "Anthropic Claude API",
+      "label_zh": "Anthropic Claude API",
+      "protocol": "anthropic",
+      "env": "ANTHROPIC_API_KEY",
+      "default_model": "claude-sonnet-5-5",
+      "models": [
+        {
+          "id": "claude-sonnet-5-5",
+          "label": "Claude Sonnet 5.5",
+          "note_en": "Detailed visual understanding",
+          "note_zh": "细致的画面理解",
+          "note_ja": "詳細な画像理解",
+          "note_ko": "상세한 이미지 이해",
+          "note_es": "Comprensión visual detallada"
+        },
+        {
+          "id": "claude-haiku-5-5",
+          "label": "Claude Haiku 5.5",
+          "note_en": "Faster and lower cost",
+          "note_zh": "更快、成本更低",
+          "note_ja": "高速・低コスト",
+          "note_ko": "더 빠르고 저렴함",
+          "note_es": "Más rápido y económico"
+        }
+      ],
+      "source": "https://platform.claude.com/docs/en/models/overview",
+      "label_ja": "Anthropic Claude API",
+      "label_ko": "Anthropic Claude API",
+      "label_es": "Anthropic Claude API"
+    },
+    {
+      "id": "ollama",
+      "label_en": "Local Ollama",
+      "label_zh": "本地 Ollama",
+      "protocol": "ollama",
+      "env": null,
+      "base_url": "http://127.0.0.1:11434",
+      "default_model": "qwen3-vl:8b",
+      "models": [
+        {
+          "id": "qwen3-vl:8b",
+          "label": "Qwen3-VL 8B",
+          "note_en": "Local vision model",
+          "note_zh": "本地视觉模型",
+          "note_ja": "ローカル画像モデル",
+          "note_ko": "로컬 비전 모델",
+          "note_es": "Modelo visual local"
+        },
+        {
+          "id": "qwen3-vl:4b",
+          "label": "Qwen3-VL 4B",
+          "note_en": "Smaller local model",
+          "note_zh": "较小的本地模型",
+          "note_ja": "小型ローカルモデル",
+          "note_ko": "더 작은 로컬 모델",
+          "note_es": "Modelo local más pequeño"
+        }
+      ],
+      "source": "https://ollama.com/library/qwen3-vl",
+      "label_ja": "ローカル Ollama",
+      "label_ko": "로컬 Ollama",
+      "label_es": "Ollama local"
+    },
+    {
+      "id": "compatible",
+      "label_en": "Custom compatible API",
+      "label_zh": "自定义兼容接口",
+      "protocol": "openai_compatible",
+      "env": "NIMOTESHOT_API_KEY",
+      "base_url": "",
+      "default_model": "",
+      "models": [],
+      "source": "",
+      "label_ja": "カスタム互換 API",
+      "label_ko": "사용자 지정 호환 API",
+      "label_es": "API compatible personalizada"
+    }
+  ]
+}
