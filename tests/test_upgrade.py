@@ -69,9 +69,9 @@ class UpgradeTests(unittest.TestCase):
             get();get();self.assertEqual(len(calls),1)
             get(True);self.assertEqual(len(calls),2)
             cache=next(Path(folder).glob('*.json'))
-            cache.write_text('broken JSON');get();self.assertEqual(len(calls),3)
-            payload=json.loads(cache.read_text());payload['expires_at']=0
-            cache.write_text(json.dumps(payload))
+            cache.write_text('broken JSON', encoding='utf-8');get();self.assertEqual(len(calls),3)
+            payload=json.loads(cache.read_text(encoding='utf-8'));payload['expires_at']=0
+            cache.write_text(json.dumps(payload), encoding='utf-8')
             get();self.assertEqual(len(calls),4)
             analyzer.cached_analysis(folder,['new-image'],produce,design.validate_design)
             self.assertEqual(len(calls),5)

@@ -9,7 +9,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageColor, ImageOps
 
 ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE_REGISTRY = json.loads((ROOT / 'nimoteshot/templates.json').read_text(encoding='utf-8'))
-APPLE_SIZES = {tuple(size) for size in json.loads((ROOT / 'store_screenshots/targets.json').read_text())['iphone_portrait']['sizes']}
+APPLE_SIZES = {tuple(size) for size in json.loads((ROOT / 'store_screenshots/targets.json').read_text(encoding='utf-8'))['iphone_portrait']['sizes']}
 TARGETS = ROOT / 'store_screenshots/targets.json'
 
 def targets(c):

@@ -52,7 +52,7 @@ class DesignTests(unittest.TestCase):
     @unittest.skipUnless(sys.platform.startswith('linux'), 'Exact pixel baselines are generated on Linux')
     def test_visual_baselines(self):
         import hashlib
-        baseline=json.loads((ROOT/'tests/visual-baselines.json').read_text())
+        baseline=json.loads((ROOT/'tests/visual-baselines.json').read_text(encoding='utf-8'))
         config=renderer.load('demo/nimotecode/config.json')
         for template in TEMPLATES:
             screen=config['screens'][0];screen['template']=template

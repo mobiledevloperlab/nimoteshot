@@ -47,7 +47,7 @@ def main():
                 local = unquote(target.split('#', 1)[0])
                 if not (path.parent / local).exists():
                     errors.append(f'Broken local link: {name} -> {target}')
-    manifest = json.loads((ROOT / 'demo/nimotecode/source_manifest.json').read_text())
+    manifest = json.loads((ROOT / 'demo/nimotecode/source_manifest.json').read_text(encoding='utf-8'))
     for name, expected in manifest.items():
         path = ROOT / 'demo/nimotecode/originals' / name
         if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:

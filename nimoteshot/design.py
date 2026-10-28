@@ -5,10 +5,10 @@ from pathlib import Path
 
 from jsonschema import Draft202012Validator, ValidationError
 
-SCHEMA = json.loads(Path(__file__).with_name("design.schema.json").read_text())
+SCHEMA = json.loads(Path(__file__).with_name("design.schema.json").read_text(encoding="utf-8"))
 
 VERSION = 1
-TEMPLATES = json.loads(Path(__file__).with_name("templates.json").read_text())
+TEMPLATES = json.loads(Path(__file__).with_name("templates.json").read_text(encoding="utf-8"))
 PAGE_TYPES = ('editor', 'terminal', 'git', 'agent', 'files', 'settings', 'other', 'unknown')
 
 

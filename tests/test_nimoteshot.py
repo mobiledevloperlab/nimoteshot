@@ -117,7 +117,7 @@ class StudioTests(unittest.TestCase):
             assets.parent.mkdir(parents=True)
             shutil.copytree(pipeline.ROOT / 'store_screenshots/assets', assets)
             small_targets = {name: {"layout": item["layout"], "sizes": [[320, 640] if item["layout"] == 'portrait' else [640, 320]]}
-                             for name, item in json.loads((pipeline.ROOT / 'store_screenshots/targets.json').read_text()).items()}
+                             for name, item in json.loads((pipeline.ROOT / 'store_screenshots/targets.json').read_text(encoding='utf-8')).items()}
             (root / 'store_screenshots/targets.json').write_text(json.dumps(small_targets), encoding='utf-8')
             incoming = root / 'incoming'
             incoming.mkdir()

@@ -17,5 +17,5 @@ if __name__ == '__main__':
         entries[template]={'size':list(image.size),'sha256':hashlib.sha256(image.tobytes()).hexdigest()}
     for name,image in visual_cases():
         entries[name]={'size':list(image.size),'sha256':hashlib.sha256(image.tobytes()).hexdigest()}
-    (ROOT/'tests/visual-baselines.json').write_text(json.dumps(entries,indent=2)+'\n')
+    (ROOT/'tests/visual-baselines.json').write_text(json.dumps(entries,indent=2)+'\n', encoding='utf-8')
     print(f'Updated {len(entries)} pixel baselines; review rendered previews before accepting changes.')

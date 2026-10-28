@@ -123,10 +123,10 @@ class CredentialTests(unittest.TestCase):
     def test_profile_save_does_not_overwrite_symlink_target(self):
         with tempfile.TemporaryDirectory() as temp:
             target = Path(temp) / 'other-file'
-            target.write_text('untouched')
+            target.write_text('untouched', encoding='utf-8')
             path = Path(temp) / 'config.json'
             path.symlink_to(target)
             with patch.object(settings, 'config_path', return_value=path):
                 settings.save('qwen', api_key='test-value')
-            self.assertEqual(target.read_text(), 'untouched')
+            self.assertEqual(target.read_text(encoding='utf-8'), 'untouched')
             self.assertFalse(path.is_symlink())

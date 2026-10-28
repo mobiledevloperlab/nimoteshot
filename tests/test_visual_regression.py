@@ -34,7 +34,7 @@ def visual_cases():
 class VisualRegressionTests(unittest.TestCase):
     @unittest.skipUnless(sys.platform.startswith('linux'), 'Exact pixel baselines are generated on Linux')
     def test_representative_light_dark_portrait_and_tablet_layouts(self):
-        baseline=json.loads((ROOT/'tests/visual-baselines.json').read_text())
+        baseline=json.loads((ROOT/'tests/visual-baselines.json').read_text(encoding='utf-8'))
         for name,actual in visual_cases():
             with self.subTest(name=name):
                 self.assertEqual(list(actual.size),baseline[name]['size'])

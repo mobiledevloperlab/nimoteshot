@@ -154,7 +154,7 @@ class BrowserWorkflowTests(unittest.TestCase):
 
     @unittest.skipUnless(os.environ.get('SHOTNIMOTE_LIVE_TEST') == '1','Live API testing is explicitly opt-in')
     def test_live_two_image_analysis_copy_layout_and_export(self):
-        text=(ROOT/'test.md').read_text()
+        text=(ROOT/'test.md').read_text(encoding='utf-8')
         match=re.search(r'(?im)^\s*apikey\s*[:：]\s*(.+?)\s*$',text)
         self.assertIsNotNone(match,'test.md requires an apikey field')
         self.page.select_option('#provider','deepseek')
@@ -171,5 +171,5 @@ class BrowserWorkflowTests(unittest.TestCase):
         self.assertEqual(set(templates),{'compact','showcase'})
         href=self.edit_and_export()
         output=ROOT/'test_outputs';output.mkdir(exist_ok=True)
-        (output/'browser-live-result.json').write_text(json.dumps({'download':href,'templates':templates,'source_count':2,'pngs':28,'browser_errors':self.errors},indent=2))
+        (output/'browser-live-result.json').write_text(json.dumps({'download':href,'templates':templates,'source_count':2,'pngs':28,'browser_errors':self.errors},indent=2), encoding='utf-8')
         self.page.screenshot(path=str(output/'browser-live-mobile.png'),full_page=True)
