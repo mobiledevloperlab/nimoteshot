@@ -37,7 +37,7 @@ python -m pip install -r requirements-dev.txt
 python -m ruff check .
 python scripts/check_repository.py
 python scripts/check_secrets.py --history
-python -m unittest discover -s tests -v
+python scripts/run_tests.py
 python -m pip_audit -r store_screenshots/requirements.txt
 python -m pip_audit -r requirements-dev.txt
 ```

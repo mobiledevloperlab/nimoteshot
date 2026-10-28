@@ -22,7 +22,7 @@ python -m venv .venv
 # Windows PowerShell: .venv\Scripts\Activate.ps1
 python -m pip install -r requirements-dev.txt
 python -m ruff check .
-python -m unittest discover -s tests -v
+python scripts/run_tests.py
 python scripts/check_repository.py
 python scripts/check_secrets.py --history
 python -m pip_audit -r store_screenshots/requirements.txt

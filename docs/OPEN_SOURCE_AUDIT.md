@@ -93,7 +93,7 @@ fails on newly reported vulnerable dependencies rather than silently ignoring th
 
 | Local check / 本地检查 | Result / 结果 |
 | --- | --- |
-| `python -m unittest discover -s tests -q` | 18 tests passed on Linux / Python 3.12 / Pillow 13.0.0, including 10 new security regressions. |
+| `python scripts/run_tests.py` | Unit and regression tests run without provider credentials; CI failures include their traceback in the check annotation. |
 | `python -m ruff check .` | Passed. Correctness rule subset, not a full security analyzer. |
 | `python scripts/check_repository.py` | 0 errors: required files, JSON, local Markdown links, tracked private-file policy and demo hashes. |
 | `python scripts/check_secrets.py --history` | 0 findings in working-tree text and reachable history under the documented detectors; not a privacy clearance for images. |

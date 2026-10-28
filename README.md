@@ -209,7 +209,7 @@ python -m venv .venv
 . .venv/bin/activate
 python -m pip install -r requirements-dev.txt
 python -m ruff check .
-python -m unittest discover -s tests -v
+python scripts/run_tests.py
 python scripts/check_repository.py
 python scripts/check_secrets.py --history
 ```
