@@ -1,24 +1,24 @@
 # License scope and third-party notices / 授权范围与第三方声明
 
 Original NimoteShot contributions are offered under the
-[GNU Affero General Public License v3.0 or later](LICENSE) (`AGPL-3.0-or-later`).
+[GNU Affero General Public License v3.0 or later](../LICENSE) (`AGPL-3.0-or-later`).
 The project is fully open source and free to use, modify, and distribute under
 that license. Distribution and network-service use of modified versions require
 corresponding source under the same terms. The license does not grant rights to
 third-party trademarks, screenshots, fonts, or service accounts. The following
 materials retain their own terms; the project license does not override them.
 
-NimoteShot 原创贡献采用 [GNU Affero General Public License v3.0 或更高版本](LICENSE)
+NimoteShot 原创贡献采用 [GNU Affero General Public License v3.0 或更高版本](../LICENSE)
 （`AGPL-3.0-or-later`）。项目完全开源，可依该许可证免费使用、修改和分发；分发修改版或
 将其作为网络服务提供时，必须以相同条款提供对应源码。本许可证不授予第三方商标、截图、
 字体或服务账户的权利。第三方材料仍受各自授权约束，项目许可证不会覆盖它们。
 
 | Material / 材料 | License / 授权 | Evidence / 声明位置 |
 | --- | --- | --- |
-| `store_screenshots/assets/fonts/Inter.ttf` | SIL OFL 1.1 | [Bundled notice](store_screenshots/assets/fonts/OFL-Inter.txt), [upstream](https://github.com/rsms/inter) |
-| `store_screenshots/assets/fonts/NotoSansCJKsc-*.otf` | SIL OFL 1.1 | [Bundled notice](store_screenshots/assets/fonts/OFL-NotoSansCJK.txt), [upstream](https://github.com/notofonts/noto-cjk) |
+| `store_screenshots/assets/fonts/Inter.ttf` | SIL OFL 1.1 | [Bundled notice](../store_screenshots/assets/fonts/OFL-Inter.txt), [upstream](https://github.com/rsms/inter) |
+| `store_screenshots/assets/fonts/NotoSansCJKsc-*.otf` | SIL OFL 1.1 | [Bundled notice](../store_screenshots/assets/fonts/OFL-NotoSansCJK.txt), [upstream](https://github.com/notofonts/noto-cjk) |
 | `store_screenshots/assets/sRGB.icc` | Embedded copyright: “No copyright, use freely” | Profile description: `sRGB built-in`; embedded metadata inspected during audit |
-| `demo/nimotecode/originals/` and `previews/` | Redistribution permission not established by this repository / 仓库内尚无可核验的再分发授权记录 | [Demo](demo/nimotecode/README.md); release gate in [audit](docs/OPEN_SOURCE_AUDIT.md) |
+| `demo/nimotecode/originals/` and `previews/` | Redistribution permission not established by this repository / 仓库内尚无可核验的再分发授权记录 | [Demo](../demo/nimotecode/README.md); release gate in [audit](OPEN_SOURCE_AUDIT.md) |
 | Pillow (installed dependency) | HPND; bundled native libraries have additional notices | [Upstream license](https://github.com/python-pillow/Pillow/blob/main/LICENSE) |
 | jsonschema (installed dependency) | MIT | [Upstream license](https://github.com/python-jsonschema/jsonschema/blob/main/COPYING) |
 | DiskCache (installed dependency) | Apache-2.0 | [Upstream license](https://github.com/grantjenks/python-diskcache/blob/master/LICENSE) |

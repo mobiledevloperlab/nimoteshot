@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="public/nimoteshot-logo.svg" alt="NimoteShot" width="392">
+  <img src="web/assets/nimoteshot-logo.svg" alt="NimoteShot" width="392">
 </p>
 
 <p align="center">
-  <img src="public/hero-v1.png" alt="深色背景上的抽象移动截图卡片" width="100%">
+  <img src="web/assets/hero-v1.png" alt="深色背景上的抽象移动截图卡片" width="100%">
 </p>
 
 <p align="center"><strong>应用商店截图工作台</strong></p>
@@ -19,11 +19,11 @@
 <p align="center"><em>真实 PNG、JPEG、WebP 截图&nbsp;&nbsp;•&nbsp;&nbsp;视觉模型辅助文案&nbsp;&nbsp;•&nbsp;&nbsp;本地渲染与导出</em></p>
 
 <p align="center">
-  <a href="#快速开始">快速开始</a> · <a href="#命令行使用">命令行使用</a> · <a href="demo/nimotecode/">示例</a> · <a href="CHANGELOG.md">变更日志</a>
+  <a href="#快速开始">快速开始</a> · <a href="#命令行使用">命令行使用</a> · <a href="demo/nimotecode/">示例</a> · <a href="docs/CHANGELOG.md">变更日志</a>
 </p>
 
 <p align="center">
-  完全开源 · 免费使用、修改与分享 · <a href="LICENSE">GNU AGPLv3</a> · <a href="SECURITY.md">安全策略</a>
+  完全开源 · 免费使用、修改与分享 · <a href="LICENSE">GNU AGPLv3</a> · <a href=".github/SECURITY.md">安全策略</a>
 </p>
 
 ---
@@ -35,11 +35,11 @@ NimoteShot 是在本机运行的应用商店截图工作台，面向 App Store �
 <table>
   <tr>
     <td width="56%" valign="top">
-      <img src="public/ui.png" alt="NimoteShot 首页与 NimoteCode 应用商店截图示例" width="100%">
+      <img src="web/assets/ui.png" alt="NimoteShot 首页与 NimoteCode 应用商店截图示例" width="100%">
       <p align="center"><sub>首页与一组已生成的应用商店截图示例</sub></p>
     </td>
     <td width="44%" valign="top">
-      <img src="public/snapshot.png" alt="NimoteShot 四步式截图生成工作台" width="100%">
+      <img src="web/assets/snapshot.png" alt="NimoteShot 四步式截图生成工作台" width="100%">
       <p align="center"><sub>四步式本地生成流程</sub></p>
     </td>
   </tr>
@@ -200,7 +200,7 @@ Windows 请将 `.venv/bin/python` 替换为 `.venv\Scripts\python.exe`。完整�
 - 模型输出属于不可信输入；发布前必须审核所有文案、功能声明、翻译和设备映射。
 - 不要提交 API Key、本地配置、私密截图、生成任务或压缩包。项目 `.gitignore` 已排除这些路径。
 
-完整威胁模型和私密漏洞报告方式请见 [SECURITY.md](SECURITY.md)。
+完整威胁模型和私密漏洞报告方式请见 [SECURITY.md](.github/SECURITY.md)。
 
 ## 开发与测试
 
@@ -214,17 +214,16 @@ python scripts/check_repository.py
 python scripts/check_secrets.py --history
 ```
 
-测试会模拟服务商调用，不需要付费模型账户或真实 API Key。编码规范、测试要求与 Pull Request 流程请见[贡献指南](CONTRIBUTING.md)。
+测试会模拟服务商调用，不需要付费模型账户或真实 API Key。编码规范、测试要求与 Pull Request 流程请见[贡献指南](.github/CONTRIBUTING.md)。
 
 ## 项目结构
 
 ```text
 nimoteshot/          核心流程、服务商适配、配置和本地服务
-web/                 由本地 Python 服务提供的浏览器界面
+web/                 由本地 Python 服务提供的浏览器界面与公共素材
 scripts/             CLI 入口、渲染器和仓库检查工具
 store_screenshots/   目标尺寸定义、字体、色彩配置与生成任务
 demo/nimotecode/     已审计的演示原图与示例产物
-public/              README 预览图片
 tests/               单元测试与安全测试
 ```
 
@@ -245,6 +244,6 @@ tests/               单元测试与安全测试
 
 ## 贡献与授权
 
-欢迎通过 Fork 和 Pull Request 参与贡献。请阅读[贡献指南](CONTRIBUTING.md)、[行为准则](CODE_OF_CONDUCT.md)和[治理规范](GOVERNANCE.md)；发版流程见 [docs/RELEASING.md](docs/RELEASING.md)。
+欢迎通过 Fork 和 Pull Request 参与贡献。请阅读[贡献指南](.github/CONTRIBUTING.md)、[行为准则](.github/CODE_OF_CONDUCT.md)和[治理规范](docs/GOVERNANCE.md)；发版流程见 [docs/RELEASING.md](docs/RELEASING.md)。
 
-NimoteShot 是完全开源、免费使用的软件，采用 [GNU Affero General Public License v3.0 或更高版本](LICENSE)（AGPLv3+）。你可以免费使用、学习、修改与分享本项目；如果将修改版作为网络服务提供给用户，必须以相同许可证向这些用户提供对应源码。打包字体和其他第三方材料继续遵守其各自条款，详见[第三方声明](THIRD_PARTY_NOTICES.md)。
+NimoteShot 是完全开源、免费使用的软件，采用 [GNU Affero General Public License v3.0 或更高版本](LICENSE)（AGPLv3+）。你可以免费使用、学习、修改与分享本项目；如果将修改版作为网络服务提供给用户，必须以相同许可证向这些用户提供对应源码。打包字体和其他第三方材料继续遵守其各自条款，详见[第三方声明](docs/THIRD_PARTY_NOTICES.md)。

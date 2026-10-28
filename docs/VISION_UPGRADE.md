@@ -25,7 +25,7 @@ The main gaps were unversioned copy-only AI proposals, duplicated template choic
 | `tests/test_upgrade.py`, `test_design.py`, `test_i18n.py`, `test_visual_regression.py`, `test_browser_workflow.py` | Schema, cache, provider faults, layouts, localization and browser coverage |
 | `tests/visual-baselines.json`, `update_visual_baselines.py` | 17 deterministic pixel-hash baselines; explicit update command |
 | `.github/workflows/ci.yml`, dependency lists | Existing unit CI plus a Chromium job; Playwright is development-only |
-| `README.md`, `README.zh-CN.md`, `store_screenshots/README.md`, `CHANGELOG.md`, `THIRD_PARTY_NOTICES.md` | Usage, cleanup, changes and dependency notices |
+| `README.md`, `README.zh-CN.md`, `store_screenshots/README.md`, `docs/CHANGELOG.md`, `docs/THIRD_PARTY_NOTICES.md` | Usage, cleanup, changes and dependency notices |
 
 Removed `prompts/review.en.md` and `review.zh-CN.md`: they were optional human review briefs, not runtime prompts. Their only documentation link was removed. Runtime AI prompts remain in the pipeline/planner. Previous PNG golden fixtures are replaced by pixel hashes to avoid accumulating screenshot binaries in source control; reviewed previews are local test artifacts.
 

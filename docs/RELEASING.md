@@ -14,7 +14,7 @@
   `AGPL-3.0-or-later` license correctly.
 - [ ] Enable private vulnerability reporting under Settings → Security. Verify the
   “Report a vulnerability” route as a non-maintainer. Publish an actual private
-  moderation contact in CODE_OF_CONDUCT.md.
+  moderation contact in `.github/CODE_OF_CONDUCT.md`.
 - [ ] Protect the default branch: require PR review by at least one maintainer,
   dismiss stale approvals, require resolved conversations and successful CI/test
   matrix plus Security/audit. Block force pushes and deletion. Review admin bypass.

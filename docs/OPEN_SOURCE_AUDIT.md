@@ -24,9 +24,9 @@ maintainer over other contributors' work.
 自动版权转让或维护者可任意重新授权他人贡献的条款。
 
 AGPLv3 is an OSI-approved free and open-source license. Third-party fonts and
-installed dependencies retain their original terms; see [notices](../THIRD_PARTY_NOTICES.md).
+installed dependencies retain their original terms; see [notices](THIRD_PARTY_NOTICES.md).
 
-AGPLv3 是 OSI 认可的自由及开源许可证。字体和依赖保留各自的原授权，详见[第三方声明](../THIRD_PARTY_NOTICES.md)。
+AGPLv3 是 OSI 认可的自由及开源许可证。字体和依赖保留各自的原授权，详见[第三方声明](THIRD_PARTY_NOTICES.md)。
 
 ## Findings and changes / 发现与修复
 

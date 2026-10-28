@@ -26,9 +26,9 @@ PUBLIC_DOCUMENTS = {
     "guide": "README.md",
     "guide-zh": "README.zh-CN.md",
     "license": "LICENSE",
-    "contributing": "CONTRIBUTING.md",
-    "security": "SECURITY.md",
-    "notices": "THIRD_PARTY_NOTICES.md",
+    "contributing": ".github/CONTRIBUTING.md",
+    "security": ".github/SECURITY.md",
+    "notices": "docs/THIRD_PARTY_NOTICES.md",
 }
 JOBS = {}
 LOCK = threading.Lock()
@@ -143,8 +143,6 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_error(403)
             else:
                 self.file_response(candidate)
-        elif path in ("/assets/nimoteshot-icon.svg", "/assets/nimoteshot-logo.svg"):
-            self.file_response(ROOT / "public" / path.rsplit("/", 1)[1], "image/svg+xml")
         elif path == "/assets/Inter.ttf":
             self.file_response(ROOT / "store_screenshots/assets/fonts/Inter.ttf")
         elif path.startswith("/assets/demo-previews/"):

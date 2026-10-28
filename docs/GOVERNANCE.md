@@ -20,7 +20,7 @@ response SLA, release cadence or paid support is implied.
 争议在 Issue/PR 中说明事实，尽可能请未涉事维护者复核，仓库所有者为最终协调人。
 行为投诉涉及维护者本人时，有其他负责人可接手则应回避。不承诺响应 SLA、发布周期或付费支持。
 
-Before a release, follow [the release checklist](docs/RELEASING.md). Record visible
+Before a release, follow [the release checklist](RELEASING.md). Record visible
 changes in [CHANGELOG.md](CHANGELOG.md). Tagged releases should use semantic
 versions; breaking changes during 0.x increment the minor version. Do not rewrite
 published tags. This policy does not claim that a release already exists.

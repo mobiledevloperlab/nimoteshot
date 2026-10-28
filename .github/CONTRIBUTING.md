@@ -68,7 +68,7 @@ PR 应说明问题、修改后的行为、关联 Issue 和验证结果。提交�
 ## Contribution license / 贡献授权
 
 By submitting an original contribution for inclusion, you agree to license it
-under the [GNU Affero General Public License v3.0 or later](LICENSE) and confirm you have the right to submit it. You keep your
+under the [GNU Affero General Public License v3.0 or later](../LICENSE) and confirm you have the right to submit it. You keep your
 copyright; no copyright assignment or separate CLA is required. Identify imported
 third-party material and retain its original notices.
 

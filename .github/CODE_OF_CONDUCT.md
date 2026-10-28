@@ -25,7 +25,7 @@ reporter privacy as far as practical. Responses may include a correction request
 warning, content removal, temporary participation restriction or permanent ban,
 according to severity and repetition. Threats and disclosure of private data may
 require immediate removal. Appeals go privately to the repository owner or an
-uninvolved maintainer; see [governance](GOVERNANCE.md).
+uninvolved maintainer; see [governance](../docs/GOVERNANCE.md).
 
 维护者核查上下文并尽可能保护报告者隐私，根据严重程度与重复情况采取纠正请求、警告、
 删除内容、暂时限制或永久禁入。威胁及隐私泄露可立即处理。申诉私密交由仓库所有者或

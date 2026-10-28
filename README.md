@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="public/nimoteshot-logo.svg" alt="NimoteShot" width="392">
+  <img src="web/assets/nimoteshot-logo.svg" alt="NimoteShot" width="392">
 </p>
 
 <p align="center">
-  <img src="public/hero-v1.png" alt="Abstract mobile screenshot cards on a dark blue background" width="100%">
+  <img src="web/assets/hero-v1.png" alt="Abstract mobile screenshot cards on a dark blue background" width="100%">
 </p>
 
 <p align="center"><strong>App Store Screenshot Studio</strong></p>
@@ -19,11 +19,11 @@
 <p align="center"><em>Real PNG captures&nbsp;&nbsp;•&nbsp;&nbsp;Vision-assisted store copy&nbsp;&nbsp;•&nbsp;&nbsp;Local rendering and export</em></p>
 
 <p align="center">
-  <a href="#quick-start">Quick start</a> · <a href="#cli-workflow">CLI workflow</a> · <a href="demo/nimotecode/">Demo</a> · <a href="CHANGELOG.md">Changelog</a>
+  <a href="#quick-start">Quick start</a> · <a href="#cli-workflow">CLI workflow</a> · <a href="demo/nimotecode/">Demo</a> · <a href="docs/CHANGELOG.md">Changelog</a>
 </p>
 
 <p align="center">
-  Fully open source · Free to use, modify, and share · <a href="LICENSE">GNU AGPLv3</a> · <a href="SECURITY.md">Security</a>
+  Fully open source · Free to use, modify, and share · <a href="LICENSE">GNU AGPLv3</a> · <a href=".github/SECURITY.md">Security</a>
 </p>
 
 ---
@@ -35,11 +35,11 @@ NimoteShot analyzes genuine PNG, JPEG or WebP captures with a vision model, draf
 <table>
   <tr>
     <td width="56%" valign="top">
-      <img src="public/ui.png" alt="NimoteShot landing page and generated NimoteCode store screenshots" width="100%">
+      <img src="web/assets/ui.png" alt="NimoteShot landing page and generated NimoteCode store screenshots" width="100%">
       <p align="center"><sub>Homepage and generated store-screenshot example</sub></p>
     </td>
     <td width="44%" valign="top">
-      <img src="public/snapshot.png" alt="NimoteShot four-step screenshot builder" width="100%">
+      <img src="web/assets/snapshot.png" alt="NimoteShot four-step screenshot builder" width="100%">
       <p align="center"><sub>Four-step local creation workflow</sub></p>
     </td>
   </tr>
@@ -200,7 +200,7 @@ Profiles are stored outside the repository: `~/.config/nimoteshot/config.json` o
 - Model output is untrusted. Review all copy, claims, translations, and device mapping before publishing.
 - Do not commit API keys, local profiles, private captures, generated runs, or archives. The supplied `.gitignore` excludes these paths.
 
-See [SECURITY.md](SECURITY.md) for the full threat model and private vulnerability-reporting guidance.
+See [SECURITY.md](.github/SECURITY.md) for the full threat model and private vulnerability-reporting guidance.
 
 ## Development
 
@@ -214,17 +214,16 @@ python scripts/check_repository.py
 python scripts/check_secrets.py --history
 ```
 
-Tests use mocked providers, so they do not require a paid model account or real API key. See [CONTRIBUTING.md](CONTRIBUTING.md) for coding conventions, test expectations, and pull-request guidance.
+Tests use mocked providers, so they do not require a paid model account or real API key. See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for coding conventions, test expectations, and pull-request guidance.
 
 ## Project layout
 
 ```text
 nimoteshot/          Core pipeline, provider adapters, settings, and local server
-web/                 Browser UI served by the local Python server
+web/                 Browser UI and public assets served by the local Python server
 scripts/             CLI entry points, renderer, and repository checks
 store_screenshots/   Target definitions, fonts, color profile, and generated runs
 demo/nimotecode/     Audited demonstration captures and example output
-public/              README preview images
 tests/               Unit and security tests
 ```
 
@@ -245,6 +244,6 @@ tests/               Unit and security tests
 
 ## Contributing and license
 
-Contributions are welcome via forks and pull requests. Please read [CONTRIBUTING.md](CONTRIBUTING.md), [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), and [GOVERNANCE.md](GOVERNANCE.md). Releases follow [docs/RELEASING.md](docs/RELEASING.md).
+Contributions are welcome via forks and pull requests. Please read [CONTRIBUTING.md](.github/CONTRIBUTING.md), [CODE_OF_CONDUCT.md](.github/CODE_OF_CONDUCT.md), and [GOVERNANCE.md](docs/GOVERNANCE.md). Releases follow [docs/RELEASING.md](docs/RELEASING.md).
 
-NimoteShot is fully open source and licensed under the [GNU Affero General Public License v3.0 or later](LICENSE) (AGPLv3+). You may use, study, modify, and share it at no charge; modified versions offered to users over a network must provide their corresponding source under the same license. Bundled fonts and other third-party material retain their own terms; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+NimoteShot is fully open source and licensed under the [GNU Affero General Public License v3.0 or later](LICENSE) (AGPLv3+). You may use, study, modify, and share it at no charge; modified versions offered to users over a network must provide their corresponding source under the same license. Bundled fonts and other third-party material retain their own terms; see [THIRD_PARTY_NOTICES.md](docs/THIRD_PARTY_NOTICES.md).

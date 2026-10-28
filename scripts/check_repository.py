@@ -9,9 +9,10 @@ from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = (
-    'LICENSE', 'THIRD_PARTY_NOTICES.md', 'CONTRIBUTING.md', 'SECURITY.md',
-    'CODE_OF_CONDUCT.md', 'GOVERNANCE.md', 'CHANGELOG.md', 'README.md',
-    'README.zh-CN.md', 'docs/OPEN_SOURCE_AUDIT.md', 'docs/RELEASING.md',
+    'LICENSE', 'README.md', 'README.zh-CN.md',
+    '.github/CODE_OF_CONDUCT.md', '.github/CONTRIBUTING.md', '.github/SECURITY.md',
+    'docs/CHANGELOG.md', 'docs/GOVERNANCE.md', 'docs/THIRD_PARTY_NOTICES.md',
+    'docs/OPEN_SOURCE_AUDIT.md', 'docs/RELEASING.md',
 )
 
 
