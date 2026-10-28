@@ -30,6 +30,14 @@ PUBLIC_DOCUMENTS = {
     "security": ".github/SECURITY.md",
     "notices": "docs/THIRD_PARTY_NOTICES.md",
 }
+PUBLIC_DOCUMENT_TITLES = {
+    "guide": "User guide",
+    "guide-zh": "使用指南",
+    "contributing": "参与贡献",
+    "security": "安全与数据",
+    "license": "许可证",
+    "notices": "第三方声明",
+}
 JOBS = {}
 LOCK = threading.Lock()
 MAX_REQUEST = 250 * 1024 * 1024
@@ -125,12 +133,21 @@ class Handler(BaseHTTPRequestHandler):
                     sources[item["id"]] = "none"
             self.json_response({"models": MODELS, "styles": STYLES, "credential_source": sources,
                                 "profiles": describe(), "templates": TEMPLATES})
-        elif path.startswith("/docs/"):
-            name = PUBLIC_DOCUMENTS.get(path.removeprefix("/docs/"))
+        elif path.startswith("/api/docs/"):
+            slug = path.removeprefix("/api/docs/")
+            name = PUBLIC_DOCUMENTS.get(slug)
             if name is None:
                 self.send_error(404)
             else:
-                self.file_response(ROOT / name, "text/plain; charset=utf-8")
+                source = ROOT / name
+                self.json_response({"slug": slug, "title": PUBLIC_DOCUMENT_TITLES[slug],
+                                    "source": name, "content": source.read_text(encoding="utf-8")})
+        elif path.startswith("/docs/"):
+            slug = path.removeprefix("/docs/")
+            if slug not in PUBLIC_DOCUMENTS:
+                self.send_error(404)
+            else:
+                self.file_response(WEB / "docs.html", "text/html; charset=utf-8")
         elif path.startswith("/api/jobs/"):
             job_id = path.removeprefix("/api/jobs/")
             with LOCK:

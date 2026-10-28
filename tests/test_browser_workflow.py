@@ -133,6 +133,25 @@ class BrowserWorkflowTests(unittest.TestCase):
             self.assertEqual(self.page.get_by_label(labels['editTemplate'],exact=True).first.locator('option[value=duo]').inner_text(),labels['duo'])
         self.assertEqual(self.errors,[])
 
+    def test_document_pages_render_source_content(self):
+        documents = {
+            'guide-zh': '使用指南',
+            'contributing': '参与贡献',
+            'security': '安全与数据',
+            'license': '许可证',
+            'notices': '第三方声明',
+        }
+        self.page.set_viewport_size({'width': 390, 'height': 844})
+        for slug, expected_title in documents.items():
+            with self.subTest(document=slug):
+                self.page.goto(f'{self.url}/docs/{slug}')
+                self.page.wait_for_function("document.querySelectorAll('#doc-content > *').length > 2")
+                self.assertEqual(self.page.locator('#doc-title').inner_text(), expected_title)
+                self.assertGreater(len(self.page.locator('#doc-content').inner_text()), 500)
+                self.assertEqual(self.page.locator('.docs-sidebar a.active').count(), 1)
+                self.assertFalse(self.page.evaluate('document.documentElement.scrollWidth > innerWidth + 1'))
+        self.assertEqual(self.errors, [])
+
     @unittest.skipUnless(os.environ.get('SHOTNIMOTE_LIVE_TEST') == '1','Live API testing is explicitly opt-in')
     def test_live_two_image_analysis_copy_layout_and_export(self):
         text=(ROOT/'test.md').read_text()

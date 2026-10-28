@@ -40,20 +40,30 @@ class LocalHTTPTests(unittest.TestCase):
         self.assertEqual(status, 200)
         self.assertIn(b'NimoteShot', body)
 
-    def test_public_documents_are_allowlisted_and_served_as_text(self):
+    def test_web_assets_are_served_from_merged_directory(self):
+        assets = server.WEB / 'assets'
+        for path in assets.iterdir():
+            if path.is_file():
+                with self.subTest(asset=path.name):
+                    status, body = self.request(path='/assets/' + path.name)
+                    self.assertEqual(status, 200)
+                    self.assertEqual(body, path.read_bytes())
+
+    def test_public_documents_are_allowlisted_and_served_as_pages(self):
         for slug, filename in server.PUBLIC_DOCUMENTS.items():
-            conn = http.client.HTTPConnection('127.0.0.1', self.port, timeout=3)
-            try:
-                conn.request('GET', '/docs/' + slug)
-                response = conn.getresponse()
-                self.assertEqual(response.status, 200)
-                self.assertEqual(response.getheader('Content-Type'), 'text/plain; charset=utf-8')
-                self.assertEqual(response.getheader('X-Content-Type-Options'), 'nosniff')
-                self.assertEqual(response.read(), (server.ROOT / filename).read_bytes())
-            finally:
-                conn.close()
-        for path in ('/docs/../LICENSE', '/docs/%2e%2e/.git/config', '/docs/.env', '/docs/nimoteshot/settings.py'):
-            self.assertEqual(self.request(path=path)[0], 404)
+            with self.subTest(slug=slug):
+                status, body = self.request(path='/docs/' + slug)
+                self.assertEqual(status, 200)
+                self.assertIn(b'id="doc-content"', body)
+                status, body = self.request(path='/api/docs/' + slug)
+                self.assertEqual(status, 200)
+                payload = json.loads(body)
+                self.assertEqual(payload['title'], server.PUBLIC_DOCUMENT_TITLES[slug])
+                self.assertEqual(payload['content'], (server.ROOT / filename).read_text(encoding='utf-8'))
+        blocked = ('../LICENSE', '%2e%2e/.git/config', '.env', 'nimoteshot/settings.py')
+        for suffix in blocked:
+            self.assertEqual(self.request(path='/docs/' + suffix)[0], 404)
+            self.assertEqual(self.request(path='/api/docs/' + suffix)[0], 404)
 
     def test_rebinding_host_blocks_reads_and_writes_before_provider_calls(self):
         with patch.object(server, 'check_connection') as check:

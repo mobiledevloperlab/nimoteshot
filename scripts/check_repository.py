@@ -38,7 +38,10 @@ def main():
             except (ValueError, UnicodeError):
                 errors.append(f'Invalid JSON: {name}')
         if path.suffix == '.md':
-            for target in re.findall(r'\[[^\]]*\]\(([^\s)]+)\)', path.read_text(encoding='utf-8')):
+            text = path.read_text(encoding='utf-8')
+            targets = re.findall(r'\[[^\]]*\]\(([^\s)]+)\)', text)
+            targets += re.findall(r'(?:href|src)=["\']([^"\']+)["\']', text, flags=re.IGNORECASE)
+            for target in targets:
                 if re.match(r'^[a-zA-Z][a-zA-Z0-9+.-]*:', target) or target.startswith('#'):
                     continue
                 local = unquote(target.split('#', 1)[0])
