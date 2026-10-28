@@ -9,7 +9,7 @@
 <p align="center"><strong>应用商店截图工作台</strong></p>
 
 <p align="center">
-  <a href="README.md">English</a> · 简体中文
+  <a href="README.md">English</a> · 简体中文 · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a> · <a href="README.es.md">Español</a>
 </p>
 
 <p align="center">
@@ -58,13 +58,13 @@ NimoteShot 是在本机运行的应用商店截图工作台，面向 App Store �
     <td width="33.33%" align="center" valign="top">
       <strong>SSH 工作区</strong><br><br>
       <img src="demo/nimotecode/originals/ssh-workspace.png" alt="NimoteCode SSH 工作区原始截图" width="47%">
-      <img src="demo/nimotecode/previews/02_feature.png" alt="生成后的 SSH 工作区应用商店截图" width="47%"><br>
+      <img src="demo/nimotecode/previews/03_feature.png" alt="生成后的 SSH 工作区应用商店截图" width="47%"><br>
       <sub>原始界面 → 生成的功能页素材</sub>
     </td>
     <td width="33.33%" align="center" valign="top">
       <strong>AI 编程助手</strong><br><br>
       <img src="demo/nimotecode/originals/ai-assistant.png" alt="NimoteCode AI 助手原始截图" width="47%">
-      <img src="demo/nimotecode/previews/03_feature.png" alt="生成后的 AI 助手应用商店截图" width="47%"><br>
+      <img src="demo/nimotecode/previews/02_feature.png" alt="生成后的 AI 助手应用商店截图" width="47%"><br>
       <sub>原始界面 → 生成的功能页素材</sub>
     </td>
   </tr>

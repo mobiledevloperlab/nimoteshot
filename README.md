@@ -9,7 +9,7 @@
 <p align="center"><strong>App Store Screenshot Studio</strong></p>
 
 <p align="center">
-  English · <a href="README.zh-CN.md">简体中文</a>
+  English · <a href="README.zh-CN.md">简体中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a> · <a href="README.es.md">Español</a>
 </p>
 
 <p align="center">
@@ -58,13 +58,13 @@ NimoteShot analyzes genuine PNG, JPEG or WebP captures with a vision model, draf
     <td width="33.33%" align="center" valign="top">
       <strong>SSH workspace</strong><br><br>
       <img src="demo/nimotecode/originals/ssh-workspace.png" alt="Original NimoteCode SSH workspace capture" width="47%">
-      <img src="demo/nimotecode/previews/02_feature.png" alt="Generated SSH workspace store screenshot" width="47%"><br>
+      <img src="demo/nimotecode/previews/03_feature.png" alt="Generated SSH workspace store screenshot" width="47%"><br>
       <sub>Source capture → generated feature artwork</sub>
     </td>
     <td width="33.33%" align="center" valign="top">
       <strong>AI coding assistant</strong><br><br>
       <img src="demo/nimotecode/originals/ai-assistant.png" alt="Original NimoteCode AI assistant capture" width="47%">
-      <img src="demo/nimotecode/previews/03_feature.png" alt="Generated AI assistant store screenshot" width="47%"><br>
+      <img src="demo/nimotecode/previews/02_feature.png" alt="Generated AI assistant store screenshot" width="47%"><br>
       <sub>Source capture → generated feature artwork</sub>
     </td>
   </tr>
