@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96" role="img" aria-label="NimoteShot icon"><title>NimoteShot</title><g transform="translate(0 0) scale(1)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <g stroke="#6554E8" stroke-width="7.5">
+      <path d="M24 10 H12 Q10 10 10 12 V24"/><path d="M72 10 H84 Q86 10 86 12 V24"/>
+      <path d="M10 72 V84 Q10 86 12 86 H24"/><path d="M86 72 V84 Q86 86 84 86 H72"/>
+    </g>
+    <path d="M31 67 V29 L65 67 V29" stroke="#5644DA" stroke-width="11" />
+    <path d="M31 29 L65 67" stroke="#8A76F5" stroke-width="11" />
+  </g></svg>

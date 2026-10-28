@@ -1,0 +1,74 @@
+{
+  "balanced": {
+    "label": "Balanced · 平衡留白",
+    "layout": "single",
+    "portrait": {},
+    "landscape": {}
+  },
+  "showcase": {
+    "label": "Showcase · 产品展示",
+    "layout": "single",
+    "portrait": {
+      "image_width": 0.86,
+      "image_y": 0.32
+    },
+    "landscape": {
+      "image_width": 0.54
+    }
+  },
+  "compact": {
+    "label": "Compact · 紧凑界面",
+    "layout": "single",
+    "portrait": {
+      "image_width": 0.72,
+      "image_y": 0.38
+    },
+    "landscape": {
+      "image_width": 0.45
+    }
+  },
+  "detail": {
+    "label": "Detail · 原图与特写",
+    "layout": "detail",
+    "portrait": {
+      "image_y": 0.255
+    },
+    "landscape": {},
+    "composition": {
+      "primary": [
+        0,
+        0,
+        0.8,
+        1
+      ],
+      "secondary": [
+        0.38,
+        0.5,
+        0.62,
+        0.42
+      ]
+    }
+  },
+  "duo": {
+    "label": "Duo · 双界面组合",
+    "layout": "duo",
+    "portrait": {
+      "image_y": 0.265
+    },
+    "landscape": {},
+    "composition": {
+      "primary": [
+        0,
+        0,
+        0.66,
+        0.88
+      ],
+      "secondary": [
+        0.38,
+        0.18,
+        0.62,
+        0.82
+      ]
+    }
+  }
+}

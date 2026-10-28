@@ -1,0 +1,121 @@
+{
+  "balanced": {
+    "size": [
+      330,
+      717
+    ],
+    "sha256": "731aadbbccad316ecdfbeb41e41a7b1509d0b429f53f7ff2bffc028280b1dd41"
+  },
+  "showcase": {
+    "size": [
+      330,
+      717
+    ],
+    "sha256": "f98eb1741d16ead8b9635517a96f6b4356bfbb87a5373d5ad00c2654cadb10ca"
+  },
+  "compact": {
+    "size": [
+      330,
+      717
+    ],
+    "sha256": "3b76c374d833ad63a91e600c084a39248699c02f487de90294eaaa8f87120456"
+  },
+  "detail": {
+    "size": [
+      330,
+      717
+    ],
+    "sha256": "78855da120821408988d0e13c94b1d830f9bb77e5bfa0d990c843d030bc0d162"
+  },
+  "duo": {
+    "size": [
+      330,
+      717
+    ],
+    "sha256": "1ab91add313dd23756b39c259261102141319ac95e5add6c5fbe614c1d84e7f7"
+  },
+  "code-editor-showcase-iphone_portrait.png": {
+    "size": [
+      264,
+      574
+    ],
+    "sha256": "701378b9251c3f5b9fd80f39092ad8f8fda32aae8925364455a69e07e3ece963"
+  },
+  "code-editor-showcase-ipad_landscape.png": {
+    "size": [
+      420,
+      315
+    ],
+    "sha256": "bf2847ac740a9168d3a3037cbaf5ac477ca6b0942ed63f6007236259ec81ce76"
+  },
+  "code-editor-detail-iphone_portrait.png": {
+    "size": [
+      264,
+      574
+    ],
+    "sha256": "e1aea523d49586c648d868def1302d48cac5d9ba2aa38fb98b4241cbb0544eae"
+  },
+  "code-editor-detail-ipad_landscape.png": {
+    "size": [
+      420,
+      315
+    ],
+    "sha256": "9c9031083b9df90af92f71f561ce16563e06464530ca2af51c88719597d49607"
+  },
+  "code-editor-duo-iphone_portrait.png": {
+    "size": [
+      264,
+      574
+    ],
+    "sha256": "807ce1517d120c468004d9643407c82a0d8845a75c05d7b4e009b489840fe5c7"
+  },
+  "code-editor-duo-ipad_landscape.png": {
+    "size": [
+      420,
+      315
+    ],
+    "sha256": "68857044a118934243e829a74c3060d624697f2feec5a69e9503924a60669393"
+  },
+  "terminal-showcase-iphone_portrait.png": {
+    "size": [
+      264,
+      574
+    ],
+    "sha256": "a8ef338f7f3cd09b5de8adab6b4be7a31e03cf6b1ed6724f5a833e16c4491fd0"
+  },
+  "terminal-showcase-ipad_landscape.png": {
+    "size": [
+      420,
+      315
+    ],
+    "sha256": "a348933472b2d1eaa9739cca57d6f67139f573443d92ef56ca18d1a3b20fcfa3"
+  },
+  "terminal-detail-iphone_portrait.png": {
+    "size": [
+      264,
+      574
+    ],
+    "sha256": "ab6d3418fca951f86a62d5ca5d6eb91d7f956ea182e3c4d6f78afc907dac566a"
+  },
+  "terminal-detail-ipad_landscape.png": {
+    "size": [
+      420,
+      315
+    ],
+    "sha256": "ccd39a86614459cd05c00a6a5d3341697b6ee85fef61f35ca4b7815bca66a9fe"
+  },
+  "terminal-duo-iphone_portrait.png": {
+    "size": [
+      264,
+      574
+    ],
+    "sha256": "f8602b5bf85b4e2b48e6f0323350f35e3a33b5c219120701ff0d009e957a6391"
+  },
+  "terminal-duo-ipad_landscape.png": {
+    "size": [
+      420,
+      315
+    ],
+    "sha256": "336d35594fc23f018399f1eb30ec221a55c14f31d2fbcb8323c598187f6a05d8"
+  }
+}

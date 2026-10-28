@@ -1,0 +1,1435 @@
+{
+  "default": "editorial",
+  "styles": [
+    {
+      "id": "editorial",
+      "name_en": "Editorial",
+      "name_zh": "杂志留白",
+      "description_en": "Warm neutrals and spacious typography",
+      "description_zh": "暖灰底色与充足留白",
+      "swatches": [
+        "#F5F4F2",
+        "#17191E",
+        "#C94863"
+      ],
+      "colors": {
+        "ink": "#17191E",
+        "muted": "#60656E",
+        "accent": "#C94863",
+        "frame": "#35383E",
+        "backgrounds": [
+          "#F5F4F2",
+          "#EDF0F3",
+          "#F5EDEF",
+          "#F1F2F4"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "name_ja": "エディトリアル",
+      "description_ja": "暖かな中間色と余白のある文字組み",
+      "name_ko": "에디토리얼",
+      "description_ko": "따뜻한 중간색과 여유로운 타이포그래피",
+      "name_es": "Editorial",
+      "description_es": "Tonos neutros cálidos y tipografía espaciosa"
+    },
+    {
+      "id": "soft_gradient",
+      "name_en": "Soft gradient",
+      "name_zh": "柔和渐变",
+      "description_en": "Pastel depth with a calm product focus",
+      "description_zh": "柔和层次，突出产品界面",
+      "swatches": [
+        "#F7ECF1",
+        "#E8EFF9",
+        "#BD5D82"
+      ],
+      "colors": {
+        "ink": "#242331",
+        "muted": "#666878",
+        "accent": "#BD5D82",
+        "frame": "#494757",
+        "backgrounds": [
+          "#F7ECF1",
+          "#E8EFF9",
+          "#F1ECE8",
+          "#EDF3F2"
+        ],
+        "gradient_ends": [
+          "#E8EFF9",
+          "#F8E7EF",
+          "#E9E5F5",
+          "#DDEDEB"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.8,
+        "radius": 0.046,
+        "title_size": 110
+      },
+      "landscape_layout": {
+        "left_width": 0.38,
+        "image_width": 0.47,
+        "title_scale": 0.08,
+        "radius": 0.028
+      },
+      "name_ja": "柔らかなグラデーション",
+      "description_ja": "パステルカラーで製品を穏やかに強調",
+      "name_ko": "부드러운 그라데이션",
+      "description_ko": "파스텔 색감으로 차분하게 제품 강조",
+      "name_es": "Degradado suave",
+      "description_es": "Tonos pastel para destacar el producto con calma"
+    },
+    {
+      "id": "midnight",
+      "name_en": "Midnight",
+      "name_zh": "深色科技",
+      "description_en": "Dark canvas and bright accents",
+      "description_zh": "深色背景与明亮强调色",
+      "swatches": [
+        "#151A25",
+        "#EAF1FA",
+        "#73B6FF"
+      ],
+      "colors": {
+        "ink": "#F4F6FA",
+        "muted": "#BBC7D9",
+        "accent": "#73B6FF",
+        "frame": "#667487",
+        "backgrounds": [
+          "#151A25",
+          "#1A2230",
+          "#1B202D",
+          "#111C29"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.87,
+        "radius": 0.018,
+        "title_size": 118
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.089,
+        "radius": 0.012
+      },
+      "name_ja": "ミッドナイト",
+      "description_ja": "暗い背景と明るいアクセント",
+      "name_ko": "미드나이트",
+      "description_ko": "어두운 배경과 밝은 강조 색상",
+      "name_es": "Medianoche",
+      "description_es": "Fondo oscuro y acentos luminosos"
+    },
+    {
+      "id": "bold_color",
+      "name_en": "Bold color",
+      "name_zh": "鲜明撞色",
+      "description_en": "Confident color blocks and strong contrast",
+      "description_zh": "鲜明色块与强对比",
+      "swatches": [
+        "#F6D85D",
+        "#1D2937",
+        "#DA496E"
+      ],
+      "colors": {
+        "ink": "#1D2937",
+        "muted": "#43505D",
+        "accent": "#DA496E",
+        "frame": "#354254",
+        "backgrounds": [
+          "#F6D85D",
+          "#BFE7DF",
+          "#F5C9D5",
+          "#C9D9FA"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.82,
+        "radius": 0.014,
+        "title_size": 126
+      },
+      "landscape_layout": {
+        "left_width": 0.34,
+        "image_width": 0.5,
+        "title_scale": 0.095,
+        "radius": 0.01
+      },
+      "name_ja": "鮮やかな色",
+      "description_ja": "大胆な色面と明確なコントラスト",
+      "name_ko": "선명한 색상",
+      "description_ko": "과감한 색상 면과 뚜렷한 대비",
+      "name_es": "Color intenso",
+      "description_es": "Bloques de color y contraste marcado"
+    },
+    {
+      "id": "productivity_1",
+      "category": "productivity",
+      "category_zh": "效率办公",
+      "category_en": "Productivity",
+      "name_zh": "效率办公 · 沉稳",
+      "name_en": "Productivity · Focused",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#F2F6FE",
+        "#2563EB",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#2563EB",
+        "frame": "#334155",
+        "backgrounds": [
+          "#F2F6FE",
+          "#E5ECFD",
+          "#D8E3FB",
+          "#F8FAFE"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "仕事効率化",
+      "name_ja": "仕事効率化 · 集中",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "생산성",
+      "name_ko": "생산성 · 집중",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Productividad",
+      "name_es": "Productividad · Enfoque",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "productivity_2",
+      "category": "productivity",
+      "category_zh": "效率办公",
+      "category_en": "Productivity",
+      "name_zh": "效率办公 · 清新",
+      "name_en": "Productivity · Fresh",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#F1F7F6",
+        "#0F766E",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#0F766E",
+        "frame": "#334155",
+        "backgrounds": [
+          "#F1F7F6",
+          "#E2EFEE",
+          "#D4E6E5",
+          "#F8FBFB"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "仕事効率化",
+      "name_ja": "仕事効率化 · 爽やか",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "생산성",
+      "name_ko": "생산성 · 산뜻",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Productividad",
+      "name_es": "Productividad · Fresco",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "productivity_3",
+      "category": "productivity",
+      "category_zh": "效率办公",
+      "category_en": "Productivity",
+      "name_zh": "效率办公 · 鲜明",
+      "name_en": "Productivity · Expressive",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#F7F3FE",
+        "#7C3AED",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#7C3AED",
+        "frame": "#334155",
+        "backgrounds": [
+          "#F7F3FE",
+          "#EFE7FD",
+          "#E7DCFC",
+          "#FBF9FE"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "仕事効率化",
+      "name_ja": "仕事効率化 · 表現豊か",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "생산성",
+      "name_ko": "생산성 · 표현력",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Productividad",
+      "name_es": "Productividad · Expresivo",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "finance_1",
+      "category": "finance",
+      "category_zh": "金融记账",
+      "category_en": "Finance",
+      "name_zh": "金融记账 · 沉稳",
+      "name_en": "Finance · Focused",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#F1F4FD",
+        "#1D4ED8",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#1D4ED8",
+        "frame": "#334155",
+        "backgrounds": [
+          "#F1F4FD",
+          "#E4EAFA",
+          "#D6DFF8",
+          "#F8FAFE"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "ファイナンス",
+      "name_ja": "ファイナンス · 集中",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "금융",
+      "name_ko": "금융 · 집중",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Finanzas",
+      "name_es": "Finanzas · Enfoque",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "finance_2",
+      "category": "finance",
+      "category_zh": "金融记账",
+      "category_en": "Finance",
+      "name_zh": "金融记账 · 清新",
+      "name_en": "Finance · Fresh",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#F0F7F5",
+        "#047857",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#047857",
+        "frame": "#334155",
+        "backgrounds": [
+          "#F0F7F5",
+          "#E1EFEB",
+          "#D2E7E1",
+          "#F7FBFA"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "ファイナンス",
+      "name_ja": "ファイナンス · 爽やか",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "금융",
+      "name_ko": "금융 · 산뜻",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Finanzas",
+      "name_es": "Finanzas · Fresco",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "finance_3",
+      "category": "finance",
+      "category_zh": "金融记账",
+      "category_en": "Finance",
+      "name_zh": "金融记账 · 鲜明",
+      "name_en": "Finance · Expressive",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#F8F4F1",
+        "#92400E",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#92400E",
+        "frame": "#334155",
+        "backgrounds": [
+          "#F8F4F1",
+          "#F2E8E2",
+          "#EBDDD4",
+          "#FCF9F8"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "ファイナンス",
+      "name_ja": "ファイナンス · 表現豊か",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "금융",
+      "name_ko": "금융 · 표현력",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Finanzas",
+      "name_es": "Finanzas · Expresivo",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "health_1",
+      "category": "health",
+      "category_zh": "健康运动",
+      "category_en": "Health & fitness",
+      "name_zh": "健康运动 · 沉稳",
+      "name_en": "Health & fitness · Focused",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#F1F7F3",
+        "#15803D",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#15803D",
+        "frame": "#334155",
+        "backgrounds": [
+          "#F1F7F3",
+          "#E3F0E8",
+          "#D5E8DC",
+          "#F8FBF9"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "ヘルスケア・フィットネス",
+      "name_ja": "ヘルスケア・フィットネス · 集中",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "건강 및 운동",
+      "name_ko": "건강 및 운동 · 집중",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Salud y ejercicio",
+      "name_es": "Salud y ejercicio · Enfoque",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "health_2",
+      "category": "health",
+      "category_zh": "健康运动",
+      "category_en": "Health & fitness",
+      "name_zh": "健康运动 · 清新",
+      "name_en": "Health & fitness · Fresh",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#F1F7F8",
+        "#0E7490",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#0E7490",
+        "frame": "#334155",
+        "backgrounds": [
+          "#F1F7F8",
+          "#E2EEF2",
+          "#D4E6EB",
+          "#F8FBFC"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "ヘルスケア・フィットネス",
+      "name_ja": "ヘルスケア・フィットネス · 爽やか",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "건강 및 운동",
+      "name_ko": "건강 및 운동 · 산뜻",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Salud y ejercicio",
+      "name_es": "Salud y ejercicio · Fresco",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "health_3",
+      "category": "health",
+      "category_zh": "健康运动",
+      "category_en": "Health & fitness",
+      "name_zh": "健康运动 · 鲜明",
+      "name_en": "Health & fitness · Expressive",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#FBF1F5",
+        "#BE185D",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#BE185D",
+        "frame": "#334155",
+        "backgrounds": [
+          "#FBF1F5",
+          "#F7E3EC",
+          "#F3D5E2",
+          "#FDF8FA"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "ヘルスケア・フィットネス",
+      "name_ja": "ヘルスケア・フィットネス · 表現豊か",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "건강 및 운동",
+      "name_ko": "건강 및 운동 · 표현력",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Salud y ejercicio",
+      "name_es": "Salud y ejercicio · Expresivo",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "education_1",
+      "category": "education",
+      "category_zh": "教育学习",
+      "category_en": "Education",
+      "name_zh": "教育学习 · 沉稳",
+      "name_en": "Education · Focused",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#F4F3FC",
+        "#4338CA",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#4338CA",
+        "frame": "#334155",
+        "backgrounds": [
+          "#F4F3FC",
+          "#E8E7F9",
+          "#DDDBF5",
+          "#F9F9FD"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "教育",
+      "name_ja": "教育 · 集中",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "교육",
+      "name_ko": "교육 · 집중",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Educación",
+      "name_es": "Educación · Enfoque",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "education_2",
+      "category": "education",
+      "category_zh": "教育学习",
+      "category_en": "Education",
+      "name_zh": "教育学习 · 清新",
+      "name_en": "Education · Fresh",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#FBF4F0",
+        "#C2410C",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#C2410C",
+        "frame": "#334155",
+        "backgrounds": [
+          "#FBF4F0",
+          "#F8E8E2",
+          "#F4DDD3",
+          "#FDF9F8"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "教育",
+      "name_ja": "教育 · 爽やか",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "교육",
+      "name_ko": "교육 · 산뜻",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Educación",
+      "name_es": "Educación · Fresco",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "education_3",
+      "category": "education",
+      "category_zh": "教育学习",
+      "category_en": "Education",
+      "name_zh": "教育学习 · 鲜明",
+      "name_en": "Education · Expressive",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#F0F6F9",
+        "#0369A1",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#0369A1",
+        "frame": "#334155",
+        "backgrounds": [
+          "#F0F6F9",
+          "#E1EDF4",
+          "#D2E4EE",
+          "#F7FAFC"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "教育",
+      "name_ja": "教育 · 表現豊か",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "교육",
+      "name_ko": "교육 · 표현력",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Educación",
+      "name_es": "Educación · Expresivo",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "social_1",
+      "category": "social",
+      "category_zh": "社交通讯",
+      "category_en": "Social",
+      "name_zh": "社交通讯 · 沉稳",
+      "name_en": "Social · Focused",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#FBF1F5",
+        "#BE185D",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#BE185D",
+        "frame": "#334155",
+        "backgrounds": [
+          "#FBF1F5",
+          "#F7E3EC",
+          "#F3D5E2",
+          "#FDF8FA"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "ソーシャル",
+      "name_ja": "ソーシャル · 集中",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "소셜",
+      "name_ko": "소셜 · 집중",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Social",
+      "name_es": "Social · Enfoque",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "social_2",
+      "category": "social",
+      "category_zh": "社交通讯",
+      "category_en": "Social",
+      "name_zh": "社交通讯 · 清新",
+      "name_en": "Social · Fresh",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#F7F2FC",
+        "#7E22CE",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#7E22CE",
+        "frame": "#334155",
+        "backgrounds": [
+          "#F7F2FC",
+          "#F0E4F9",
+          "#E8D7F6",
+          "#FBF8FE"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "ソーシャル",
+      "name_ja": "ソーシャル · 爽やか",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "소셜",
+      "name_ko": "소셜 · 산뜻",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Social",
+      "name_es": "Social · Fresco",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "social_3",
+      "category": "social",
+      "category_zh": "社交通讯",
+      "category_en": "Social",
+      "name_zh": "社交通讯 · 鲜明",
+      "name_en": "Social · Expressive",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#FBF1F1",
+        "#B91C1C",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#B91C1C",
+        "frame": "#334155",
+        "backgrounds": [
+          "#FBF1F1",
+          "#F7E4E4",
+          "#F2D6D6",
+          "#FDF8F8"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "ソーシャル",
+      "name_ja": "ソーシャル · 表現豊か",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "소셜",
+      "name_ko": "소셜 · 표현력",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Social",
+      "name_es": "Social · Expresivo",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "shopping_1",
+      "category": "shopping",
+      "category_zh": "购物电商",
+      "category_en": "Shopping",
+      "name_zh": "购物电商 · 沉稳",
+      "name_en": "Shopping · Focused",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#FBF4F0",
+        "#C2410C",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#C2410C",
+        "frame": "#334155",
+        "backgrounds": [
+          "#FBF4F0",
+          "#F8E8E2",
+          "#F4DDD3",
+          "#FDF9F8"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "ショッピング",
+      "name_ja": "ショッピング · 集中",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "쇼핑",
+      "name_ko": "쇼핑 · 집중",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Compras",
+      "name_es": "Compras · Enfoque",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "shopping_2",
+      "category": "shopping",
+      "category_zh": "购物电商",
+      "category_en": "Shopping",
+      "name_zh": "购物电商 · 清新",
+      "name_en": "Shopping · Fresh",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#FBF1F3",
+        "#BE123C",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#BE123C",
+        "frame": "#334155",
+        "backgrounds": [
+          "#FBF1F3",
+          "#F7E3E8",
+          "#F3D4DC",
+          "#FDF8F9"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "ショッピング",
+      "name_ja": "ショッピング · 爽やか",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "쇼핑",
+      "name_ko": "쇼핑 · 산뜻",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Compras",
+      "name_es": "Compras · Fresco",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "shopping_3",
+      "category": "shopping",
+      "category_zh": "购物电商",
+      "category_en": "Shopping",
+      "name_zh": "购物电商 · 鲜明",
+      "name_en": "Shopping · Expressive",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#F6F2FD",
+        "#6D28D9",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#6D28D9",
+        "frame": "#334155",
+        "backgrounds": [
+          "#F6F2FD",
+          "#EDE5FA",
+          "#E5D8F8",
+          "#FBF9FE"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "ショッピング",
+      "name_ja": "ショッピング · 表現豊か",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "쇼핑",
+      "name_ko": "쇼핑 · 표현력",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Compras",
+      "name_es": "Compras · Expresivo",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "creative_1",
+      "category": "creative",
+      "category_zh": "摄影创作",
+      "category_en": "Creative",
+      "name_zh": "摄影创作 · 沉稳",
+      "name_en": "Creative · Focused",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#F7F3FE",
+        "#7C3AED",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#7C3AED",
+        "frame": "#334155",
+        "backgrounds": [
+          "#F7F3FE",
+          "#EFE7FD",
+          "#E7DCFC",
+          "#FBF9FE"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "クリエイティブ",
+      "name_ja": "クリエイティブ · 集中",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "창작",
+      "name_ko": "창작 · 집중",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Creatividad",
+      "name_es": "Creatividad · Enfoque",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "creative_2",
+      "category": "creative",
+      "category_zh": "摄影创作",
+      "category_en": "Creative",
+      "name_zh": "摄影创作 · 清新",
+      "name_en": "Creative · Fresh",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#F1F7F6",
+        "#0F766E",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#0F766E",
+        "frame": "#334155",
+        "backgrounds": [
+          "#F1F7F6",
+          "#E2EFEE",
+          "#D4E6E5",
+          "#F8FBFB"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "クリエイティブ",
+      "name_ja": "クリエイティブ · 爽やか",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "창작",
+      "name_ko": "창작 · 산뜻",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Creatividad",
+      "name_es": "Creatividad · Fresco",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "creative_3",
+      "category": "creative",
+      "category_zh": "摄影创作",
+      "category_en": "Creative",
+      "name_zh": "摄影创作 · 鲜明",
+      "name_en": "Creative · Expressive",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#F9F1FA",
+        "#A21CAF",
+        "#172033"
+      ],
+      "colors": {
+        "ink": "#172033",
+        "muted": "#475569",
+        "accent": "#A21CAF",
+        "frame": "#334155",
+        "backgrounds": [
+          "#F9F1FA",
+          "#F4E4F5",
+          "#EED6F1",
+          "#FCF8FD"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "クリエイティブ",
+      "name_ja": "クリエイティブ · 表現豊か",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "창작",
+      "name_ko": "창작 · 표현력",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Creatividad",
+      "name_es": "Creatividad · Expresivo",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "developer_1",
+      "category": "developer",
+      "category_zh": "开发工具",
+      "category_en": "Developer tools",
+      "name_zh": "开发工具 · 沉稳",
+      "name_en": "Developer tools · Focused",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#111827",
+        "#2563EB",
+        "#F1F5F9"
+      ],
+      "colors": {
+        "ink": "#F1F5F9",
+        "muted": "#CBD5E1",
+        "accent": "#93C5FD",
+        "frame": "#64748B",
+        "backgrounds": [
+          "#111827",
+          "#172033",
+          "#1E293B",
+          "#131C2E"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "開発者ツール",
+      "name_ja": "開発者ツール · 集中",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "개발자 도구",
+      "name_ko": "개발자 도구 · 집중",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Herramientas de desarrollo",
+      "name_es": "Herramientas de desarrollo · Enfoque",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "developer_2",
+      "category": "developer",
+      "category_zh": "开发工具",
+      "category_en": "Developer tools",
+      "name_zh": "开发工具 · 清新",
+      "name_en": "Developer tools · Fresh",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#111827",
+        "#059669",
+        "#F1F5F9"
+      ],
+      "colors": {
+        "ink": "#F1F5F9",
+        "muted": "#CBD5E1",
+        "accent": "#6EE7B7",
+        "frame": "#64748B",
+        "backgrounds": [
+          "#111827",
+          "#172033",
+          "#1E293B",
+          "#131C2E"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "開発者ツール",
+      "name_ja": "開発者ツール · 爽やか",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "개발자 도구",
+      "name_ko": "개발자 도구 · 산뜻",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Herramientas de desarrollo",
+      "name_es": "Herramientas de desarrollo · Fresco",
+      "description_es": "Fondo, acento y marco coordinados"
+    },
+    {
+      "id": "developer_3",
+      "category": "developer",
+      "category_zh": "开发工具",
+      "category_en": "Developer tools",
+      "name_zh": "开发工具 · 鲜明",
+      "name_en": "Developer tools · Expressive",
+      "description_zh": "统一背景、强调色与设备边框",
+      "description_en": "Coordinated canvas, accent and device frame",
+      "swatches": [
+        "#111827",
+        "#9333EA",
+        "#F1F5F9"
+      ],
+      "colors": {
+        "ink": "#F1F5F9",
+        "muted": "#CBD5E1",
+        "accent": "#D8B4FE",
+        "frame": "#64748B",
+        "backgrounds": [
+          "#111827",
+          "#172033",
+          "#1E293B",
+          "#131C2E"
+        ]
+      },
+      "layout_overrides": {
+        "image_width": 0.84,
+        "radius": 0.031,
+        "title_size": 116
+      },
+      "landscape_layout": {
+        "left_width": 0.36,
+        "image_width": 0.49,
+        "title_scale": 0.087,
+        "radius": 0.018
+      },
+      "category_ja": "開発者ツール",
+      "name_ja": "開発者ツール · 表現豊か",
+      "description_ja": "背景・アクセント・フレームを統一",
+      "category_ko": "개발자 도구",
+      "name_ko": "개발자 도구 · 표현력",
+      "description_ko": "배경, 강조 색상, 기기 프레임을 조화롭게 구성",
+      "category_es": "Herramientas de desarrollo",
+      "name_es": "Herramientas de desarrollo · Expresivo",
+      "description_es": "Fondo, acento y marco coordinados"
+    }
+  ],
+  "prompt_presets": [
+    {
+      "id": "editorial",
+      "name_zh": "杂志留白",
+      "name_en": "Editorial",
+      "prompt": "Use concise editorial headlines, generous whitespace and one clear benefit per screen.",
+      "prompt_zh": "简洁的杂志式标题、大量留白，每张图只突出一个核心价值。",
+      "name_ja": "エディトリアル",
+      "prompt_ja": "短い見出しと余白を使い、各画像で1つの価値を伝えます。",
+      "name_ko": "에디토리얼",
+      "prompt_ko": "짧은 제목과 충분한 여백으로 이미지마다 하나의 가치를 전달합니다.",
+      "name_es": "Editorial",
+      "prompt_es": "Usa titulares breves, espacio en blanco y una ventaja clara por imagen."
+    },
+    {
+      "id": "minimal",
+      "name_zh": "极简产品",
+      "name_en": "Minimal",
+      "prompt": "Use short, factual headings and a restrained product-first composition. Avoid decorative language.",
+      "prompt_zh": "简短、准确的标题，以产品为中心，避免装饰性措辞。",
+      "name_ja": "ミニマル",
+      "prompt_ja": "簡潔で正確な見出しを使い、製品を中心に構成します。",
+      "name_ko": "미니멀",
+      "prompt_ko": "간결하고 정확한 제목으로 제품을 중심에 배치합니다.",
+      "name_es": "Minimalista",
+      "prompt_es": "Usa títulos breves y objetivos, con el producto como protagonista."
+    },
+    {
+      "id": "device",
+      "name_zh": "设备聚焦",
+      "name_en": "Device focus",
+      "prompt": "Emphasize the real device interface and describe the visible workflow with concise supporting copy.",
+      "prompt_zh": "突出真实设备界面，使用简短辅助文案说明可见操作流程。",
+      "name_ja": "端末を強調",
+      "prompt_ja": "実際の画面と表示された操作を短い説明で強調します。",
+      "name_ko": "기기 강조",
+      "prompt_ko": "실제 화면과 표시된 작업을 짧은 설명으로 강조합니다.",
+      "name_es": "Enfoque en el dispositivo",
+      "prompt_es": "Destaca la interfaz real y explica el flujo visible con textos breves."
+    },
+    {
+      "id": "bold",
+      "name_zh": "大胆标题",
+      "name_en": "Bold headlines",
+      "prompt": "Use confident, short benefit-led titles with strong hierarchy. Do not exaggerate capabilities.",
+      "prompt_zh": "使用有力、简短、价值导向的标题，层级鲜明，不夸大功能。",
+      "name_ja": "大胆な見出し",
+      "prompt_ja": "短く力強い見出しを使い、機能を誇張しません。",
+      "name_ko": "과감한 제목",
+      "prompt_ko": "짧고 힘 있는 제목을 사용하되 기능을 과장하지 않습니다.",
+      "name_es": "Titulares destacados",
+      "prompt_es": "Usa títulos breves y claros sin exagerar las funciones."
+    },
+    {
+      "id": "story",
+      "name_zh": "场景叙事",
+      "name_en": "Storytelling",
+      "prompt": "Arrange copy as a user journey: need, action, and outcome, grounded in visible features.",
+      "prompt_zh": "以需求、操作、结果组织用户旅程，所有内容以可见功能为依据。",
+      "name_ja": "ストーリー",
+      "prompt_ja": "画面に基づき、必要性・操作・結果の流れを伝えます。",
+      "name_ko": "스토리텔링",
+      "prompt_ko": "화면에 근거하여 필요, 행동, 결과의 흐름을 전달합니다.",
+      "name_es": "Narración",
+      "prompt_es": "Organiza el recorrido en necesidad, acción y resultado, según lo visible."
+    },
+    {
+      "id": "technical",
+      "name_zh": "专业科技",
+      "name_en": "Technical",
+      "prompt": "Use precise technical terminology and emphasize visible capabilities, integrations and controls.",
+      "prompt_zh": "使用准确的专业术语，突出可见的功能、集成和控制能力。",
+      "name_ja": "技術的",
+      "prompt_ja": "正確な専門用語で、表示された機能と操作を説明します。",
+      "name_ko": "전문 기술",
+      "prompt_ko": "정확한 기술 용어로 표시된 기능과 조작을 설명합니다.",
+      "name_es": "Técnico",
+      "prompt_es": "Usa términos técnicos precisos para describir funciones y controles visibles."
+    },
+    {
+      "id": "friendly",
+      "name_zh": "亲切生活",
+      "name_en": "Friendly lifestyle",
+      "prompt": "Use warm, approachable language and everyday use cases. Keep claims specific to the app.",
+      "prompt_zh": "使用亲切易懂的语言，结合日常使用场景，描述具体功能。",
+      "name_ja": "親しみやすい",
+      "prompt_ja": "親しみやすい言葉で、実際の機能と日常の用途を説明します。",
+      "name_ko": "친근한 일상",
+      "prompt_ko": "친근한 표현으로 실제 기능과 일상적인 사용 사례를 설명합니다.",
+      "name_es": "Cercano",
+      "prompt_es": "Usa un tono cercano y situaciones cotidianas basadas en las funciones reales."
+    },
+    {
+      "id": "premium",
+      "name_zh": "精致高端",
+      "name_en": "Premium",
+      "prompt": "Use restrained, polished language, short titles and deliberate whitespace. Avoid unsupported superlatives.",
+      "prompt_zh": "措辞克制精炼，标题简短并保留充足留白，不使用无依据的最高级。",
+      "name_ja": "上品",
+      "prompt_ja": "短く洗練された表現と余白を使い、根拠のない最上級を避けます。",
+      "name_ko": "세련된 스타일",
+      "prompt_ko": "간결하고 세련된 표현과 여백을 사용하며 근거 없는 최상급 표현은 피합니다.",
+      "name_es": "Elegante",
+      "prompt_es": "Usa textos sobrios y espacio en blanco; evita superlativos sin fundamento."
+    },
+    {
+      "id": "playful",
+      "name_zh": "活力趣味",
+      "name_en": "Playful",
+      "prompt": "Use lively, accessible titles and a light tone while preserving factual feature descriptions.",
+      "prompt_zh": "标题活泼易懂，语气轻松，同时准确描述真实功能。",
+      "name_ja": "遊び心",
+      "prompt_ja": "軽快で分かりやすい見出しで、実際の機能を正確に伝えます。",
+      "name_ko": "활기찬 스타일",
+      "prompt_ko": "활기차고 이해하기 쉬운 제목으로 실제 기능을 정확히 전달합니다.",
+      "name_es": "Divertido",
+      "prompt_es": "Usa títulos ágiles y accesibles manteniendo la precisión de las funciones."
+    },
+    {
+      "id": "educational",
+      "name_zh": "清晰教学",
+      "name_en": "Educational",
+      "prompt": "Explain one task per screen with clear action-oriented titles and simple supporting text.",
+      "prompt_zh": "每张图解释一个任务，使用清晰的行动导向标题及简洁说明。",
+      "name_ja": "分かりやすい説明",
+      "prompt_ja": "各画像で1つの操作を、簡潔な見出しと説明で伝えます。",
+      "name_ko": "명확한 안내",
+      "prompt_ko": "이미지마다 하나의 작업을 간결한 제목과 설명으로 안내합니다.",
+      "name_es": "Explicativo",
+      "prompt_es": "Explica una tarea por imagen con títulos claros y textos sencillos."
+    }
+  ]
+}
