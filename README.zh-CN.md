@@ -6,20 +6,20 @@
   <img src="web/assets/hero-v1.png" alt="深色背景上的抽象移动截图卡片" width="100%">
 </p>
 
-<p align="center"><strong>应用商店截图工作台</strong></p>
+<p align="center"><strong>免费 AI App Store 与 Google Play 截图生成器</strong></p>
 
 <p align="center">
   <a href="README.md">English</a> · 简体中文 · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a> · <a href="README.es.md">Español</a>
 </p>
 
 <p align="center">
-  将真实产品界面截图转化为清晰、本地化、可用于 App Store 和 Google Play 上架的截图。
+  将真实产品界面截图转化为清晰、本地化、可用于 App Store 和 Google Play 上架的应用商店截图。
 </p>
 
 <p align="center"><em>真实 PNG、JPEG、WebP 截图&nbsp;&nbsp;•&nbsp;&nbsp;视觉模型辅助文案&nbsp;&nbsp;•&nbsp;&nbsp;本地渲染与导出</em></p>
 
 <p align="center">
-  <a href="#快速开始">快速开始</a> · <a href="#命令行使用">命令行使用</a> · <a href="demo/nimotecode/">示例</a> · <a href="docs/CHANGELOG.md">变更日志</a>
+  <a href="#快速开始">快速开始</a> · <a href="#前后对比">前后对比</a> · <a href="#服务商">服务商</a> · <a href="#命令行使用">命令行</a> · <a href="demo/nimotecode/">示例</a>
 </p>
 
 <p align="center">
@@ -28,9 +28,31 @@
 
 ---
 
-NimoteShot 是在本机运行的应用商店截图工作台，面向 App Store 和 Google Play 上架素材。它将真实 PNG、JPEG 或 WebP 界面交给视觉模型分析并起草本地化文案，同时在本地完成图片排版与导出。每项任务都会生成可编辑的目录，包含原始截图、清单、配置、预览、成品与 ZIP 压缩包。
+NimoteShot 是免费、开源的 AI 应用商店截图生成器，面向 App Store 和 Google Play 上架素材。它将真实 PNG、JPEG 或 WebP 界面交给你选择的视觉模型分析并起草本地化文案，同时在本机完成排版渲染与导出。每项任务都会生成可编辑的目录，包含原始截图、清单、配置、预览、成品与 ZIP 压缩包。
 
-## 界面预览
+## 快速开始
+
+克隆仓库后，在仓库目录运行安装脚本。应用本身免费开源；云端服务商可能需要单独的 API 访问权限，也可选择本地 Ollama 模型。
+
+### Linux 与 macOS
+
+```bash
+git clone https://github.com/mobiledevloperlab/nimoteshot.git nimoteshot
+cd nimoteshot
+./install.sh
+```
+
+### Windows PowerShell
+
+```powershell
+git clone https://github.com/mobiledevloperlab/nimoteshot.git nimoteshot
+cd nimoteshot
+powershell -ExecutionPolicy Bypass -File .\install.ps1
+```
+
+打开命令行输出的 `http://127.0.0.1:8765` 地址。服务仅绑定本机回环地址。
+
+## 前后对比
 
 <table>
   <tr>
@@ -70,17 +92,23 @@ NimoteShot 是在本机运行的应用商店截图工作台，面向 App Store �
   </tr>
 </table>
 
+## 为什么选择 NimoteShot
+
+- **以真实界面为依据：** 每个任务保留原图，并记录 SHA-256 清单；它不是凭空生成界面模型的工具。
+- **AI 分析，本地渲染：** 所选模型分析截图并起草文案，布局、PNG 渲染、打包和导出均在你的电脑完成。
+- **可编辑的本地化：** 固定输出英文，并可选中文、日文、韩文、西班牙文；导出前可审阅和修改文案。
+
 ## 功能特性
 
 - 基于 1–40 张真实 PNG、JPEG 或 WebP 界面截图生成素材，文案以界面内容为依据。
 - 固定生成英文，并可选中文、日文、韩文、西班牙文。
 - 支持 iPhone、Android、iPad 的竖屏与横屏目标尺寸。
-- 提供 4 套视觉风格、28 套按应用类别划分的配色，以及可选设计提示词。
+- 提供 4 套基础视觉风格、24 套按应用类别划分的配色，以及可选设计提示词。
 - 默认使用 DeepSeek Flash，支持通义、智谱 GLM、火山方舟、腾讯混元、OpenAI 兼容接口、Gemini、Claude、Ollama，以及已登录的 Codex CLI。
 - 可通过仅监听本机回环地址的网页工作台或命令行使用；无需 Node.js 构建流程。
 - 每次导出均保存 SHA-256 源文件清单和可编辑配置。
 
-## 运行环境
+## 运行环境与服务商
 
 | 组件 | 版本 / 访问要求 | 用途 |
 | --- | --- | --- |
@@ -92,7 +120,7 @@ NimoteShot 是在本机运行的应用商店截图工作台，面向 App Store �
 | 网络 | 安装依赖和使用云端模型时需要 | 排版渲染在本地完成；云服务商会接收分析输入。 |
 | 视觉模型服务 | 受支持的 API Key、已配置 Endpoint、Ollama 或 Codex CLI 登录 | 分析截图并起草文案。 |
 
-### 服务商前置条件
+### 服务商
 
 | 服务商 | 凭证或准备步骤 | 默认模型 / 说明 |
 | --- | --- | --- |
@@ -108,28 +136,12 @@ NimoteShot 是在本机运行的应用商店截图工作台，面向 App Store �
 
 API 服务订阅与消费者聊天订阅不是同一项权限。开始生成前，请在服务商控制台确认账户有权调用所选视觉模型。
 
-## 快速开始
+### 安装说明
 
-### Linux 与 macOS
-
-```bash
-git clone <你的仓库地址> nimoteshot
-cd nimoteshot
-./install.sh
-```
-
-脚本会检查 Python 3.11+、创建 `.venv`、安装运行依赖并打开工作台。若不希望自动打开浏览器：
+安装脚本会检查 Python 3.11+、创建 `.venv`、安装运行依赖并打开工作台。Linux 或 macOS 如不希望自动打开浏览器：
 
 ```bash
 ./install.sh --no-browser
-```
-
-### Windows PowerShell
-
-```powershell
-git clone <你的仓库地址> nimoteshot
-Set-Location nimoteshot
-powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
 若企业安全策略限制 PowerShell，请联系管理员获得合规的执行策略；不要从不可信来源下载脚本。

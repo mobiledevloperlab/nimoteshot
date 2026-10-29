@@ -6,20 +6,20 @@
   <img src="web/assets/hero-v1.png" alt="Abstract mobile screenshot cards on a dark blue background" width="100%">
 </p>
 
-<p align="center"><strong>App Store Screenshot Studio</strong></p>
+<p align="center"><strong>Free AI App Store &amp; Google Play Screenshot Generator</strong></p>
 
 <p align="center">
   English · <a href="README.zh-CN.md">简体中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a> · <a href="README.es.md">Español</a>
 </p>
 
 <p align="center">
-  Turn genuine product captures into clear, localized screenshots for your App Store and Google Play listings.
+  Turn genuine product captures into localized app store screenshots for App Store and Google Play listings.
 </p>
 
 <p align="center"><em>Real PNG captures&nbsp;&nbsp;•&nbsp;&nbsp;Vision-assisted store copy&nbsp;&nbsp;•&nbsp;&nbsp;Local rendering and export</em></p>
 
 <p align="center">
-  <a href="#quick-start">Quick start</a> · <a href="#cli-workflow">CLI workflow</a> · <a href="demo/nimotecode/">Demo</a> · <a href="docs/CHANGELOG.md">Changelog</a>
+  <a href="#quick-start">Quick start</a> · <a href="#before-and-after">Before &amp; after</a> · <a href="#providers">Providers</a> · <a href="#cli-workflow">CLI</a> · <a href="demo/nimotecode/">Demo</a>
 </p>
 
 <p align="center">
@@ -28,9 +28,31 @@
 
 ---
 
-NimoteShot analyzes genuine PNG, JPEG or WebP captures with a vision model, drafts localized store copy, and renders the final artwork on your computer. Each task creates an editable folder containing source captures, a manifest, configuration, previews, exports, and a ZIP archive.
+NimoteShot is a free, open-source AI screenshot generator. It analyzes genuine PNG, JPEG, or WebP captures with your selected vision model, drafts localized store copy, and uses local rendering for the final artwork and export. Every task creates an editable folder containing source captures, a manifest, configuration, previews, exports, and a ZIP archive.
 
-## Preview
+## Quick start
+
+Clone the repository, then run the installer from its folder. The application is free and open source; a cloud provider may require its own API access, while Local Ollama is available for local model use.
+
+### Linux and macOS
+
+```bash
+git clone https://github.com/mobiledevloperlab/nimoteshot.git nimoteshot
+cd nimoteshot
+./install.sh
+```
+
+### Windows PowerShell
+
+```powershell
+git clone https://github.com/mobiledevloperlab/nimoteshot.git nimoteshot
+cd nimoteshot
+powershell -ExecutionPolicy Bypass -File .\install.ps1
+```
+
+Open the printed `http://127.0.0.1:8765` address. The server deliberately binds to loopback only.
+
+## Before and after
 
 <table>
   <tr>
@@ -70,17 +92,23 @@ NimoteShot analyzes genuine PNG, JPEG or WebP captures with a vision model, draf
   </tr>
 </table>
 
+## Why NimoteShot
+
+- **Evidence-led screenshots:** source captures remain visible in the task and a SHA-256 manifest records them; the tool is not a mockup generator.
+- **AI for analysis, local rendering for output:** your chosen model analyzes captures and drafts copy, while layout, PNG rendering, packaging, and export happen on your computer.
+- **Localization you can edit:** produce English with optional Chinese, Japanese, Korean, and Spanish output, then review and adjust text before export.
+
 ## Features
 
 - Converts 1–40 real PNG, JPEG or WebP captures into localized store artwork.
 - Produces English plus optional Chinese, Japanese, Korean, and Spanish copy.
 - Renders iPhone, Android, and iPad portrait/landscape targets.
-- Includes four visual styles, 28 category-aware palettes, and optional design-direction prompts.
+- Includes four base visual styles, 24 category-specific palettes, and optional design-direction prompts.
 - Defaults to DeepSeek Flash and supports Qwen, GLM, Volcengine Ark, Hunyuan, OpenAI-compatible APIs, Gemini, Claude, Ollama, and a signed-in Codex CLI workflow.
 - Runs as a loopback-only local web app or a command-line tool; no Node.js build is required.
 - Saves a SHA-256 source manifest and editable task configuration with each export.
 
-## Requirements
+## Requirements and providers
 
 | Component | Required version / access | Why it is needed |
 | --- | --- | --- |
@@ -92,7 +120,7 @@ NimoteShot analyzes genuine PNG, JPEG or WebP captures with a vision model, draf
 | Network | Required for dependency installation and cloud providers | Local rendering stays on your computer; cloud providers receive analysis inputs. |
 | Vision provider | A supported API key, configured endpoint, Ollama, or Codex CLI sign-in | Analyzes captures and drafts copy. |
 
-### Provider prerequisites
+### Providers
 
 | Provider | Credential or setup | Default model / note |
 | --- | --- | --- |
@@ -108,28 +136,12 @@ NimoteShot analyzes genuine PNG, JPEG or WebP captures with a vision model, draf
 
 An API subscription is separate from a consumer chat subscription. Confirm your account can call the selected vision model before generating.
 
-## Quick start
+### Installation details
 
-### Linux and macOS
-
-```bash
-git clone <your-repository-url> nimoteshot
-cd nimoteshot
-./install.sh
-```
-
-The script verifies Python 3.11+, creates `.venv`, installs runtime dependencies, and opens the studio. To start without opening a browser:
+The installers verify Python 3.11+, create `.venv`, install runtime dependencies, and open the studio. On Linux and macOS, start without opening a browser with:
 
 ```bash
 ./install.sh --no-browser
-```
-
-### Windows PowerShell
-
-```powershell
-git clone <your-repository-url> nimoteshot
-Set-Location nimoteshot
-powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
 If PowerShell is restricted by organizational policy, ask your administrator for an approved execution-policy workflow rather than downloading an untrusted script.
