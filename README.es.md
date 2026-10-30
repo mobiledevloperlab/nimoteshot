@@ -1,95 +1,90 @@
 <p align="center">
-  <img src="web/assets/nimoteshot-logo.svg" alt="NimoteShot" width="392">
+  <img src="web/assets/nimoteshot-logo.svg" alt="NimoteShot" width="320">
 </p>
 
-<p align="center"><strong>Generador gratuito con IA de capturas para App Store y Google Play</strong></p>
+# NimoteShot — Generador de capturas para App Store con IA
 
-<p align="center">
-  <a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a> · Español
-</p>
+**Pantallas reales. Textos editables. Exportación PNG local.**
 
-NimoteShot es un generador de capturas con IA, gratuito y de código abierto. Convierte capturas reales de producto en imágenes localizadas para App Store y Google Play. Analiza PNG, JPEG o WebP con el modelo de visión que elijas para preparar textos de tienda; la composición y la exportación se realizan en tu equipo.
+Convierte capturas de tu aplicación en imágenes para **App Store y Google Play**. Un modelo visual redacta el texto inicial; tú ajustas los textos y el diseño en un editor con vista previa y exportas imágenes para iPhone, iPad y Android. Para desarrolladores independientes y equipos que preparan su próximo lanzamiento.
+
+**Python 3.11+ · Linux / macOS / Windows · 17 idiomas de salida · AGPLv3+**
+
+[English](README.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · Español
+
+![Editor de NimoteShot con un título en inglés y chino y su vista previa de App Store actualizada al lado](web/assets/redefine_promotion.png)
+
+*Edita el título, subtítulo y diseño junto al resultado. Solo se actualizan las vistas afectadas, de forma local y sin otra llamada a la IA. La imagen muestra el editor en funcionamiento.*
+
+## Por qué usar NimoteShot
+
+- **Parte de tu producto real.** Sube PNG, JPEG o WebP. El modelo redacta textos basados en funciones visibles y las capturas originales forman la composición.
+- **Conserva el control después de generar.** Ajusta textos, plantillas, colores y orden; comprueba la vista previa antes de exportar.
+- **Prepara varios mercados y dispositivos.** Elige 17 versiones de idioma y seis combinaciones de dispositivo y orientación, con fuentes incluidas según los caracteres introducidos.
+- **Trabaja a tu manera.** Usa la web o la CLI. El diseño manual no necesita clave API; el análisis con IA admite proveedores visuales locales y en la nube.
+
+El software es gratuito y de código abierto. Los proveedores de modelos en la nube pueden cobrar por el uso de su API.
 
 ## Inicio rápido
 
-Clona el repositorio y ejecuta el instalador desde esa carpeta. La aplicación es gratuita y de código abierto, aunque los proveedores en la nube pueden requerir acceso propio a la API. Puedes elegir Ollama para un modelo local.
+Instala **Python 3.11 o posterior** y clona el repositorio:
 
 ```bash
-git clone https://github.com/mobiledevloperlab/nimoteshot.git nimoteshot
+git clone https://github.com/mobiledevloperlab/nimoteshot.git
 cd nimoteshot
+```
+
+Linux / macOS:
+
+```bash
 ./install.sh
 ```
 
+Windows PowerShell:
+
 ```powershell
-git clone https://github.com/mobiledevloperlab/nimoteshot.git nimoteshot
-cd nimoteshot
 powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
-Abre la dirección `http://127.0.0.1:8765` mostrada. El servidor escucha solo en el bucle local.
+El instalador prepara `.venv`, instala las dependencias e inicia el estudio. Abre la **URL que aparece en el terminal**; la predeterminada es `http://127.0.0.1:8765`. Elige **Manual design** para probar el editor sin una clave de modelo.
 
-## Antes y después
+## De la captura a la imagen de tienda
 
-<table><tr>
-<td width="56%" valign="top"><img src="web/assets/ui.png" alt="Página de inicio y ejemplo generado de NimoteShot" width="100%"><p align="center"><sub>Inicio y ejemplo de imágenes de tienda generadas</sub></p></td>
-<td width="44%" valign="top"><img src="web/assets/snapshot.png" alt="Flujo de creación en cuatro pasos" width="100%"><p align="center"><sub>Flujo de creación local en cuatro pasos</sub></p></td>
-</tr></table>
+1. Introduce el nombre y una descripción o web HTTPS pública. Añade entre 1 y 40 capturas reales.
+2. Elige idiomas, tamaños y dirección visual. Inicia el análisis con IA o el diseño manual.
+3. Edita cada versión de idioma y comprueba la vista previa. Los cambios individuales actualizan las capturas afectadas; los ajustes globales renuevan el conjunto de vistas actual.
+4. Usa **Export PNG / ZIP** para descargar imágenes RGB/sRGB validadas en varias resoluciones y una configuración editable.
 
-### Capturas reales → material para la tienda
+| Captura original de la aplicación | Imagen de tienda generada |
+| --- | --- |
+| <img src="demo/nimotecode/originals/code-editor.png" alt="Captura original del editor móvil NimoteCode" width="220"> | <img src="demo/nimotecode/previews/01_feature.png" alt="Imagen para App Store generada a partir del editor real" width="220"> |
 
-<table><tr>
-<td width="33.33%" align="center" valign="top"><strong>Editor de código móvil</strong><br><br><img src="demo/nimotecode/originals/code-editor.png" alt="Captura original del editor de código" width="47%"> <img src="demo/nimotecode/previews/01_feature.png" alt="Material generado para IDE móvil" width="47%"><br><sub>Captura original → material funcional generado</sub></td>
-<td width="33.33%" align="center" valign="top"><strong>Espacio de trabajo SSH</strong><br><br><img src="demo/nimotecode/originals/ssh-workspace.png" alt="Captura original del espacio de trabajo SSH" width="47%"> <img src="demo/nimotecode/previews/03_feature.png" alt="Material generado para espacio de trabajo SSH" width="47%"><br><sub>Captura original → material funcional generado</sub></td>
-<td width="33.33%" align="center" valign="top"><strong>Asistente de programación con IA</strong><br><br><img src="demo/nimotecode/originals/ai-assistant.png" alt="Captura original del asistente de IA" width="47%"> <img src="demo/nimotecode/previews/02_feature.png" alt="Material generado para asistente de IA" width="47%"><br><sub>Captura original → material funcional generado</sub></td>
-</tr></table>
+[Explora la demostración completa](demo/nimotecode/). Los ajustes opcionales agrupan la reescritura de textos, la selección local de plantillas y el nuevo análisis de imágenes, indicando qué sustituye cada acción.
 
-## Qué diferencia a NimoteShot
+## Idiomas y fuentes
 
-- **Basado en capturas reales:** guarda las capturas de origen en la tarea y registra un manifiesto SHA-256; no es un generador de maquetas desde cero.
-- **Análisis con IA y renderizado local:** el modelo elegido analiza las capturas y redacta el texto; la composición, el renderizado PNG, el empaquetado y la exportación suceden en tu equipo.
-- **Localización editable:** genera inglés y, opcionalmente, chino, japonés, coreano y español, con revisión y edición del texto antes de exportar.
+La selección de salida, el selector de versión, las instrucciones a la IA, la vista previa y la exportación usan el mismo catálogo de **17 idiomas**: inglés, chino simplificado y tradicional, japonés, coreano, español, francés, alemán, portugués brasileño, ruso, griego, vietnamita, árabe, hindi, bengalí, tailandés y hebreo. El inglés siempre se incluye; selecciona los demás según tus necesidades.
 
-## Características
+Cada idioma conserva sus propios textos. Las fuentes se eligen por los caracteres introducidos, de modo que un campo de inglés también puede contener chino o japonés. Los idiomas añadidos después de planificar empiezan con textos provisionales y un aviso para editarlos o regenerarlos. La composición del método de entrada termina antes de actualizar la vista previa.
 
-- Convierte entre 1 y 40 capturas reales PNG, JPEG o WebP en material de tienda localizado.
-- Genera textos en inglés y, opcionalmente, chino, japonés, coreano y español.
-- Admite tamaños de destino para iPhone, Android y iPad, en vertical y horizontal.
-- Incluye cuatro estilos visuales base, 24 paletas específicas por categoría y sugerencias de diseño opcionales.
-- Funciona como aplicación web local o herramienta de línea de comandos; el renderizado y la exportación permanecen en el equipo.
+La interfaz está disponible en inglés, chino simplificado, japonés, coreano y español. Las combinaciones de caracteres no cubiertas por las fuentes o la falta de composición de escritura compleja producen un error claro.
 
-## Instalación y proveedores
+## Formatos, modelos y CLI
 
-El instalador comprueba Python 3.11 o posterior, crea `.venv`, instala las dependencias y abre el estudio. Para iniciarlo sin abrir el navegador, usa `./install.sh --no-browser`. Puedes elegir DeepSeek (predeterminado), Qwen, Zhipu GLM, Volcengine Ark, Hunyuan, una API compatible con OpenAI, Gemini, Claude, Ollama o Codex CLI con sesión iniciada. Cada proveedor requiere su propia clave o configuración.
+Incluye iPhone, iPad y Android en vertical y horizontal, cuatro estilos base, 24 paletas por categoría y plantillas editables. Cada tarea conserva originales, manifiesto SHA-256, configuración, vistas previas, PNG y ZIP en `store_screenshots/runs/<task-id>/`. Consulta los [tamaños de salida](store_screenshots/targets.json).
 
-## Uso del estudio
+Puedes elegir DeepSeek (predeterminado), Qwen, GLM, Volcengine Ark, Hunyuan, APIs compatibles con OpenAI, Gemini, Claude, Ollama o la integración con Codex CLI. Analizar capturas requiere un modelo visual y acceso a él. Consulta la [configuración de proveedores](docs/PROVIDERS.md) y la [guía de CLI](README.md#cli).
 
-1. Introduce el nombre de la aplicación y una breve descripción del producto o una página HTTPS pública y fiable.
-2. Sube entre 1 y 40 capturas PNG, JPEG o WebP reales sobre las que tengas derecho de uso.
-3. Elige idiomas de salida, estilo, paleta y, si quieres, una indicación de diseño.
-4. Selecciona un proveedor de visión y ejecuta **Check setup** antes de generar.
-5. Haz clic en **Analyze and plan** para previsualizar y editar el texto de cada idioma.
-6. Haz clic en **Export PNG / ZIP** para descargar imágenes validadas. Sin clave API, elige **Manual design** y escribe el texto manualmente.
+## Actualizaciones y privacidad
 
-Cada tarea se guarda en `store_screenshots/runs/<task-id>/` e incluye originales, `source_manifest.json`, un `config.json` editable, vistas previas, PNG y un ZIP. Antes de publicar, revisa las [especificaciones de capturas de Apple](https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications/) y los [requisitos de imágenes de Google Play](https://support.google.com/googleplay/android-developer/answer/9866151).
+Después de actualizar, ejecuta `python -m pip install -r store_screenshots/requirements.txt` y reinicia el servicio. Si el puerto está ocupado, una instancia verificada e inactiva del proyecto se cierra normalmente y se reemplaza. Las tareas activas y otros programas se mantienen; el nuevo estudio elige otro puerto e indica la URL real. No se fuerzan cierres de procesos.
 
-## CLI
+El renderizado permanece en tu equipo, pero **el análisis con IA envía capturas y contexto al proveedor elegido**. Las claves guardadas se conservan en texto plano en la configuración del usuario. Usa imágenes que tengas derecho a enviar y revisa textos y traducciones antes de publicar. Consulta la [política de seguridad](.github/SECURITY.md) para conocer los límites y comunicar vulnerabilidades en privado.
 
-Coloca capturas PNG/JPEG/WebP en `screens/`, configura un proveedor y ejecuta:
+## Construyámoslo juntos
 
-```bash
-.venv/bin/python scripts/nimoteshot.py generate \
-  --brand "My App" \
-  --description "Un editor móvil con herramientas SSH, Git y terminal" \
-  --style editorial --provider qwen --locales es-ES
-```
+Prueba el proyecto con tu aplicación y [comunica un problema reproducible](https://github.com/mobiledevloperlab/nimoteshot/issues/new/choose), mejora una traducción, fuente o plantilla, o envía un PR de código o documentación. Comenta los cambios grandes en un Issue primero. La [guía de contribución](.github/CONTRIBUTING.md) explica el entorno y las pruebas; las [notas de arquitectura y validación](docs/VISION_UPGRADE.md) recogen los detalles técnicos.
 
-En Windows, sustituye `.venv/bin/python` por `.venv\Scripts\python.exe`. Consulta todas las opciones con `python scripts/nimoteshot.py --help`.
+## Licencia
 
-## Privacidad y seguridad
-
-- El renderizado, empaquetado y exportación se realizan localmente. Las capturas y la descripción se envían al modelo elegido para su análisis.
-- Las tareas generadas contienen capturas y texto de origen: trátalas como datos privados y elimínalas cuando ya no sean necesarias.
-- La salida del modelo no es fiable. Revisa todos los textos, afirmaciones, traducciones y asignaciones de dispositivos antes de publicar.
-- No subas claves API, perfiles locales, capturas privadas, tareas generadas ni archivos a tu repositorio. Consulta [SECURITY.md](.github/SECURITY.md) para el modelo de amenazas completo.
-
-Para desarrollo, resolución de problemas, requisitos de proveedores y la referencia técnica completa, consulta el [README en inglés](README.md).
+Se publica bajo [GNU AGPLv3 o posterior](LICENSE). Puedes usar, estudiar, modificar y compartir el proyecto según sus condiciones. Si ofreces una versión modificada como servicio de red, proporciona el código fuente correspondiente según la licencia. Las fuentes y otros materiales conservan sus propias licencias: consulta los [avisos de terceros](docs/THIRD_PARTY_NOTICES.md), el [código de conducta](.github/CODE_OF_CONDUCT.md) y la [gobernanza](docs/GOVERNANCE.md).

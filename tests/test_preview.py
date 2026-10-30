@@ -11,6 +11,7 @@ from unittest.mock import patch
 from PIL import Image
 
 from nimoteshot import server
+from test_typography import SAMPLES
 
 
 class PreviewTests(unittest.TestCase):
@@ -77,6 +78,39 @@ class PreviewTests(unittest.TestCase):
         self.assertEqual(status, 200, reverse)
         self.assertEqual(reverse['indices'], [1, 0])
         self.assertEqual(reverse['images'], list(reversed(full['images'])))
+
+    def test_major_language_text_in_english_fields_renders_in_both_orientations(self):
+        screen = self.payload['proposal']['screens'][0]
+        for language, title, subtitle in SAMPLES:
+            screen.update(title_en=[title], subtitle_en=subtitle)
+            for target in self.payload['targets']:
+                with self.subTest(language=language, target=target):
+                    status, result = self.request(preview_indices=[0], preview_target=target)
+                    self.assertEqual(status, 200, result)
+                    self.assertEqual(result['locale'], 'en-US')
+                    self.assertEqual(result['indices'], [0])
+                    self.assertTrue(result['images'][0].startswith('data:image/png;base64,'))
+
+    def test_replacing_english_with_chinese_changes_pixels_and_subsequent_chinese_edits_are_visible(self):
+        screen = self.payload['proposal']['screens'][0]
+        for target in self.payload['targets']:
+            images = []
+            for title in ('Code tools', '代码工具', '终端工具'):
+                screen['title_en'] = [title]
+                status, result = self.request(preview_indices=[0], preview_target=target)
+                self.assertEqual(status, 200, result)
+                images.append(result['images'][0])
+            self.assertEqual(len(set(images)), 3)
+
+    def test_supplied_demo_title_with_mixed_chinese_and_english_renders(self):
+        self.payload['proposal']['screens'][0].update(
+            title_en=['Remote SSH', 'workspace | China 中国 | for test'],
+            subtitle_en='Browse a connected server project')
+        for target in self.payload['targets']:
+            with self.subTest(target=target):
+                status, result = self.request(preview_indices=[0], preview_target=target)
+                self.assertEqual(status, 200, result)
+                self.assertEqual(result['indices'], [0])
 
     def test_invalid_indices_are_rejected_before_rendering(self):
         for indices in (None, [], '0', [True], [-1], [2], [0, 0], [0.5], [{}]):

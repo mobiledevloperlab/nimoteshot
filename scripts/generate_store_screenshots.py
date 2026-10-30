@@ -4,8 +4,11 @@ import argparse
 import json
 import hashlib
 import copy
+import unicodedata
+from functools import lru_cache
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageColor, ImageOps
+from PIL import Image, ImageDraw, ImageFont, ImageFilter, ImageColor, ImageOps, features
+from fontTools.ttLib import TTFont
 
 ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE_REGISTRY = json.loads((ROOT / 'nimoteshot/templates.json').read_text(encoding='utf-8'))
@@ -81,19 +84,50 @@ def localized(c,locale):
     for path in result['fonts'].values():assert (ROOT/path).is_file(),f'Missing font: {path}'
     return result
 
+@lru_cache(maxsize=32)
+def font_characters(path):
+    with TTFont(path, lazy=True) as face:
+        return frozenset(face.getBestCmap() or {})
+
+
+def text_font_path(preferred, text, weight='Regular'):
+    # Language selectors choose copy variants, not which scripts a user may type.
+    characters={ord(char) for char in text if not char.isspace()
+                and unicodedata.category(char) != 'Cf'
+                and not 0xFE00 <= ord(char) <= 0xFE0F}
+    complex_text=any(unicodedata.bidirectional(char) in ('R','AL')
+                     or any(script in unicodedata.name(char,'') for script in ('DEVANAGARI','BENGALI','THAI'))
+                     for char in text)
+    if complex_text and not features.check('raqm'):
+        raise ValueError('Complex text requires Pillow with libraqm shaping support')
+    directory=ROOT/'store_screenshots/assets/fonts'
+    candidates=[Path(preferred), directory/f'NotoSansCJKsc-{weight}.otf', directory/'Inter.ttf',
+                *(directory/f'NotoSans{script}.ttf' for script in ('Arabic','Devanagari','Thai','Hebrew','Bengali'))]
+    for path in dict.fromkeys(candidates):
+        if path.is_file() and characters <= font_characters(str(path)):
+            return path
+    raise ValueError('No bundled font covers text characters: '+', '.join(f'U+{code:04X}' for code in sorted(characters)))
+
+
+def load_font(path, size, weight):
+    face=ImageFont.truetype(path,size)
+    try:face.set_variation_by_name(weight)
+    except OSError:pass
+    return face
+
+
 def fit_text(draw, lines, font_path, max_width, initial, minimum, weight='Bold'):
+    font_path=text_font_path(font_path,''.join(lines),weight)
     for size in range(initial,minimum-1,-1):
-        f=ImageFont.truetype(font_path,size)
-        try:f.set_variation_by_name(weight)
-        except OSError:pass
+        f=load_font(font_path,size,weight)
         if all(draw.textbbox((0,0),line,font=f)[2]<=max_width for line in lines): return f
     raise ValueError(f'Text does not fit: {lines}')
 
-def font(c,key,size):
-    f=ImageFont.truetype(ROOT/c['fonts'][key],size)
-    try:f.set_variation_by_name('Bold' if key=='bold' else 'Regular')
-    except OSError:pass
-    return f
+
+def font(c,key,size,text=''):
+    weight='Bold' if key=='bold' else 'Regular'
+    path=text_font_path(ROOT/c['fonts'][key],text,weight)
+    return load_font(path,size,weight)
 
 def px(v,w): return round(v*w)
 
@@ -247,9 +281,9 @@ def render_landscape(c,s,size,target='android_landscape'):
     title=s['title']
     tf=fit_text(d,title,ROOT/c['fonts']['bold'],left_width,round(h*style.get('title_scale',.087)),round(h*.04))
     line_height=round(tf.size*1.12)
-    sub=s['subtitle']; sf=font(c,'regular',max(12,round(h*.038)))
+    sub=s['subtitle']; sf=font(c,'regular',max(12,round(h*.038)),sub)
     while d.textbbox((0,0),sub,font=sf)[2]>left_width and sf.size>round(h*.02):
-        sf=font(c,'regular',sf.size-1)
+        sf=font(c,'regular',sf.size-1,sub)
     assert d.textbbox((0,0),sub,font=sf)[2]<=left_width, f'Subtitle overflow: {s["output"]}'
     text_height=len(title)*line_height+round(h*.045)+sf.size
     ty=max(round((h-text_height)*.48),brand_y+round(h*.10))
@@ -287,17 +321,17 @@ def render_overview(c,s,size):
     d.text((margin+round(46*k),by-round(3*k)),brand,font=bf,fill=C['ink'])
     num=f"01 / {len(c['screens']):02d}";nf=font(c,'regular',round(27*k));bb=d.textbbox((0,0),num,font=nf)
     d.text((w-margin-(bb[2]-bb[0]),by),num,font=nf,fill=C['muted'])
-    ty=round(h*L['title_y']);tf=font(c,'bold',round(L['title_size']*k))
+    ty=round(h*L['title_y']);tf=font(c,'bold',round(L['title_size']*k),''.join(s['title']))
     for line in s['title']:
         bb=d.textbbox((0,0),line,font=tf);assert bb[2]-bb[0]<=w-2*margin
         d.text((margin,ty),line,font=tf,fill=C['ink']);ty+=round(L['title_line_height']*k)
-    sf=font(c,'regular',round(L['subtitle_size']*k));suby=ty+round(11*k)
+    sf=font(c,'regular',round(L['subtitle_size']*k),s['subtitle']);suby=ty+round(11*k)
     assert d.textbbox((0,0),s['subtitle'],font=sf)[2]<w-2*margin
     d.text((margin,suby),s['subtitle'],font=sf,fill=C['muted'])
     roww=w-2*margin;rowh=round(h*.175);start=round(h*.302);gap=round(h*.044)
     for i,part in enumerate(s['components']):
         label_y=start+i*(rowh+gap)-round(65*k)
-        d.text((margin,label_y),part['label'],font=font(c,'bold',round(46*k)),fill=C['muted'])
+        d.text((margin,label_y),part['label'],font=font(c,'bold',round(46*k),part['label']),fill=C['muted'])
         with Image.open(ROOT/c['source_dir']/part['file']) as raw:
             a,b,e,f=part['crop'];sw,sh=raw.size
             crop=raw.crop((round(a*sw),round(b*sh),round(e*sw),round(f*sh))).convert('RGB')

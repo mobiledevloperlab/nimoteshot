@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from nimoteshot.pipeline import MODELS, STYLES, generate
+from nimoteshot.pipeline import LOCALES, MODELS, STYLES, generate
 from nimoteshot.providers import check_connection
 from nimoteshot.server import serve
 from nimoteshot.settings import config_path, describe, save
@@ -45,7 +45,7 @@ def main():
     run.add_argument("--model", default="", help="Optional model override")
     run.add_argument("--base-url", default="", help="Only needed for another compatible API")
     run.add_argument("--design-prompt", default="", help="Optional layout or art-direction guidance for the model")
-    run.add_argument("--locales", default="zh-CN", help="Comma-separated output locales: zh-CN,ja-JP,ko-KR,es-ES")
+    run.add_argument("--locales", default="zh-CN", help="Comma-separated output locales: " + ",".join(LOCALES))
     args = parser.parse_args()
     if args.command == "web":
         serve(port=args.port, open_browser=not args.no_browser)

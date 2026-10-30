@@ -92,10 +92,17 @@ function renderMarkdown(markdown, source) {
       index += 1; continue;
     }
     if (codeLines !== null) { codeLines.push(line); index += 1; continue; }
+    const picture = /^!\[([^\]]*)\]\(([^)\s]+)\)$/.exec(line.trim());
+    if (picture) {
+      const image = document.createElement('img');image.alt = picture[1];image.src = resolveTarget(picture[2], source);image.loading = 'lazy';
+      const figure = document.createElement('figure');figure.className = 'docs-figure';figure.append(image);fragment.append(figure);
+      index += 1;continue;
+    }
     if (!line.trim() || /^<\/?(?:p|div|picture|summary|details|img|a|br)\b/i.test(line.trim())) { index += 1; continue; }
     const heading = /^(#{1,4})\s+(.+)$/.exec(line);
     if (heading) {
       const node = document.createElement(`h${Math.min(heading[1].length + 1, 5)}`);
+      node.id = heading[2].toLowerCase().replace(/[^\p{L}\p{N}_\s-]/gu, '').trim().replace(/\s+/g, '-');
       appendInline(node, heading[2], source); fragment.append(node); index += 1; continue;
     }
     if (/^\s*[-*_]{3,}\s*$/.test(line)) { fragment.append(document.createElement('hr')); index += 1; continue; }

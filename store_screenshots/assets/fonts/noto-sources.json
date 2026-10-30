@@ -1,0 +1,42 @@
+[
+  {
+    "family": "Noto Sans Arabic",
+    "revision": "6157dfaa640ca5738b4d1a7070fe389c3036d7fc",
+    "source": "https://github.com/google/fonts/tree/6157dfaa640ca5738b4d1a7070fe389c3036d7fc/ofl/notosansarabic",
+    "file": "NotoSansArabic.ttf",
+    "sha256": "63111b5b2e074dd48cc67692e0a2726d86ee94c1c37fe8598257b7b4e87e869e",
+    "license": "OFL-NotoSansArabic.txt"
+  },
+  {
+    "family": "Noto Sans Devanagari",
+    "revision": "6157dfaa640ca5738b4d1a7070fe389c3036d7fc",
+    "source": "https://github.com/google/fonts/tree/6157dfaa640ca5738b4d1a7070fe389c3036d7fc/ofl/notosansdevanagari",
+    "file": "NotoSansDevanagari.ttf",
+    "sha256": "14ec4af41f27482216d1c2229f417ff9b1425e1babb014e57d1d40d03229853e",
+    "license": "OFL-NotoSansDevanagari.txt"
+  },
+  {
+    "family": "Noto Sans Thai",
+    "revision": "6157dfaa640ca5738b4d1a7070fe389c3036d7fc",
+    "source": "https://github.com/google/fonts/tree/6157dfaa640ca5738b4d1a7070fe389c3036d7fc/ofl/notosansthai",
+    "file": "NotoSansThai.ttf",
+    "sha256": "5a1c559bb539583c8a1fd99d1c5b9491e5e14478c9cd2bd0970d5c3096cc9ef8",
+    "license": "OFL-NotoSansThai.txt"
+  },
+  {
+    "family": "Noto Sans Hebrew",
+    "revision": "6157dfaa640ca5738b4d1a7070fe389c3036d7fc",
+    "source": "https://github.com/google/fonts/tree/6157dfaa640ca5738b4d1a7070fe389c3036d7fc/ofl/notosanshebrew",
+    "file": "NotoSansHebrew.ttf",
+    "sha256": "7ef36a2c3593758cdb622e1bdef4f84523e92fbc3ccc667438dd80ff54c2de88",
+    "license": "OFL-NotoSansHebrew.txt"
+  },
+  {
+    "family": "Noto Sans Bengali",
+    "revision": "6157dfaa640ca5738b4d1a7070fe389c3036d7fc",
+    "source": "https://github.com/google/fonts/tree/6157dfaa640ca5738b4d1a7070fe389c3036d7fc/ofl/notosansbengali",
+    "file": "NotoSansBengali.ttf",
+    "sha256": "dcd42978094e584a849c84a51450eeac40c8826057d566ea6d4b9627a403a05a",
+    "license": "OFL-NotoSansBengali.txt"
+  }
+]

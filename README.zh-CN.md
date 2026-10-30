@@ -1,263 +1,181 @@
 <p align="center">
-  <img src="web/assets/nimoteshot-logo.svg" alt="NimoteShot" width="392">
+  <img src="web/assets/nimoteshot-logo.svg" alt="NimoteShot" width="320">
 </p>
 
-<p align="center">
-  <img src="web/assets/hero-v1.png" alt="深色背景上的抽象移动截图卡片" width="100%">
-</p>
+# NimoteShot — 开源 AI 应用商店截图生成器
 
-<p align="center"><strong>免费 AI App Store 与 Google Play 截图生成器</strong></p>
+**真实界面，文案可改，多语言截图在本地导出。**
 
-<p align="center">
-  <a href="README.md">English</a> · 简体中文 · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a> · <a href="README.es.md">Español</a>
-</p>
+把自己的应用截图，制作成适用于 **App Store 和 Google Play** 的上架素材。让视觉模型起草卖点，在实时编辑器中调整文案与布局，再导出 iPhone、iPad、Android 所需的图片。适合准备发布应用的独立开发者与产品团队。
 
-<p align="center">
-  将真实产品界面截图转化为清晰、本地化、可用于 App Store 和 Google Play 上架的应用商店截图。
-</p>
+**Python 3.11+ · Linux / macOS / Windows · 17 种输出语言 · AGPLv3+**
 
-<p align="center"><em>真实 PNG、JPEG、WebP 截图&nbsp;&nbsp;•&nbsp;&nbsp;视觉模型辅助文案&nbsp;&nbsp;•&nbsp;&nbsp;本地渲染与导出</em></p>
+[English](README.md) · 简体中文 · [日本語](README.ja.md) · [한국어](README.ko.md) · [Español](README.es.md)
 
-<p align="center">
-  <a href="#快速开始">快速开始</a> · <a href="#前后对比">前后对比</a> · <a href="#服务商">服务商</a> · <a href="#命令行使用">命令行</a> · <a href="demo/nimotecode/">示例</a>
-</p>
+[快速开始](#快速开始) · [查看效果](#从真实界面到上架素材) · [语言支持](#语言支持) · [参与共建](#参与共建)
 
-<p align="center">
-  完全开源 · 免费使用、修改与分享 · <a href="LICENSE">GNU AGPLv3</a> · <a href=".github/SECURITY.md">安全策略</a>
-</p>
+![NimoteShot 实时截图编辑器：在标题中编辑中英混排文字，旁边同步显示 App Store 截图预览](web/assets/redefine_promotion.png)
 
----
+*直接在结果旁修改标题、副标题和布局，只重新渲染受影响的预览，无需再次调用 AI。上图为实际运行中的编辑界面。*
 
-NimoteShot 是免费、开源的 AI 应用商店截图生成器，面向 App Store 和 Google Play 上架素材。它将真实 PNG、JPEG 或 WebP 界面交给你选择的视觉模型分析并起草本地化文案，同时在本机完成排版渲染与导出。每项任务都会生成可编辑的目录，包含原始截图、清单、配置、预览、成品与 ZIP 压缩包。
+## 为什么使用 NimoteShot？
+
+- **从你的真实产品开始。** 上传 PNG、JPEG、WebP 界面截图，模型依据可见功能起草文案，使用原始界面制作宣传图。
+- **生成后仍能自由调整。** 文案、模板、品牌色和顺序均可编辑。自动预览，失败可重试，确认效果后再导出。
+- **一次准备多个市场和设备。** 可选 17 种语言版本及六组设备／方向组合；内置字体支持中英混排和常见文字体系。
+- **按自己的方式使用。** 网页和 CLI 共用流程。手动设计无需密钥，AI 分析可选云端或本地视觉模型，渲染和 ZIP 打包在本地完成。
+
+NimoteShot 是免费、开源的软件；云端模型服务商可能单独收取 API 费用。
 
 ## 快速开始
 
-克隆仓库后，在仓库目录运行安装脚本。应用本身免费开源；云端服务商可能需要单独的 API 访问权限，也可选择本地 Ollama 模型。
-
-### Linux 与 macOS
+安装 **Python 3.11 或更新版本**，然后克隆项目：
 
 ```bash
-git clone https://github.com/mobiledevloperlab/nimoteshot.git nimoteshot
+git clone https://github.com/mobiledevloperlab/nimoteshot.git
 cd nimoteshot
+```
+
+**Linux / macOS**
+
+```bash
 ./install.sh
 ```
 
-### Windows PowerShell
+**Windows PowerShell**
 
 ```powershell
-git clone https://github.com/mobiledevloperlab/nimoteshot.git nimoteshot
-cd nimoteshot
 powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
-打开命令行输出的实际地址（默认 `http://127.0.0.1:8765`）。服务仅绑定本机回环地址。
+安装脚本会创建 `.venv`、安装依赖并启动工作台。打开**终端实际输出的地址**，默认是 `http://127.0.0.1:8765`。
 
-## 前后对比
+想先体验编辑器，可选择 **手动设计**，无需模型密钥。使用 AI 起草文案时，选择服务商、配置凭据，再点击 **检查模型配置**。
 
-<table>
-  <tr>
-    <td width="56%" valign="top">
-      <img src="web/assets/ui.png" alt="NimoteShot 首页与 NimoteCode 应用商店截图示例" width="100%">
-      <p align="center"><sub>首页与一组已生成的应用商店截图示例</sub></p>
-    </td>
-    <td width="44%" valign="top">
-      <img src="web/assets/snapshot.png" alt="NimoteShot 四步式截图生成工作台" width="100%">
-      <p align="center"><sub>四步式本地生成流程</sub></p>
-    </td>
-  </tr>
-</table>
-
-### 真实界面 → 上架素材
-
-<table>
-  <tr>
-    <td width="33.33%" align="center" valign="top">
-      <strong>移动代码编辑器</strong><br><br>
-      <img src="demo/nimotecode/originals/code-editor.png" alt="NimoteCode 代码编辑器原始截图" width="47%">
-      <img src="demo/nimotecode/previews/01_feature.png" alt="生成后的移动 IDE 应用商店截图" width="47%"><br>
-      <sub>原始界面 → 生成的功能页素材</sub>
-    </td>
-    <td width="33.33%" align="center" valign="top">
-      <strong>SSH 工作区</strong><br><br>
-      <img src="demo/nimotecode/originals/ssh-workspace.png" alt="NimoteCode SSH 工作区原始截图" width="47%">
-      <img src="demo/nimotecode/previews/03_feature.png" alt="生成后的 SSH 工作区应用商店截图" width="47%"><br>
-      <sub>原始界面 → 生成的功能页素材</sub>
-    </td>
-    <td width="33.33%" align="center" valign="top">
-      <strong>AI 编程助手</strong><br><br>
-      <img src="demo/nimotecode/originals/ai-assistant.png" alt="NimoteCode AI 助手原始截图" width="47%">
-      <img src="demo/nimotecode/previews/02_feature.png" alt="生成后的 AI 助手应用商店截图" width="47%"><br>
-      <sub>原始界面 → 生成的功能页素材</sub>
-    </td>
-  </tr>
-</table>
-
-## 为什么选择 NimoteShot
-
-- **以真实界面为依据：** 每个任务保留原图，并记录 SHA-256 清单；它不是凭空生成界面模型的工具。
-- **AI 分析，本地渲染：** 所选模型分析截图并起草文案，布局、PNG 渲染、打包和导出均在你的电脑完成。
-- **可编辑的本地化：** 固定输出英文，并可选中文、日文、韩文、西班牙文；导出前可审阅和修改文案。
-
-## 功能特性
-
-- 基于 1–40 张真实 PNG、JPEG 或 WebP 界面截图生成素材，文案以界面内容为依据。
-- 固定生成英文，并可选中文、日文、韩文、西班牙文。
-- 支持 iPhone、Android、iPad 的竖屏与横屏目标尺寸。
-- 提供 4 套基础视觉风格、24 套按应用类别划分的配色，以及可选设计提示词。
-- 默认使用 DeepSeek Flash，支持通义、智谱 GLM、火山方舟、腾讯混元、OpenAI 兼容接口、Gemini、Claude、Ollama，以及已登录的 Codex CLI。
-- 可通过仅监听本机回环地址的网页工作台或命令行使用；无需 Node.js 构建流程。
-- 每次导出均保存 SHA-256 源文件清单和可编辑配置。
-
-## 运行环境与服务商
-
-| 组件 | 版本 / 访问要求 | 用途 |
-| --- | --- | --- |
-| 操作系统 | Linux、macOS 或 Windows 10/11 | 运行本地工作台和渲染器。 |
-| Python | **3.11 或更高版本** | Pillow 13 与项目脚本的必需版本。 |
-| pip + venv | 标准 Python 安装通常自带 | 创建隔离环境并安装依赖。 |
-| 浏览器 | 现代桌面浏览器 | 访问 `http://127.0.0.1:8765` 本地工作台。 |
-| 磁盘空间 | 至少 500 MB；大量导出时需要更多 | 存放虚拟环境、原图与生成的 PNG。 |
-| 网络 | 安装依赖和使用云端模型时需要 | 排版渲染在本地完成；云服务商会接收分析输入。 |
-| 视觉模型服务 | 受支持的 API Key、已配置 Endpoint、Ollama 或 Codex CLI 登录 | 分析截图并起草文案。 |
-
-### 服务商
-
-| 服务商 | 凭证或准备步骤 | 默认模型 / 说明 |
-| --- | --- | --- |
-| [DeepSeek](https://api-docs.deepseek.com/guides/vision/) | `DEEPSEEK_API_KEY` | DeepSeek Flash（默认） |
-| [通义](https://help.aliyun.com/en/model-studio/qwen-api-via-dashscope) | `DASHSCOPE_API_KEY` | Qwen3-VL Plus |
-| [智谱 GLM](https://docs.bigmodel.cn/cn/guide/develop/openai/introduction) | `ZAI_API_KEY` | GLM-5.3-Flash |
-| 火山方舟 | `ARK_API_KEY` | 填写账户已开通的视觉模型或 Endpoint ID。 |
-| [腾讯 TokenHub](https://cloud.tencent.com/document/product/1823/136956) | `HUNYUAN_API_KEY` | HY-Vision 2.0 Instruct |
-| OpenAI 兼容接口 | `OPENAI_API_KEY` 或 `NIMOTESHOT_API_KEY` | 需要 HTTPS 基础地址与支持视觉的模型。 |
-| Gemini / Claude | 对应服务商的 API Key | 在工作台中选择对应服务商。 |
-| Ollama | 运行 `ollama serve`，并拉取视觉模型 | 例如 `ollama pull qwen3-vl:8b`；不需要云端 Key。 |
-| Codex CLI | 安装 Codex CLI 后执行 `codex login` | 使用已登录账户，不会将 API Key 复制进 NimoteShot。 |
-
-API 服务订阅与消费者聊天订阅不是同一项权限。开始生成前，请在服务商控制台确认账户有权调用所选视觉模型。
-
-### 安装说明
-
-安装脚本会检查 Python 3.11+、创建 `.venv`、安装运行依赖并打开工作台。Linux 或 macOS 如不希望自动打开浏览器：
-
-```bash
-./install.sh --no-browser
-```
-
-若企业安全策略限制 PowerShell，请联系管理员获得合规的执行策略；不要从不可信来源下载脚本。
-
-### 手动安装
+<details>
+<summary>手动安装、更新与启动选项</summary>
 
 ```bash
 python -m venv .venv
-# Linux/macOS
+# Linux / macOS：
 . .venv/bin/activate
-# Windows PowerShell: .venv\Scripts\Activate.ps1
-python -m pip install --upgrade pip
+# Windows PowerShell：
+# .venv\Scripts\Activate.ps1
 python -m pip install -r store_screenshots/requirements.txt
 python scripts/nimoteshot.py web
 ```
 
-在浏览器中打开启动时输出的实际地址（默认 `http://127.0.0.1:8765`）。服务刻意只绑定本机回环地址，请勿通过反向代理、端口映射或共享主机将其公开到公网。
+更新代码后，重新安装依赖并重启服务。`--no-browser` 可关闭自动打开浏览器，`--port 8766` 可指定首选端口。
 
-首选端口被占用时，程序会通过用户配置目录中的私有运行凭据验证是否为当前项目的旧服务。已验证且没有进行中任务的服务会正常退出，再启动新服务；有任务的服务、其他程序及不支持验证的旧版本会保留，新服务自动换用本地空闲端口，不会强杀进程。可用 `--port 8766` 指定首选端口，或用 `--port 0` 让系统分配端口。
+端口被占用时，程序会验证是否为本项目的旧服务。已验证且空闲的服务会正常退出并重启；有任务的服务、其他程序和不支持验证的旧版本会保留，新服务自动换用本地空闲端口，不会强杀进程。
 
-## 使用网页工作台
+</details>
 
-1. 输入应用名称，并填写简短产品说明或可信的公开 HTTPS 产品网站。
-2. 上传 1–40 张真实 PNG、JPEG 或 WebP 界面截图。仅上传你有权发送给所选服务商的内容。
-3. 选择目标语言、视觉风格、配色，以及可选的设计提示词。
-4. 选择视觉模型服务商，先点击 **检查模型配置**，再开始生成。
-5. 点击 **分析并生成方案**，按输出语言编辑文案，调整模板、品牌色和顺序。本地预览不重新调用 AI。
-6. 修改后会自动更新每张截图旁的成品预览：文案和单张布局修改只渲染受影响的截图；品牌色、风格、语言、设备和顺序变化会刷新当前语言、设备下的全部预览。渲染失败时可点击 **重试预览**。AI 设计的 **更多调整（可选）** 中提供：**重新生成文案** 复用视觉证据，替换所有语言的文案；**重新推荐布局** 在本地重选模板，保留文案；**重新分析截图** 重新调用视觉模型，替换整套设计。
-7. 点击 **批量导出 PNG / ZIP** 获取校验后的多分辨率文件。没有密钥也可选择 **手动设计**，自行填写文案。
+## 从真实界面到上架素材
 
-编辑器、模板选项、按钮和状态提示随五种界面语言切换；宣传文案的输出语言单独选择。默认优先突出单张真实界面，双图用于补充同一卖点，不强制拼图。详见[架构与验证记录](docs/VISION_UPGRADE.md)。
+1. **添加产品信息。** 填写应用名称、功能简介或公开 HTTPS 网站，上传 1–40 张真实界面截图。
+2. **选择输出方向。** 勾选语言、设备尺寸和设计风格，使用 AI 分析或手动设计。
+3. **预览与微调。** 分别编辑各语言版本，调整模板并查看效果。修改文案或单张布局只更新对应截图；全局修改刷新当前预览集。
+4. **导出 PNG / ZIP。** 下载经过校验的多分辨率 RGB/sRGB 图片，以及可继续编辑的任务配置。
 
-每次任务均保存到 `store_screenshots/runs/<任务ID>/`，其中包括原图、`source_manifest.json`、可编辑 `config.json`、预览、各尺寸 PNG 与 ZIP。修改配置后可重新渲染已有任务：
+| 原始应用界面 | 生成的商店截图 |
+| --- | --- |
+| <img src="demo/nimotecode/originals/code-editor.png" alt="NimoteCode 移动代码编辑器原始截图" width="220"> | <img src="demo/nimotecode/previews/01_feature.png" alt="基于真实代码编辑器界面生成的 App Store 宣传截图" width="220"> |
+
+[查看 NimoteCode 完整示例](demo/nimotecode/)，了解更多原图与生成效果。
+
+### 继续调整，无需从头生成
+
+**编辑语言版本** 用于选择独立保存的文案。切换语言会显示对应版本；字体按实际文字选择，因此英文栏也能直接输入中文。需要更多版本时，在 **产品信息** 中勾选输出语言。方案生成后新增的语言会填入占位文案，并提示先编辑或重新生成文案。
+
+可选调整均说明作用范围：**重新生成文案** 复用视觉证据，重写所选语言的文案；**重新推荐布局** 在本地重选模板，保留文案；**重新分析截图** 再次调用视觉模型，替换整套设计。
+
+## 语言支持
+
+输出选择、语言版本切换、AI 提示词、预览和导出使用同一份 **17 种语言目录**：
+
+| 分组 | 可选输出语言 |
+| --- | --- |
+| 英语与东亚语言 | 英文、简体中文、繁体中文、日文、韩文 |
+| 欧洲与美洲语言 | 西班牙文、法文、德文、巴西葡萄牙文、俄文、希腊文 |
+| 南亚与东南亚语言 | 印地文、孟加拉文、越南文、泰文 |
+| 中东语言 | 阿拉伯文、希伯来文 |
+
+英文默认包含，其他版本按需勾选。**操作界面**支持英文、简体中文、日文、韩文和西班牙文。
+
+应用名称、标题和副标题按实际字符选择内置字体，预览与导出共用同一套文字渲染。输入法组词完成后才触发更新。复杂文字使用 [Pillow 的 libraqm 排版能力](https://pillow.readthedocs.io/en/stable/reference/ImageFont.html)；缺少排版能力或字体无法覆盖的字符组合会明确提示，避免静默显示缺字方框。
+
+## 格式与设计
+
+| 能力 | 支持范围 |
+| --- | --- |
+| 输入 | 1–40 张 PNG、JPEG、WebP，可归组为最多 10 张功能宣传图 |
+| 设备 | iPhone、iPad、Android，均支持竖屏与横屏 |
+| 设计 | 4 套基础风格、24 套分类配色、设计提示词与可编辑模板 |
+| 预览 | 本地渲染、局部更新、旧请求结果保护与失败重试 |
+| 导出 | 多分辨率 PNG、sRGB 色彩配置、ZIP 完整性校验与可编辑配置 |
+| 可追溯 | 每次任务保留原图及 SHA-256 源文件清单 |
+
+任务保存于 `store_screenshots/runs/<任务ID>/`。具体尺寸见[输出规格](store_screenshots/targets.json)。上架前请审阅文案，并核对最新的 [Apple 截图规范](https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications/) 与 [Google Play 图片要求](https://support.google.com/googleplay/android-developer/answer/9866151)。
+
+## 模型服务商
+
+可选 DeepSeek（默认）、通义千问、智谱 GLM、火山方舟、腾讯混元、OpenAI 兼容 API、Gemini、Claude、Ollama 和已登录的 Codex CLI。可用性取决于具体模型与账号权限；工作台提供配置及连接检查，[模型预设](nimoteshot/models.json)是配置依据。
+
+分析截图需选择**具备视觉理解能力的模型**。手动编辑与导出不调用模型。云端凭据可通过工作台、环境变量或本地配置档案设置，详见[服务商配置说明](docs/PROVIDERS.md)。
+
+## 命令行使用
+
+把截图放入 `screens/`，配置服务商后生成：
+
+```bash
+.venv/bin/python scripts/nimoteshot.py configure \
+  --provider qwen --prompt-api-key --verify
+
+.venv/bin/python scripts/nimoteshot.py generate \
+  --brand "My App" \
+  --description "支持 SSH、Git 和终端的移动编辑器" \
+  --provider qwen --style editorial --locales zh-CN,fr-FR,ja-JP
+```
+
+Windows 请将 `.venv/bin/python` 换为 `.venv\Scripts\python.exe`。完整语言 ID 与选项见 `python scripts/nimoteshot.py generate --help`。编辑配置后，可直接在本地重新渲染：
 
 ```bash
 python scripts/generate_store_screenshots.py \
   --config store_screenshots/runs/<任务ID>/config.json --all
 ```
 
-提交前请始终核对最新的 [Apple 截图规范](https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications/) 和 [Google Play 图片要求](https://support.google.com/googleplay/android-developer/answer/9866151)。
+## 隐私与常见问题
 
-## 命令行使用
+网页服务仅监听本机回环地址。渲染在本地完成，**AI 分析会将截图和产品上下文发送给你选择的服务商**；填写网站时会读取该公开页面。工作台输入的密钥保留在页面内存中，只有主动保存配置时才写入用户配置目录；保存的配置为明文文件。请将任务目录和 ZIP 视为私有数据。
 
-将 PNG、JPEG 或 WebP 放入 `screens/`（该目录会被 Git 忽略），配置服务商后执行：
+| 问题 | 处理方法 |
+| --- | --- |
+| 缺少 Python 或 `venv` | 安装包含 pip、venv 的 Python 3.11+，再运行安装脚本。 |
+| 服务商拒绝密钥或模型 | 核对账号授权、模型 ID 与接口地址，再检查模型配置。 |
+| 预览失败或文字过长 | 缩短文案或调整布局，查看预览提示后重试；也可使用手动设计。 |
+| 页面仍是旧版或缺少新增语言 | 更新依赖、重启服务，并在新标签页打开终端输出的地址。 |
+| 端口已被占用 | 程序会验证空闲旧服务或自动换端口，以实际输出的地址为准。 |
 
-```bash
-# 在上传截图前诊断服务商配置。
-.venv/bin/python scripts/nimoteshot.py doctor --provider qwen
+仅上传有权发送的截图，发布前复核 AI 生成的功能描述与翻译。不要提交密钥或私有截图。威胁模型及漏洞反馈渠道见[安全策略](.github/SECURITY.md)。
 
-# 不回显密钥，保存本地配置档案。
-.venv/bin/python scripts/nimoteshot.py configure \
-  --provider qwen --prompt-api-key --verify
+## 参与共建
 
-# 生成英文与中文导出。
-.venv/bin/python scripts/nimoteshot.py generate \
-  --brand "我的应用" \
-  --description "面向开发者的移动编辑器，支持 SSH、Git 与终端" \
-  --style editorial --provider qwen --locales zh-CN
-```
+你可以从这些具体事情开始：
 
-Windows 请将 `.venv/bin/python` 替换为 `.venv\Scripts\python.exe`。完整参数可执行 `python scripts/nimoteshot.py --help` 查看，包括 `--website`、`--model`、`--base-url` 与 `--design-prompt`。
-
-配置档案位于仓库外部：Linux/macOS 是 `~/.config/nimoteshot/config.json`，Windows 是 `%APPDATA%\NimoteShot\config.json`。Unix 上文件仅当前用户可读写，但密钥仍以明文落盘；请使用受加密保护的用户账户，并在泄露后轮换密钥。
-
-## 隐私与安全
-
-- 排版、打包和导出均在本地完成；截图和产品描述会发送到你选择的模型服务商进行分析。
-- 填写产品网站会发起一次外部 HTTPS 请求，仅应使用可信的公开网站。
-- 任务目录包含原始截图和文案，应按私密数据处理，不再需要时及时删除。
-- 模型输出属于不可信输入；发布前必须审核所有文案、功能声明、翻译和设备映射。
-- 不要提交 API Key、本地配置、私密截图、生成任务或压缩包。项目 `.gitignore` 已排除这些路径。
-
-完整威胁模型和私密漏洞报告方式请见 [SECURITY.md](.github/SECURITY.md)。
-
-## 开发与测试
+- **用自己的应用试一遍。** [报告可复现的问题](https://github.com/mobiledevloperlab/nimoteshot/issues/new/choose)，附操作步骤或命令、预期结果及已脱敏的错误信息。
+- **完善一种语言或版型。** 帮助检查翻译、字体、设备尺寸与模板，较大的改动先通过 Issue 讨论。
+- **贡献代码或文档。** Fork 项目后提交范围清晰的 PR。[贡献指南](.github/CONTRIBUTING.md)包含环境配置、检查和评审方式，欢迎 Draft PR。
 
 ```bash
-python -m venv .venv
-. .venv/bin/activate
 python -m pip install -r requirements-dev.txt
 python -m ruff check .
 python scripts/run_tests.py
 python scripts/check_repository.py
-python scripts/check_secrets.py --history
 ```
 
-测试会模拟服务商调用，不需要付费模型账户或真实 API Key。编码规范、测试要求与 Pull Request 流程请见[贡献指南](.github/CONTRIBUTING.md)。
+默认测试使用合成素材或仓库示例，并模拟模型调用；真实服务商测试需显式启用。浏览器与视觉回归覆盖编辑、语言切换、预览及导出。更多信息见[架构与验证](docs/VISION_UPGRADE.md)、[更新日志](docs/CHANGELOG.md)、[治理规则](docs/GOVERNANCE.md)及[行为准则](.github/CODE_OF_CONDUCT.md)。
 
-## 项目结构
+## 许可证
 
-```text
-nimoteshot/          核心流程、服务商适配、配置和本地服务
-web/                 由本地 Python 服务提供的浏览器界面与公共素材
-scripts/             CLI 入口、渲染器和仓库检查工具
-store_screenshots/   目标尺寸定义、字体、色彩配置与生成任务
-demo/nimotecode/     已审计的演示原图与示例产物
-tests/               单元测试与安全测试
-```
-
-## 常见问题
-
-| 现象 | 可能原因 | 解决方法 |
-| --- | --- | --- |
-| 提示 `Python 3.11 or newer is required` | `python` 命令指向较旧解释器。 | 安装 Python 3.11+，删除并重新创建 `.venv`；必要时显式使用 `python3.11`。 |
-| 提示无法创建虚拟环境或 `No module named venv` | Python 未安装虚拟环境支持。 | 安装系统对应的 Python venv 组件后重新运行安装脚本。 |
-| 端口被占用 / 访问地址变化 | 首选端口正在被其他服务使用。 | 程序会重启已验证的空闲旧服务，或自动换用空闲端口。打开启动时输出的实际地址；可用 `--port 8766` 指定首选端口。 |
-| 无法从另一台电脑打开页面 | 工作台设计上只接受本机回环地址。 | 请在运行程序的电脑上使用；不要将其公开到公网。 |
-| 检查模型配置时提示密钥或模型被拒绝 | Key 无权限、已失效，或模型 ID 不正确。 | 在服务商控制台确认权限，选择已开通的视觉模型，再执行 `doctor`。 |
-| OpenAI 兼容接口校验失败 | Endpoint 不是 HTTPS，或基础地址/模型配置错误。 | 使用服务商提供的 HTTPS API 基础地址及支持视觉的模型 ID。 |
-| Ollama 未就绪 | 本地服务或所选模型未启动。 | 先运行 `ollama serve`，再执行 `ollama pull qwen3-vl:8b`（或选定模型）。 |
-| 提示 `Codex CLI was not found` | 未安装 Codex CLI，或命令不在 `PATH` 中。 | 安装 CLI，在终端执行 `codex login`，然后重新检查配置。 |
-| 上传后生成失败 | 图片无效、服务商请求失败，或模型未返回合法 JSON。 | 使用有效截图，检查服务商配置后重试，或切换手动设计。 |
-| 生成的文案不准确 | 模型可能误读界面或编造功能。 | 编辑任务配置并重新渲染；上架前人工核查每一项功能声明。 |
-
-## 贡献与授权
-
-欢迎通过 Fork 和 Pull Request 参与贡献。请阅读[贡献指南](.github/CONTRIBUTING.md)、[行为准则](.github/CODE_OF_CONDUCT.md)和[治理规范](docs/GOVERNANCE.md)；发版流程见 [docs/RELEASING.md](docs/RELEASING.md)。
-
-NimoteShot 是完全开源、免费使用的软件，采用 [GNU Affero General Public License v3.0 或更高版本](LICENSE)（AGPLv3+）。你可以免费使用、学习、修改与分享本项目；如果将修改版作为网络服务提供给用户，必须以相同许可证向这些用户提供对应源码。打包字体和其他第三方材料继续遵守其各自条款，详见[第三方声明](docs/THIRD_PARTY_NOTICES.md)。
+NimoteShot 采用 [GNU Affero General Public License v3.0 或更高版本](LICENSE)（`AGPL-3.0-or-later`）。你可以在许可证约定下使用、研究、修改和分享。通过网络提供修改版时，需按许可证要求提供对应源码。字体及其他第三方素材保留原有授权，见[第三方声明](docs/THIRD_PARTY_NOTICES.md)。

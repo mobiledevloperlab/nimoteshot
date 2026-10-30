@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Add 17 output-language versions shared by the picker, closed copy schema, AI prompts, preview and PNG/ZIP export. Select fonts by actual Unicode coverage and support IME composition; bundle licensed fonts for additional major writing systems.
+- Render only affected previews for per-screen edits, preserve pending changes across interrupted requests, group optional rework controls, and safely restart verified idle studios or choose an available local port.
+- Rebuild the five READMEs around the real live-editing demo, quick start and contribution paths; keep provider setup in a separate guide.
+- 将输出选择、受限文案 Schema、AI 提示词、预览及 PNG/ZIP 导出统一为 17 种语言版本；按实际字符选择字体，支持输入法组词，并补充具备授权的常用文字字体。
+- 单张编辑仅更新受影响预览，保留被中断请求的待更新内容，归并可选重做操作；安全重启已验证的空闲旧服务，或自动选择本地空闲端口。
+- 五份 README 改为以真实编辑演示、快速开始和共建入口为中心，详细模型配置独立成文。
+
 - Complete the DeepSeek Flash vision → validated design → deterministic preview/export workflow, with bounded JSON cache reuse, independent copy/layout actions and five-language editing.
 - Add shared capture validation, safe template tokens, refined detail/paired layouts, text readability limits, multi-device ZIP completeness checks and Chromium/visual/fault-injection coverage.
 - Replace DiskCache after its unsafe-pickle disclosure with an atomic, size-bounded JSON cache; update CI actions to Node 24 and keep exact pixel baselines on their Linux reference platform.

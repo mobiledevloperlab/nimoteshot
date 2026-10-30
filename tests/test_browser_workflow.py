@@ -15,6 +15,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 from nimoteshot import pipeline, server
+from test_typography import SAMPLES
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -67,9 +68,9 @@ class BrowserWorkflowTests(unittest.TestCase):
     def edit_and_export(self):
         self.page.wait_for_selector('#design-editor')
         self.wait_preview()
-        self.page.locator('[data-copy-key=title_en][data-screen-index="1"]').fill('Code tools\nOn your phone')
+        self.page.locator('[data-copy-key=title_en][data-screen-index="1"]').fill('代码工具\nOn your phone')
         self.wait_preview()
-        self.page.get_by_label('Copy and preview language',exact=True).select_option('zh')
+        self.page.get_by_label('Copy version to edit',exact=True).select_option('zh')
         self.wait_preview()
         self.page.locator('[data-copy-key=title_zh][data-screen-index="1"]').fill('代码工具\n随身使用')
         self.wait_preview()
@@ -128,6 +129,8 @@ class BrowserWorkflowTests(unittest.TestCase):
             self.assertEqual(self.page.get_by_role('button',name=labels['exportDesign'],exact=True).count(),1)
             self.assertEqual(self.page.locator('.design-rework').count(),0)
             self.assertEqual(self.page.locator('.design-source figcaption').first.inner_text(),labels['livePreview'])
+            self.assertEqual(self.page.locator('#copy-language-help').inner_text(),labels['copyLocaleHelp'])
+            self.assertEqual(self.page.locator('#copy-language').get_attribute('aria-label'),labels['copyLocale'])
             self.assertEqual(self.page.get_by_label(labels['editTemplate'],exact=True).count(),2)
             self.assertEqual(self.page.locator('[data-i18n=manualMode]').inner_text(),labels['manualMode'])
             self.assertEqual(self.page.locator('[data-copy-key=title_en][data-screen-index="1"]').input_value(),'Keep my copy')
@@ -186,7 +189,7 @@ class BrowserWorkflowTests(unittest.TestCase):
         self.assertEqual(requests[-1]['preview_indices'],[0])
         self.page.get_by_label('Brand accent',exact=True).fill('#dd3344');self.wait_preview()
         self.assertEqual(requests[-1]['preview_indices'],[0,1])
-        self.page.get_by_label('Copy and preview language',exact=True).select_option('zh');self.wait_preview()
+        self.page.get_by_label('Copy version to edit',exact=True).select_option('zh');self.wait_preview()
         self.assertEqual(requests[-1]['preview_indices'],[0,1])
         self.assertEqual(requests[-1]['preview_locale'],'zh-CN')
         self.page.get_by_label('Preview device',exact=True).select_option('iphone_landscape');self.wait_preview()
@@ -240,6 +243,113 @@ class BrowserWorkflowTests(unittest.TestCase):
         self.assertEqual(self.page.locator('#preview-status').get_attribute('data-state'),'ready')
         self.assertEqual(self.errors,[])
 
+    def test_major_language_text_in_english_fields_and_ime_commit(self):
+        requests=[]
+        self.page.on('request',lambda request:requests.append(request.post_data_json) if request.url.endswith('/api/preview') else None)
+        with patch.object(pipeline,'analyze',side_effect=AssertionError('Text editing must not call AI')):
+            self.page.check('#manual-mode');self.page.click('#generate');self.wait_preview()
+            title=self.page.locator('[data-copy-key=title_en][data-screen-index="1"]')
+            subtitle=self.page.locator('[data-copy-key=subtitle_en][data-screen-index="1"]')
+            image=self.page.locator('.design-rendered-preview').first
+            unchanged=self.page.locator('.design-rendered-preview').nth(1).get_attribute('src')
+            previous=image.get_attribute('src')
+            for language,text,sub in SAMPLES:
+                with self.subTest(language=language):
+                    title.fill(text);subtitle.fill(sub);self.wait_preview()
+                    self.assertEqual(requests[-1]['preview_indices'],[0])
+                    self.assertEqual(requests[-1]['preview_locale'],'en-US')
+                    self.assertNotEqual(image.get_attribute('src'),previous)
+                    self.assertEqual(self.page.locator('.design-rendered-preview').nth(1).get_attribute('src'),unchanged)
+                    previous=image.get_attribute('src')
+            requests.clear()
+            self.page.evaluate("""async() => {
+                const field=document.querySelector('[data-copy-key=title_en]');
+                field.dispatchEvent(new CompositionEvent('compositionstart',{bubbles:true}));
+                field.value='zhongwen';
+                field.dispatchEvent(new InputEvent('input',{bubbles:true,isComposing:true,inputType:'insertCompositionText'}));
+                await new Promise(resolve=>setTimeout(resolve,450));
+            }""")
+            self.assertEqual(requests,[])
+            self.page.evaluate("""() => {
+                const field=document.querySelector('[data-copy-key=title_en]');field.value='中文输入';
+                field.dispatchEvent(new CompositionEvent('compositionend',{bubbles:true,data:'中文输入'}));
+                field.dispatchEvent(new InputEvent('input',{bubbles:true,isComposing:false}));
+            }""")
+            self.wait_preview()
+            self.assertEqual(len(requests),1)
+            self.assertEqual(requests[0]['proposal']['screens'][0]['title_en'],['中文输入'])
+            self.assertEqual(requests[0]['preview_indices'],[0])
+            title.fill('🦄')
+            self.page.wait_for_function("document.getElementById('preview-status').dataset.state === 'error'")
+            self.assertEqual(self.page.locator('#preview-status').inner_text(),self.page.evaluate('editorMessages.en.errorFont'))
+            title.fill('代码工具');self.wait_preview()
+        self.assertEqual(self.errors,[])
+
+    def test_copy_version_switch_preserves_independent_text_and_chooses_matching_preview(self):
+        requests=[]
+        self.page.on('request',lambda request:requests.append(request.post_data_json) if request.url.endswith('/api/preview') else None)
+        self.page.check('#manual-mode');self.page.click('#generate');self.wait_preview()
+        self.assertEqual(self.page.locator('#copy-language').get_attribute('aria-describedby'),'copy-language-help')
+        english=self.page.locator('[data-copy-key=title_en][data-screen-index="1"]')
+        english.fill('英文版本中文');self.wait_preview()
+        self.assertEqual(requests[-1]['preview_locale'],'en-US')
+        english_image=self.page.locator('.design-rendered-preview').first.get_attribute('src')
+        self.page.locator('#copy-language').select_option('zh');self.wait_preview()
+        chinese=self.page.locator('[data-copy-key=title_zh][data-screen-index="1"]')
+        self.assertNotEqual(chinese.input_value(),'英文版本中文')
+        chinese.fill('中文版自定义');self.wait_preview()
+        self.assertEqual(requests[-1]['preview_locale'],'zh-CN')
+        chinese_image=self.page.locator('.design-rendered-preview').first.get_attribute('src')
+        self.assertNotEqual(english_image,chinese_image)
+        self.page.locator('#copy-language').select_option('en');self.wait_preview()
+        self.assertEqual(english.input_value(),'英文版本中文')
+        self.assertEqual(self.page.locator('.design-rendered-preview').first.get_attribute('src'),english_image)
+        self.page.locator('#copy-language').select_option('zh');self.wait_preview()
+        self.assertEqual(chinese.input_value(),'中文版自定义')
+        self.assertEqual(self.page.locator('.design-rendered-preview').first.get_attribute('src'),chinese_image)
+        self.assertEqual(self.errors,[])
+
+    def test_all_output_language_options_reach_the_matching_copy_and_preview(self):
+        requests=[]
+        self.page.on('request',lambda request:requests.append(request.post_data_json) if request.url.endswith('/api/preview') else None)
+        self.assertEqual(self.page.locator('#locale-list input').count(),len(pipeline.OUTPUT_LOCALES))
+        self.page.evaluate("""() => document.querySelectorAll('#locale-list input:not(:disabled)').forEach(field=>{
+            field.checked=true;field.dispatchEvent(new Event('change',{bubbles:true}));
+        })""")
+        self.page.check('#manual-mode');self.page.click('#generate');self.wait_preview()
+        self.assertEqual(self.page.locator('#copy-language option').count(),len(pipeline.OUTPUT_LOCALES))
+        for locale,options in pipeline.OUTPUT_LOCALES.items():
+            with self.subTest(locale=locale):
+                code=options['code']
+                self.page.locator('#copy-language').select_option(code);self.wait_preview()
+                title=self.page.locator(f'[data-copy-key=title_{code}][data-screen-index="1"]')
+                self.assertEqual(title.input_value(),options['placeholder_title'])
+                title.fill(options['placeholder_title']+'\nGit');self.wait_preview()
+                self.assertEqual(requests[-1]['preview_locale'],locale)
+                self.assertEqual(requests[-1]['preview_indices'],[0])
+        for locale,options in pipeline.OUTPUT_LOCALES.items():
+            self.page.locator('#copy-language').select_option(options['code']);self.wait_preview()
+            self.assertEqual(self.page.locator(f'[data-copy-key=title_{options["code"]}][data-screen-index="1"]').input_value(),options['placeholder_title']+'\nGit')
+        self.assertEqual(self.errors,[])
+
+    def test_adding_an_output_language_after_planning_initializes_editable_placeholders(self):
+        self.page.check('#manual-mode');self.page.click('#generate');self.wait_preview()
+        self.page.locator('[data-copy-key=title_en][data-screen-index="1"]').fill('Keep my edits');self.wait_preview()
+        self.page.evaluate("""() => {
+            editingProposal.screens.forEach(screen=>{delete screen.title_fr;delete screen.subtitle_fr;});
+            const field=document.querySelector('#locale-list input[value="fr-FR"]');
+            field.checked=true;field.dispatchEvent(new Event('change',{bubbles:true}));
+        }""")
+        self.wait_preview()
+        self.assertEqual(self.page.locator('#result-summary').inner_text(),self.page.evaluate('editorMessages.en.addedLanguage'))
+        self.page.locator('#copy-language').select_option('fr');self.wait_preview()
+        title=self.page.locator('[data-copy-key=title_fr][data-screen-index="1"]')
+        self.assertEqual(title.input_value(),pipeline.OUTPUT_LOCALES['fr-FR']['placeholder_title'])
+        title.fill('Outils mobiles');self.wait_preview()
+        self.page.locator('#copy-language').select_option('en');self.wait_preview()
+        self.assertEqual(self.page.locator('[data-copy-key=title_en][data-screen-index="1"]').input_value(),'Keep my edits')
+        self.assertEqual(self.errors,[])
+
     def test_ai_rework_is_collapsed_and_explains_overwrites(self):
         self.page.check('#manual-mode');self.page.click('#generate');self.wait_preview()
         # Attach the evidence an AI plan supplies; no provider request is needed.
@@ -262,6 +372,7 @@ class BrowserWorkflowTests(unittest.TestCase):
     def test_document_pages_render_source_content(self):
         documents = {
             'guide-zh': '使用指南',
+            'guide': 'User guide',
             'contributing': '参与贡献',
             'security': '安全与数据',
             'license': '许可证',
@@ -275,6 +386,13 @@ class BrowserWorkflowTests(unittest.TestCase):
                 self.assertEqual(self.page.locator('#doc-title').inner_text(), expected_title)
                 self.assertGreater(len(self.page.locator('#doc-content').inner_text()), 500)
                 self.assertEqual(self.page.locator('.docs-sidebar a.active').count(), 1)
+                if slug in ('guide','guide-zh'):
+                    image=self.page.locator('.docs-figure img[src="/assets/redefine_promotion.png"]')
+                    self.assertEqual(image.count(),1)
+                    image.scroll_into_view_if_needed()
+                    self.page.wait_for_function("document.querySelector('.docs-figure img').naturalWidth > 0")
+                    self.assertEqual(image.get_attribute('alt').strip()!='',True)
+                    self.assertEqual(self.page.locator('#'+('quick-start' if slug=='guide' else '快速开始')).count(),1)
                 self.assertFalse(self.page.evaluate('document.documentElement.scrollWidth > innerWidth + 1'))
         self.assertEqual(self.errors, [])
 

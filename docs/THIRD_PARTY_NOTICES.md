@@ -17,10 +17,16 @@ NimoteShot 原创贡献采用 [GNU Affero General Public License v3.0 或更高�
 | --- | --- | --- |
 | `store_screenshots/assets/fonts/Inter.ttf` | SIL OFL 1.1 | [Bundled notice](../store_screenshots/assets/fonts/OFL-Inter.txt), [upstream](https://github.com/rsms/inter) |
 | `store_screenshots/assets/fonts/NotoSansCJKsc-*.otf` | SIL OFL 1.1 | [Bundled notice](../store_screenshots/assets/fonts/OFL-NotoSansCJK.txt), [upstream](https://github.com/notofonts/noto-cjk) |
+| `store_screenshots/assets/fonts/NotoSansArabic.ttf` | SIL OFL 1.1 | [Bundled notice](../store_screenshots/assets/fonts/OFL-NotoSansArabic.txt), [pinned upstream](https://github.com/google/fonts/tree/6157dfaa640ca5738b4d1a7070fe389c3036d7fc/ofl/notosansarabic) |
+| `store_screenshots/assets/fonts/NotoSansDevanagari.ttf` | SIL OFL 1.1 | [Bundled notice](../store_screenshots/assets/fonts/OFL-NotoSansDevanagari.txt), [pinned upstream](https://github.com/google/fonts/tree/6157dfaa640ca5738b4d1a7070fe389c3036d7fc/ofl/notosansdevanagari) |
+| `store_screenshots/assets/fonts/NotoSansThai.ttf` | SIL OFL 1.1 | [Bundled notice](../store_screenshots/assets/fonts/OFL-NotoSansThai.txt), [pinned upstream](https://github.com/google/fonts/tree/6157dfaa640ca5738b4d1a7070fe389c3036d7fc/ofl/notosansthai) |
+| `store_screenshots/assets/fonts/NotoSansHebrew.ttf` | SIL OFL 1.1 | [Bundled notice](../store_screenshots/assets/fonts/OFL-NotoSansHebrew.txt), [pinned upstream](https://github.com/google/fonts/tree/6157dfaa640ca5738b4d1a7070fe389c3036d7fc/ofl/notosanshebrew) |
+| `store_screenshots/assets/fonts/NotoSansBengali.ttf` | SIL OFL 1.1 | [Bundled notice](../store_screenshots/assets/fonts/OFL-NotoSansBengali.txt), [pinned upstream](https://github.com/google/fonts/tree/6157dfaa640ca5738b4d1a7070fe389c3036d7fc/ofl/notosansbengali) |
 | `store_screenshots/assets/sRGB.icc` | Embedded copyright: “No copyright, use freely” | Profile description: `sRGB built-in`; embedded metadata inspected during audit |
 | `demo/nimotecode/originals/` and `previews/` | Redistribution permission not established by this repository / 仓库内尚无可核验的再分发授权记录 | [Demo](../demo/nimotecode/README.md); release gate in [audit](OPEN_SOURCE_AUDIT.md) |
 | Pillow (installed dependency) | HPND; bundled native libraries have additional notices | [Upstream license](https://github.com/python-pillow/Pillow/blob/main/LICENSE) |
 | jsonschema (installed dependency) | MIT | [Upstream license](https://github.com/python-jsonschema/jsonschema/blob/main/COPYING) |
+| FontTools (installed dependency) | MIT | [Upstream license](https://github.com/fonttools/fonttools/blob/main/LICENSE) |
 | Playwright Python (development-only dependency) | Apache-2.0 | [Upstream license](https://github.com/microsoft/playwright-python/blob/main/LICENSE) |
 | OpenAI Python SDK (installed dependency) | Apache-2.0 | [Upstream license](https://github.com/openai/openai-python/blob/main/LICENSE) |
 

@@ -4,7 +4,7 @@ Updated: 2026-10-28. This record describes the implemented code and local verifi
 
 ## Audit and retained architecture
 
-NimoteShot uses a localhost Python HTTP service, vanilla JavaScript/CSS, Pillow, OpenAI SDK and standard-library ZIP packaging. The audit covered provider profiles and credential handling, the four-step studio and localization, upload validation, AI prompts, configuration construction, rendering, source manifests and exports. The existing 28 styles, 10 design prompt presets, five publication languages, six device groups, native source overrides, CLI, original archives and RGB/sRGB validation are retained. No frontend framework or AI image-generation service was introduced.
+NimoteShot uses a localhost Python HTTP service, vanilla JavaScript/CSS, Pillow, OpenAI SDK and standard-library ZIP packaging. The audit covered provider profiles and credential handling, the four-step studio and localization, upload validation, AI prompts, configuration construction, rendering, source manifests and exports. The existing 28 styles, 10 design prompt presets, 17 publication languages, six device groups, native source overrides, CLI, original archives and RGB/sRGB validation are retained. No frontend framework or AI image-generation service was introduced.
 
 The main gaps were unversioned copy-only AI proposals, duplicated template choices, a fixed English/iPhone preview, no independent regeneration controls, no bounded cache, and incomplete failure/browser coverage. The implementation extends those existing paths rather than replacing them. Existing task directories are never overwritten; exports create unique new task IDs. Legacy configs keep their original layout when no new template metadata is present.
 
@@ -43,7 +43,7 @@ Cache keys include schema/prompt version, actual image hashes, filenames, contex
 
 ## Design and workflow
 
-Analyze and plan produces a complete preview before high-resolution export. Manual mode starts with editable placeholders and needs no key. The editor supports all five publication languages, template/background/brand color selection, source selection for pairs, permitted single-image sizing/position controls and manual ordering. Debounced preview uses the selected language/device ratio and the same renderer as export, cancels stale requests and makes no AI call. Changed content hides stale downloads. Copy, layout and full vision regeneration are separate actions. Every new button, option, status, manual-mode label and editor caption has Chinese, English, Japanese, Korean and Spanish UI translations; language switching preserves edits.
+Analyze and plan produces a complete preview before high-resolution export. Manual mode starts with editable placeholders and needs no key. The editor supports all 17 publication languages, template/background/brand color selection, source selection for pairs, permitted single-image sizing/position controls and manual ordering. Debounced preview uses the selected language/device ratio and the same renderer as export, cancels stale requests and makes no AI call. Changed content hides stale downloads. Copy, layout and full vision regeneration are separate actions. Every new button, option, status, manual-mode label and editor caption has Chinese, English, Japanese, Korean and Spanish UI translations; language switching preserves edits.
 
 The registry supports balanced, showcase, compact, detail and duo. Single screenshots remain the default. Detail uses a full unchanged capture plus an enlarged real crop. Duo uses a dominant full foreground capture and a subordinate, offset rear capture. Positions are normalized engine-owned tokens; compositions adapt to available space without stretching. Text gets a safe area; overly long copy is rejected instead of being shrunk to an unreadable size. A rear image in a deliberately layered pair is partly occluded; select a single layout if both complete screens must be visible at once.
 
@@ -55,7 +55,7 @@ Apple requirements checked 2026-10-28 against [official screenshot specification
 
 Only `code-editor.png` and `terminal.png` were selected as real test inputs. Paid test credentials were read from ignored `test.md`; no credentials, profiles, downloaded references, generated outputs or caches are committed.
 
-- Unit/regression suite: 44 discovered, 39 passed, five browser tests skipped by default. Covers existing behavior, JSON/schema failures and repairs, filename/locale/template compatibility, PNG/JPEG/WebP, cache hits/refresh/expiry/corruption, factual-evidence requirements, independent copy/layout behavior, all five publication languages, all six device groups, text safety and 17 Linux pixel baselines.
+- Unit/regression suite: 44 discovered, 39 passed, five browser tests skipped by default. Covers existing behavior, JSON/schema failures and repairs, filename/locale/template compatibility, PNG/JPEG/WebP, cache hits/refresh/expiry/corruption, factual-evidence requirements, independent copy/layout behavior, all 17 publication languages, all six device groups, text safety and 17 Linux pixel baselines.
 - SDK fault injection uses the real OpenAI SDK with HTTPX MockTransport: 429/503 retries, timeout, connection failure, 401 without retries, recovery after a 429, JSON response request and bounded token output. Submitted credentials are absent from user-facing errors.
 - Dedicated Chromium suite: four tests passed, one live test skipped. Covers no-key manual editing, English/Chinese editing, detail/duo selection, order changes, mobile overflow, light/dark logo loading, ZIP download, malformed-JSON failure followed by manual design, all five interface languages with edits retained, and styled project documentation pages.
 - Opt-in live Chromium test: passed with real DeepSeek Flash joint analysis of the two captures, a separate text-only copy request, local layout recommendation, editing, preview and 28 validated PNGs. Editor/terminal recommendations differ (compact/showcase); no browser JavaScript errors were recorded.
@@ -79,3 +79,11 @@ SHOTNIMOTE_BROWSER_TEST=1 SHOTNIMOTE_LIVE_TEST=1 PYTHONPATH=tests python -m unit
 ```
 
 Regenerate pixel baselines only for an intentional, visually reviewed rendering change with `python tests/update_visual_baselines.py`. Never update expected hashes merely to hide a failing regression. Restart an already-running local service after updating Python code.
+
+## Incremental preview and text updates
+
+The editor queues affected screen indices and retains uncommitted indices across debounce, aborts and retries. The preview API validates these indices and renders them against the complete configuration, preserving numbering, localization and paired-source context. Global changes and ordering refresh the current preview set. Preview/export use the same renderer and character-coverage font selection; missing fonts or complex-script shaping report errors instead of missing-glyph artwork.
+
+`nimoteshot/locales.json` is the catalog for 17 output languages. The local options API supplies that catalog to the output and copy-version selectors; the closed design schema, planner, manual placeholders and export support matching fields. Interface translations remain separate. New language versions added after planning receive editable placeholders and a notice.
+
+The startup path verifies a project-specific private runtime credential before requesting an idle server's cooperative shutdown. Queued or running jobs prevent replacement; unverified listeners remain running while another loopback port is selected. Tests include real CLI subprocess replacement, cross-project preservation, preview races, all output-language selectors and validated 17-language PNG/ZIP exports.

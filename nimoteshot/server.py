@@ -15,7 +15,7 @@ from http.server import BaseHTTPRequestHandler
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
-from .pipeline import LOCALES, MODELS, ROOT, RUNS, STYLES, TARGET_NAMES, generate, prepare_context, plan, build_config, renderer
+from .pipeline import LOCALES, OUTPUT_LOCALES, MODELS, ROOT, RUNS, STYLES, TARGET_NAMES, generate, prepare_context, plan, build_config, renderer
 from .captures import unpack
 from .design import TEMPLATES
 from .planner import revise
@@ -142,7 +142,7 @@ class Handler(BaseHTTPRequestHandler):
                 else:
                     sources[item["id"]] = "none"
             self.json_response({"models": MODELS, "styles": STYLES, "credential_source": sources,
-                                "profiles": describe(), "templates": TEMPLATES})
+                                "profiles": describe(), "templates": TEMPLATES, "output_locales": OUTPUT_LOCALES})
         elif path.startswith("/api/docs/"):
             slug = path.removeprefix("/api/docs/")
             name = PUBLIC_DOCUMENTS.get(slug)

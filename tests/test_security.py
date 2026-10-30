@@ -40,6 +40,11 @@ class LocalHTTPTests(unittest.TestCase):
         self.assertEqual(status, 200)
         self.assertIn(b'NimoteShot', body)
 
+    def test_output_locale_catalog_is_shared_with_the_editor(self):
+        status, body = self.request(path='/api/options')
+        self.assertEqual(status, 200)
+        self.assertEqual(json.loads(body)['output_locales'], server.OUTPUT_LOCALES)
+
     def test_web_assets_are_served_from_merged_directory(self):
         assets = server.WEB / 'assets'
         for path in assets.iterdir():

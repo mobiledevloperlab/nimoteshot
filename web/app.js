@@ -120,11 +120,11 @@ function updatePromptDescription() {
 $('prompt-preset').addEventListener('change', updatePromptDescription);
 $('app-category').addEventListener('change', renderStyles);
 
-const outputLocales = [['en-US', null, true], ['zh-CN', '中文'], ['ja-JP', '日本語'], ['ko-KR', '한국어'], ['es-ES', 'Español']];
 function renderLocales() {
   const selected = new Set(JSON.parse(localStorage.getItem('nimoteshot-locales') || '["zh-CN"]'));
   $('locale-list').replaceChildren();
-  outputLocales.forEach(([id, nativeLabel, locked]) => {
+  Object.keys(localeCodes).forEach(id => {
+    const locked=id==='en-US';
     const label = locked ? words().englishDefault : languageLabel(id);
     const option = document.createElement('label'); option.className = 'locale-option';
     if (locked) option.classList.add('locked');
@@ -182,7 +182,9 @@ function renderModels() {
 $('provider').addEventListener('change', () => { localStorage.setItem('nimoteshot-provider', $('provider').value); renderModels(); });
 ['check', 'save-config', 'copy-config', 'generate'].forEach(id => $(id).disabled = true);
 fetch('/api/options').then(response => { if (!response.ok) throw new Error('Could not load configuration. Refresh the page after checking the local server.'); return response.json(); }).then(data => {
-  state.options = data; translate();
+  state.options = data;
+  if(data.output_locales){Object.keys(localeCodes).forEach(id=>delete localeCodes[id]);Object.entries(data.output_locales).forEach(([id,options])=>localeCodes[id]=options.code);}
+  translate();
   ['check', 'save-config', 'copy-config', 'generate'].forEach(id => $(id).disabled = false);
 }).catch(error => showError(error.message));
 translate();
@@ -410,7 +412,7 @@ function markEdited(screenIndex = null) {
 function manualProposal(files) {
   return {schema_version:1,screens:files.slice(0,10).map(file=>{
     const screen={file:file.name,title_en:['Your feature'],subtitle_en:'Describe what is visible',design:{template:'balanced',background:0}};
-    Object.values(localeCodes).forEach(code=>{screen['title_'+code]=[editorMessages[code].featurePlaceholder];screen['subtitle_'+code]=editorMessages[code].visiblePlaceholder;});
+    Object.entries(localeCodes).forEach(([locale,code])=>{const options=state.options.output_locales?.[locale],messages=editorMessages[code]||editorMessages.en;screen['title_'+code]=[options?.placeholder_title||messages.featurePlaceholder];screen['subtitle_'+code]=options?.placeholder_subtitle||messages.visiblePlaceholder;});
     return screen;
   })};
 }
@@ -462,13 +464,24 @@ function showDesignEditor(previewIndices = null) {
   $('result-summary').textContent=ui('designReady');
   const heading=$('result').querySelector('h2');heading.textContent=ui('refine');
   const selected=requestFields();
+  let addedLanguage=false;
+  selected.locales.forEach(locale=>{
+    const code=localeCodes[locale],options=state.options.output_locales?.[locale],messages=editorMessages[code]||editorMessages.en;
+    editingProposal.screens.forEach(screen=>{
+      if(!Object.hasOwn(screen,'title_'+code)){screen['title_'+code]=[options?.placeholder_title||messages.featurePlaceholder];addedLanguage=true;}
+      if(!Object.hasOwn(screen,'subtitle_'+code)){screen['subtitle_'+code]=options?.placeholder_subtitle||messages.visiblePlaceholder;addedLanguage=true;}
+    });
+  });
+  if(addedLanguage)$('result-summary').textContent=ui('addedLanguage');
   const languages=['en-US',...selected.locales];if(!languages.some(locale=>localeCodes[locale]===editorLocale))editorLocale='en';
   if(!selected.targets.includes(editorTarget))editorTarget=selected.targets[0];
   const toolbar=document.createElement('div');toolbar.className='design-toolbar';
-  toolbar.append(selectControl(ui('copyLocale'),languages.map(locale=>[localeCodes[locale],languageLabel(locale)]),editorLocale,value=>{editorLocale=value;showDesignEditor();}),
-    selectControl(ui('previewDevice'),selected.targets.map(id=>[id,words()[targetLabels[id]]||id]),editorTarget,value=>{editorTarget=value;queueDesignPreview();}));
+  const copyVersion=selectControl(ui('copyLocale'),languages.map(locale=>[localeCodes[locale],languageLabel(locale)]),editorLocale,value=>{editorLocale=value;showDesignEditor();});
+  copyVersion.querySelector('select').id='copy-language';copyVersion.querySelector('select').setAttribute('aria-describedby','copy-language-help');
+  toolbar.append(copyVersion,selectControl(ui('previewDevice'),selected.targets.map(id=>[id,words()[targetLabels[id]]||id]),editorTarget,value=>{editorTarget=value;queueDesignPreview();}));
   const accentLabel=document.createElement('label');accentLabel.className='field';accentLabel.textContent=ui('accent');
   const accent=document.createElement('input');accent.type='color';accent.setAttribute('aria-label',ui('accent'));accent.value=editingProposal.brand_accent||state.options.styles.styles.find(s=>s.id===selected.style)?.colors.accent||'#6554e8';accent.oninput=()=>{editingProposal.brand_accent=accent.value;markEdited();};accentLabel.append(accent);toolbar.append(accentLabel);panel.append(toolbar);
+  const languageHelp=document.createElement('p');languageHelp.id='copy-language-help';languageHelp.textContent=ui('copyLocaleHelp');panel.append(languageHelp);
   const previewBar=document.createElement('div');previewBar.className='design-preview-status';
   const status=document.createElement('p');status.id='preview-status';status.setAttribute('role','status');
   const retry=document.createElement('button');retry.type='button';retry.id='retry-preview';retry.className='button quiet hidden';retry.textContent=ui('retryPreview');retry.onclick=()=>queueDesignPreview([]);
@@ -498,7 +511,10 @@ function showDesignEditor(previewIndices = null) {
       const label=document.createElement('label');label.className='field';const text=document.createElement('span');text.textContent=type==='title'?ui('editTitle'):ui('editSubtitle');
       const field=document.createElement(type==='title'?'textarea':'input');if(type==='title')field.rows=2;
       field.value=Array.isArray(screen[key])?screen[key].join('\n'):screen[key]||'';field.setAttribute('aria-label',`${ui(type==='title'?'editTitle':'editSubtitle')} ${index+1} (${editorLocale})`);field.dataset.copyKey=key;field.dataset.screenIndex=String(index+1);field.maxLength=type==='title'?161:180;
-      field.oninput=()=>{screen[key]=type==='title'?field.value.split('\n').slice(0,2):field.value;markEdited(index);};label.append(text,field);copyGrid.append(label);
+      let composing=false;const updateCopy=()=>{screen[key]=type==='title'?field.value.split('\n').slice(0,2):field.value;markEdited(index);};
+      field.oncompositionstart=()=>{composing=true;};
+      field.oninput=event=>{if(!composing&&!event.isComposing)updateCopy();};field.oncompositionend=()=>{composing=false;updateCopy();};
+      label.append(text,field);copyGrid.append(label);
     });configuration.append(copyGrid);
     const templates=Object.keys(state.options.templates).map(id=>[id,ui(id)]);
     const design=screen.design||(screen.design={template:'balanced',background:0});
@@ -596,6 +612,6 @@ function localizeProgress(message='') {
   return localizeFailure(message);
 }
 function localizeFailure(message='') {
-  const rules=[[/429|quota|rate limit/i,'errorRate'],[/timed out|timeout/i,'errorTimeout'],[/network|connect|fetch/i,'errorNetwork'],[/API.key|401|403|credential/i,'errorKey'],[/JSON|Invalid design|schema|mapping|omitted/i,'errorJson'],[/evidence|Analyze screenshots first/i,'errorEvidence'],[/fit|overflow|safe area|shorten/i,'errorCopy'],[/preview language|preview.*device/i,'errorPreview'],[/capture|image|base64|filename/i,'uploadInvalid']];
+  const rules=[[/No bundled font/i,'errorFont'],[/libraqm shaping/i,'errorShaping'],[/429|quota|rate limit/i,'errorRate'],[/timed out|timeout/i,'errorTimeout'],[/network|connect|fetch/i,'errorNetwork'],[/API.key|401|403|credential/i,'errorKey'],[/JSON|Invalid design|schema|mapping|omitted/i,'errorJson'],[/evidence|Analyze screenshots first/i,'errorEvidence'],[/fit|overflow|safe area|shorten/i,'errorCopy'],[/preview language|preview.*device/i,'errorPreview'],[/capture|image|base64|filename/i,'uploadInvalid']];
   return ui(rules.find(([pattern])=>pattern.test(message))?.[1]||'errorGeneric');
 }

@@ -22,12 +22,8 @@ TEMPLATE = ROOT / "demo" / "nimotecode" / "config.json"
 STYLES = json.loads((ROOT / "nimoteshot" / "styles.json").read_text(encoding="utf-8"))
 STYLE_MAP = {item["id"]: item for item in STYLES["styles"]}
 TARGET_NAMES = tuple(json.loads((ROOT / "store_screenshots" / "targets.json").read_text(encoding="utf-8")))
-LOCALES = {
-    "zh-CN": {"code": "zh", "fonts": {"regular": "store_screenshots/assets/fonts/NotoSansCJKsc-Regular.otf", "bold": "store_screenshots/assets/fonts/NotoSansCJKsc-Bold.otf"}},
-    "ja-JP": {"code": "ja", "fonts": {"regular": "store_screenshots/assets/fonts/NotoSansCJKsc-Regular.otf", "bold": "store_screenshots/assets/fonts/NotoSansCJKsc-Bold.otf"}},
-    "ko-KR": {"code": "ko", "fonts": {"regular": "store_screenshots/assets/fonts/NotoSansCJKsc-Regular.otf", "bold": "store_screenshots/assets/fonts/NotoSansCJKsc-Bold.otf"}},
-    "es-ES": {"code": "es", "fonts": None},
-}
+OUTPUT_LOCALES = json.loads(Path(__file__).with_name('locales.json').read_text(encoding='utf-8'))
+LOCALES = {locale: options for locale, options in OUTPUT_LOCALES.items() if locale != 'en-US'}
 
 
 def next_run_id():
