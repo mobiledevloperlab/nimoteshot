@@ -18,7 +18,8 @@ def main():
     parser = argparse.ArgumentParser(description="NimoteShot screenshot studio")
     sub = parser.add_subparsers(dest="command", required=True)
     web = sub.add_parser("web", help="Open the local web UI")
-    web.add_argument("--port", type=int, default=8765)
+    web.add_argument("--port", type=int, default=8765,
+                     help="Preferred port; restart a verified idle studio or select a free port if occupied")
     web.add_argument("--no-browser", action="store_true")
     doctor = sub.add_parser("doctor", help="Check the selected provider before uploading captures")
     doctor.add_argument("--provider", choices=[item["id"] for item in MODELS["providers"]], default=MODELS["default_provider"])

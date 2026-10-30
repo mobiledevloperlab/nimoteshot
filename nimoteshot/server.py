@@ -1,5 +1,6 @@
 """Local-only web API for planning, preview and deterministic export."""
 import io
+import hmac
 import base64
 import json
 import mimetypes
@@ -10,7 +11,7 @@ import threading
 from datetime import datetime, timezone
 import uuid
 import webbrowser
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from http.server import BaseHTTPRequestHandler
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
@@ -20,6 +21,7 @@ from .design import TEMPLATES
 from .planner import revise
 from .providers import check_connection
 from .settings import describe, has_key, save
+from .web_runtime import bind_studio, runtime_token_path, signature
 
 WEB = ROOT / "web"
 PUBLIC_DOCUMENTS = {
@@ -120,7 +122,15 @@ class Handler(BaseHTTPRequestHandler):
         if not self.local_request():
             return
         path = unquote(urlsplit(self.path).path)
-        if path == "/api/options":
+        if path == "/api/studio":
+            token = getattr(self.server, 'studio_token', None)
+            challenge = self.headers.get('X-NimoteShot-Challenge', '')
+            if not token or len(challenge) != 64 or any(c not in '0123456789abcdef' for c in challenge):
+                self.json_response({'error': 'Studio identity unavailable'}, 404)
+                return
+            instance = self.server.studio_instance
+            self.json_response({'instance': instance, 'proof': signature(token, 'identity:' + challenge + ':' + instance)})
+        elif path == "/api/options":
             sources = {}
             for item in MODELS["providers"]:
                 if not item["env"]:
@@ -182,7 +192,7 @@ class Handler(BaseHTTPRequestHandler):
         if not self.local_request():
             return
         route = urlsplit(self.path).path
-        small_routes = ('/api/preflight', '/api/configure', '/api/check-model', '/api/open-output')
+        small_routes = ('/api/preflight', '/api/configure', '/api/check-model', '/api/open-output', '/api/studio/shutdown')
         if route not in (*small_routes, '/api/generate', '/api/plan', '/api/revise', '/api/preview'):
             self.send_error(404)
             return
@@ -197,6 +207,23 @@ class Handler(BaseHTTPRequestHandler):
             payload = json.loads(self.rfile.read(length))
             if not isinstance(payload, dict):
                 raise ValueError('Request body must be a JSON object')
+            if route == '/api/studio/shutdown':
+                token = getattr(self.server, 'studio_token', None)
+                instance = getattr(self.server, 'studio_instance', None)
+                proof = payload.get('proof')
+                if (not token or payload.get('instance') != instance or not isinstance(proof, str)
+                        or len(proof) != 64 or any(c not in '0123456789abcdef' for c in proof)
+                        or not hmac.compare_digest(proof, signature(token, 'shutdown:' + instance))):
+                    self.json_response({'error': 'Studio verification failed'}, 403)
+                    return
+                with LOCK:
+                    if any(job['status'] in ('queued', 'running') for job in JOBS.values()):
+                        self.json_response({'error': 'Studio has active tasks'}, 409)
+                        return
+                    self.server.studio_draining = True
+                self.json_response({'stopping': True})
+                threading.Thread(target=self.server.shutdown, daemon=True).start()
+                return
             if route == '/api/open-output':
                 run_id = payload.get('run_id', '')
                 if not isinstance(run_id, str) or len(run_id) != 22 or not all(character.isalnum() or character == '-' for character in run_id):
@@ -273,6 +300,9 @@ class Handler(BaseHTTPRequestHandler):
 
         job_id=uuid.uuid4().hex
         with LOCK:
+            if getattr(self.server, 'studio_draining', False):
+                self.json_response({'error': 'Studio is restarting; retry on the new server'}, 409)
+                return
             JOBS[job_id]={'status':'queued','message':'Preparing captures','events':[], 'progress':0,
                           'total_renders':max(1,(len(locales)+1)*len(targets))}
 
@@ -316,8 +346,8 @@ class Handler(BaseHTTPRequestHandler):
 def serve(host="127.0.0.1", port=8765, open_browser=True):
     if host not in ("127.0.0.1", "localhost"):
         raise ValueError("The studio must listen on 127.0.0.1 or localhost")
-    server = ThreadingHTTPServer((host, port), Handler)
-    address = f"http://{host}:{port}"
+    server = bind_studio(host, port, Handler, runtime_token_path(ROOT))
+    address = f"http://{host}:{server.server_address[1]}"
     print(f"NimoteShot ready at {address}")
     if open_browser:
         threading.Timer(0.6, lambda: webbrowser.open(address)).start()

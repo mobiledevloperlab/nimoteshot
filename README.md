@@ -50,7 +50,7 @@ cd nimoteshot
 powershell -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
-Open the printed `http://127.0.0.1:8765` address. The server deliberately binds to loopback only.
+Open the URL printed on startup (default: `http://127.0.0.1:8765`). The server deliberately binds to loopback only.
 
 ## Before and after
 
@@ -158,7 +158,9 @@ python -m pip install -r store_screenshots/requirements.txt
 python scripts/nimoteshot.py web
 ```
 
-Open the printed `http://127.0.0.1:8765` address. The server deliberately binds to loopback only; do not publish it through a proxy, port-forwarding service, or shared host.
+Open the URL printed on startup (default: `http://127.0.0.1:8765`). The server deliberately binds to loopback only; do not publish it through a proxy, port-forwarding service, or shared host.
+
+If the preferred port is occupied, startup verifies whether it belongs to this checkout using a private runtime token stored in your user configuration directory. An idle, verified studio is shut down normally and replaced. Active tasks, other programs, and older instances without verification are kept running; the new studio selects another local port. No process is force-killed. Use `--port 8766` to choose a different preferred port, or `--port 0` for an automatically assigned port.
 
 ## Use the studio
 
@@ -245,7 +247,7 @@ tests/               Unit and security tests
 | --- | --- | --- |
 | `Python 3.11 or newer is required` | The default `python` command targets an older interpreter. | Install Python 3.11+ and recreate `.venv`; use `python3.11` explicitly if needed. |
 | `Could not create virtual environment` or `No module named venv` | Python virtual-environment support is missing. | Install your platform's Python venv package, then run the installer again. |
-| `Address already in use` | Port 8765 is occupied. | Start with `python scripts/nimoteshot.py web --port 8766`, then open the printed URL. |
+| Port occupied / URL changed | Another service is using the preferred port. | Startup restarts a verified idle studio or selects another free port. Open the printed URL; use `--port 8766` to set a preferred port. |
 | The page does not open from another computer | The studio accepts local loopback hosts only by design. | Use it on the machine where it runs; do not expose it publicly. |
 | Provider check says a key or model was rejected | The key lacks access, is expired, or the model ID is incorrect. | Confirm access in the provider console, choose an enabled vision model, and run `doctor` again. |
 | An OpenAI-compatible endpoint fails validation | The endpoint is not HTTPS or the base URL/model is wrong. | Use the provider's HTTPS API base URL and a vision-capable model ID. |
