@@ -249,17 +249,23 @@ class Handler(BaseHTTPRequestHandler):
                     target = payload.get('preview_target',targets[0])
                     if language not in ('en-US',*locales) or target not in targets:
                         raise ValueError('Choose a selected preview language and device')
+                    indices = payload.get('preview_indices', list(range(len(config['screens']))))
+                    if (not isinstance(indices, list) or not indices
+                            or any(type(index) is not int or not 0 <= index < len(config['screens']) for index in indices)
+                            or len(set(indices)) != len(indices)):
+                        raise ValueError('Choose valid, distinct preview screen indices')
                     config = renderer.localized(config,language)
                     preset = renderer.targets(config)[target]
                     width,height = preset['sizes'][0]
                     size = (round(width*min(480/width,720/height)),round(height*min(480/width,720/height)))
                     render = renderer.render if preset['layout']=='portrait' else renderer.render_landscape
                     pictures=[]
-                    for screen in config['screens']:
-                        image=render(config,screen,size,target)
+                    # Keep the full config: numbering and duo sources depend on it.
+                    for index in indices:
+                        image=render(config,config['screens'][index],size,target)
                         buffer=io.BytesIO(); image.save(buffer,format='PNG')
                         pictures.append('data:image/png;base64,'+base64.b64encode(buffer.getvalue()).decode())
-                    self.json_response({'images':pictures,'locale':language,'target':target})
+                    self.json_response({'images':pictures,'indices':indices,'locale':language,'target':target})
                 return
         except (KeyError, ValueError, TypeError, OSError, AssertionError) as error:
             self.json_response({'error': safe_error(error,payload if 'payload' in locals() else {})},400)

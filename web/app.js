@@ -380,6 +380,7 @@ async function poll(jobId) { for (;;) { await sleep(900); const response = await
 
 let editingProposal = null;
 let previewTimer, previewRevision = 0, previewController;
+const pendingPreviewIndices = new Set();
 let editorLocale = 'en', editorTarget = 'iphone_portrait', busy = false;
 const localeCodes = {'en-US':'en','zh-CN':'zh','ja-JP':'ja','ko-KR':'ko','es-ES':'es'};
 function ui(key,parameters={}) { return Object.entries(parameters).reduce((text,[name,value])=>text.replaceAll('{'+name+'}',String(value)),editorMessages[state.language]?.[key]||editorMessages.en[key]||key); }
@@ -396,15 +397,15 @@ async function uploadFiles() {
   }));
 }
 function invalidateDesign() {
-  editingProposal = null; ++previewRevision; clearTimeout(previewTimer); previewController?.abort();
+  editingProposal = null; ++previewRevision; clearTimeout(previewTimer); previewController?.abort();pendingPreviewIndices.clear();
   $('result').classList.add('hidden');
 }
-function markEdited() {
+function markEdited(screenIndex = null) {
   $('download').classList.add('hidden');
   $('open-export').classList.add('hidden');
   $('export-location').classList.add('hidden');
   $('result-summary').textContent = ui('changed');
-  queueDesignPreview();
+  queueDesignPreview(screenIndex === null ? null : [screenIndex]);
 }
 function manualProposal(files) {
   return {schema_version:1,screens:files.slice(0,10).map(file=>{
@@ -452,7 +453,9 @@ function selectControl(label, options, value, changed) {
   options.forEach(([id,text])=>{const option=document.createElement('option');option.value=id;option.textContent=text;select.append(option);});
   select.value=value;select.onchange=()=>changed(select.value);wrapper.append(caption,select);return wrapper;
 }
-function showDesignEditor() {
+function showDesignEditor(previewIndices = null) {
+  // A template change rebuilds its controls but keeps the other rendered images.
+  const previousImages=previewIndices === null ? [] : Array.from(document.querySelectorAll('.design-rendered-preview'));
   ++previewRevision; previewController?.abort();
   let panel=$('design-editor');if(!panel){panel=document.createElement('div');panel.id='design-editor';$('result').append(panel);}
   panel.replaceChildren();$('result').classList.remove('hidden');$('download').classList.add('hidden');$('open-export').classList.add('hidden');$('export-location').classList.add('hidden');$('result-previews').replaceChildren();
@@ -463,17 +466,28 @@ function showDesignEditor() {
   if(!selected.targets.includes(editorTarget))editorTarget=selected.targets[0];
   const toolbar=document.createElement('div');toolbar.className='design-toolbar';
   toolbar.append(selectControl(ui('copyLocale'),languages.map(locale=>[localeCodes[locale],languageLabel(locale)]),editorLocale,value=>{editorLocale=value;showDesignEditor();}),
-    selectControl(ui('previewDevice'),selected.targets.map(id=>[id,words()[targetLabels[id]]||id]),editorTarget,value=>{editorTarget=value;markEdited();}));
+    selectControl(ui('previewDevice'),selected.targets.map(id=>[id,words()[targetLabels[id]]||id]),editorTarget,value=>{editorTarget=value;queueDesignPreview();}));
   const accentLabel=document.createElement('label');accentLabel.className='field';accentLabel.textContent=ui('accent');
   const accent=document.createElement('input');accent.type='color';accent.setAttribute('aria-label',ui('accent'));accent.value=editingProposal.brand_accent||state.options.styles.styles.find(s=>s.id===selected.style)?.colors.accent||'#6554e8';accent.oninput=()=>{editingProposal.brand_accent=accent.value;markEdited();};accentLabel.append(accent);toolbar.append(accentLabel);panel.append(toolbar);
+  const previewBar=document.createElement('div');previewBar.className='design-preview-status';
+  const status=document.createElement('p');status.id='preview-status';status.setAttribute('role','status');
+  const retry=document.createElement('button');retry.type='button';retry.id='retry-preview';retry.className='button quiet hidden';retry.textContent=ui('retryPreview');retry.onclick=()=>queueDesignPreview([]);
+  previewBar.append(status,retry);panel.append(previewBar);
   editingProposal.screens.forEach((screen,index)=>{
     const row=document.createElement('fieldset');row.className='design-screen';
     const legend=document.createElement('legend');legend.textContent=`${index+1}. ${screen.file}`;row.append(legend);
     const editorBody=document.createElement('div');editorBody.className='design-screen-body';
     const source=document.createElement('figure');source.className='design-source';
     const sourceFile=selectedFiles.find(file=>file.name===screen.file);
-    if(sourceFile){const image=document.createElement('img');image.src=sourcePreview(sourceFile);image.alt=`${ui('sourceCapture')}: ${screen.file}`;source.append(image);}
-    const sourceCaption=document.createElement('figcaption');sourceCaption.textContent=ui('sourceCapture');source.append(sourceCaption);editorBody.append(source);
+    const preview=previousImages[index]||document.createElement('img');preview.className='design-rendered-preview';preview.hidden=!preview.getAttribute('src');source.append(preview);
+    const sourceCaption=document.createElement('figcaption');sourceCaption.textContent=ui('livePreview');source.append(sourceCaption);
+    if(sourceFile){
+      const original=document.createElement('details');original.className='design-original';
+      const summary=document.createElement('summary');summary.textContent=ui('sourceCapture');
+      const image=document.createElement('img');image.src=sourcePreview(sourceFile);image.alt=`${ui('sourceCapture')}: ${screen.file}`;
+      original.append(summary,image);source.append(original);
+    }
+    editorBody.append(source);
     const configuration=document.createElement('div');configuration.className='design-configuration';
     const details=document.createElement('details');const summary=document.createElement('summary');summary.textContent=ui('evidence');
     const evidence=document.createElement('p');evidence.textContent=screen.analysis?.evidence||ui('manualEvidence');
@@ -484,35 +498,38 @@ function showDesignEditor() {
       const label=document.createElement('label');label.className='field';const text=document.createElement('span');text.textContent=type==='title'?ui('editTitle'):ui('editSubtitle');
       const field=document.createElement(type==='title'?'textarea':'input');if(type==='title')field.rows=2;
       field.value=Array.isArray(screen[key])?screen[key].join('\n'):screen[key]||'';field.setAttribute('aria-label',`${ui(type==='title'?'editTitle':'editSubtitle')} ${index+1} (${editorLocale})`);field.dataset.copyKey=key;field.dataset.screenIndex=String(index+1);field.maxLength=type==='title'?161:180;
-      field.oninput=()=>{screen[key]=type==='title'?field.value.split('\n').slice(0,2):field.value;markEdited();};label.append(text,field);copyGrid.append(label);
+      field.oninput=()=>{screen[key]=type==='title'?field.value.split('\n').slice(0,2):field.value;markEdited(index);};label.append(text,field);copyGrid.append(label);
     });configuration.append(copyGrid);
     const templates=Object.keys(state.options.templates).map(id=>[id,ui(id)]);
     const design=screen.design||(screen.design={template:'balanced',background:0});
     configuration.append(selectControl(ui('editTemplate'),templates,design.template,value=>{
       design.template=value;if(value==='detail')design.focus_region=design.focus_region||'center';
       if(value==='duo')design.secondary_file=selectedFiles.find(f=>f.name!==screen.file)?.name;
-      showDesignEditor();markEdited();
+      showDesignEditor([index]);markEdited(index);
     }));
     const advanced=document.createElement('details');const advancedTitle=document.createElement('summary');advancedTitle.textContent=ui('advancedLayout');advanced.append(advancedTitle);
     [['scale',ui('screenshotSize'),['small','standard','large']],['alignment',ui('screenshotPosition'),['left','center','right']],['typography',ui('editorTypography'),['standard','compact']]].filter(([key])=>key==='typography'||!['detail','duo'].includes(design.template)).forEach(([key,label,values])=>{
-      advanced.append(selectControl(label,values.map(value=>[value,ui(value)]),design[key]||({scale:'standard',alignment:'center',typography:'standard'})[key],value=>{design[key]=value;markEdited();}));
+      advanced.append(selectControl(label,values.map(value=>[value,ui(value)]),design[key]||({scale:'standard',alignment:'center',typography:'standard'})[key],value=>{design[key]=value;markEdited(index);}));
     });
-    advanced.append(selectControl(ui('editorBackground'),[0,1,2,3].map(i=>[String(i),String(i+1)]),String(design.background||0),value=>{design.background=Number(value);markEdited();}));
-    if(design.template==='detail')advanced.append(selectControl(ui('detailRegion'),['top','center','bottom'].map(v=>[v,ui(v)]),design.focus_region||'center',value=>{design.focus_region=value;markEdited();}));
-    if(design.template==='duo')advanced.append(selectControl(ui('secondCapture'),selectedFiles.filter(f=>f.name!==screen.file).map(f=>[f.name,f.name]),design.secondary_file,value=>{design.secondary_file=value;markEdited();}));
+    advanced.append(selectControl(ui('editorBackground'),[0,1,2,3].map(i=>[String(i),String(i+1)]),String(design.background||0),value=>{design.background=Number(value);markEdited(index);}));
+    if(design.template==='detail')advanced.append(selectControl(ui('detailRegion'),['top','center','bottom'].map(v=>[v,ui(v)]),design.focus_region||'center',value=>{design.focus_region=value;markEdited(index);}));
+    if(design.template==='duo')advanced.append(selectControl(ui('secondCapture'),selectedFiles.filter(f=>f.name!==screen.file).map(f=>[f.name,f.name]),design.secondary_file,value=>{design.secondary_file=value;markEdited(index);}));
     configuration.append(advanced);
     const moves=document.createElement('div');moves.className='design-actions';
     [-1,1].forEach(delta=>{const move=document.createElement('button');move.type='button';move.className='button quiet';move.textContent=delta<0?'↑':'↓';move.setAttribute('aria-label',`${ui(delta<0?'moveUp':'moveDown')} ${index+1}`);move.disabled=index+delta<0||index+delta>=editingProposal.screens.length;
       move.onclick=()=>{const screens=editingProposal.screens;[screens[index],screens[index+delta]]=[screens[index+delta],screens[index]];showDesignEditor();markEdited();};moves.append(move);});configuration.append(moves);editorBody.append(configuration);row.append(editorBody);panel.append(row);
   });
   const actions=document.createElement('div');actions.className='design-actions';
-  actions.append(actionButton(ui('regenerateCopy'),()=>regenerate('copy')),
-    actionButton(ui('recommendLayouts'),()=>regenerate('layout')),
-    actionButton(ui('reanalyze'),()=>createPlan(true)));
+  if(editingProposal.screens.every(screen=>screen.analysis?.evidence?.trim())){
+    const optional=document.createElement('details');optional.className='design-rework';
+    const summary=document.createElement('summary');summary.textContent=ui('optionalRework');optional.append(summary);
+    [['regenerateCopy','copyHelp',()=>regenerate('copy')],['recommendLayouts','layoutHelp',()=>regenerate('layout')],['reanalyze','reanalyzeHelp',()=>createPlan(true)]].forEach(([label,help,action])=>{
+      const row=document.createElement('div');row.className='design-rework-action';
+      const note=document.createElement('p');note.textContent=ui(help);row.append(actionButton(ui(label),action),note);optional.append(row);
+    });panel.append(optional);
+  }
   const exportButton=actionButton(ui('exportDesign'),exportDesign);exportButton.className='button primary';exportButton.id='export-design';actions.append(exportButton);panel.append(actions);
-  const status=document.createElement('p');status.id='preview-status';status.setAttribute('role','status');panel.append(status);
-  const strip=document.createElement('div');strip.id='live-design-preview';panel.append(strip);
-  queueDesignPreview();
+  queueDesignPreview(previewIndices);
 }
 async function regenerate(action) {
   const fields=requestFields();fields.files=await uploadFiles();fields.proposal=editingProposal;fields.action=action;
@@ -535,20 +552,35 @@ $('open-export').addEventListener('click',async()=>{
   catch(error){showError(error.message);}
   finally{button.disabled=false;}
 });
-function queueDesignPreview() {
+function queueDesignPreview(indices = null) {
   clearTimeout(previewTimer);const revision=++previewRevision;previewController?.abort();
   if(!editingProposal)return;
+  // Keep uncommitted screens across debounced edits, aborted requests and retries.
+  (indices === null ? editingProposal.screens.map((_,index)=>index) : indices).forEach(index=>pendingPreviewIndices.add(index));
+  const requestedIndices=Array.from(pendingPreviewIndices).filter(index=>index<editingProposal.screens.length).sort((a,b)=>a-b);
+  if(!requestedIndices.length)return;
+  const status=$('preview-status');if(status){status.textContent=ui('previewUpdating');status.dataset.state='loading';}
+  $('retry-preview')?.classList.add('hidden');
+  const images=Array.from(document.querySelectorAll('.design-rendered-preview'));
+  requestedIndices.forEach(index=>images[index]?.classList.add('preview-stale'));
   previewTimer=setTimeout(async()=>{
-    const status=$('preview-status');if(status){status.textContent=ui('previewUpdating');status.dataset.state='loading';}
-    previewController=new AbortController();
+    const controller=new AbortController();previewController=controller;
     try {
-      const fields=requestFields();fields.proposal=structuredClone(editingProposal);fields.files=await uploadFiles();fields.preview_locale=Object.keys(localeCodes).find(locale=>localeCodes[locale]===editorLocale);fields.preview_target=editorTarget;fields.api_key='';
-      const response=await fetch('/api/preview',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(fields),signal:previewController.signal});
+      const fields=requestFields();fields.proposal=structuredClone(editingProposal);fields.files=await uploadFiles();fields.preview_locale=Object.keys(localeCodes).find(locale=>localeCodes[locale]===editorLocale);fields.preview_target=editorTarget;fields.preview_indices=requestedIndices;fields.api_key='';
+      if(revision!==previewRevision)return;
+      const response=await fetch('/api/preview',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(fields),signal:controller.signal});
       const result=await response.json();if(!response.ok)throw new Error(result.error);
       if(revision!==previewRevision)return;
-      $('live-design-preview').replaceChildren(...result.images.map((src,index)=>{const image=document.createElement('img');image.src=src;image.alt=`${ui('refine')}: ${editingProposal.screens[index].file} · ${result.locale} · ${words()[targetLabels[result.target]]||result.target}`;return image;}));
+      if(JSON.stringify(result.indices)!==JSON.stringify(requestedIndices)||result.images.length!==requestedIndices.length)throw new Error('Invalid preview response');
+      await Promise.all(result.images.map(async src=>{const decoded=new Image();decoded.src=src;await decoded.decode();}));
+      if(revision!==previewRevision)return;
+      result.images.forEach((src,offset)=>{
+        const index=requestedIndices[offset],image=images[index];
+        image.src=src;image.hidden=false;image.classList.remove('preview-stale');image.alt=`${ui('refine')}: ${editingProposal.screens[index].file} · ${result.locale} · ${words()[targetLabels[result.target]]||result.target}`;
+      });
+      pendingPreviewIndices.clear();
       if(status){status.textContent=ui('previewUpdated');status.dataset.state='ready';}
-    }catch(error){if(error.name!=='AbortError'&&revision===previewRevision&&status){status.textContent=localizeFailure(error.message);status.dataset.state='error';}}
+    }catch(error){if(error.name!=='AbortError'&&revision===previewRevision&&status){status.textContent=localizeFailure(error.message);status.dataset.state='error';$('retry-preview')?.classList.remove('hidden');}}
   },350);
 }
 document.addEventListener('change',event=>{

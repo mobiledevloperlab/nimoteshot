@@ -167,7 +167,7 @@ Open the printed `http://127.0.0.1:8765` address. The server deliberately binds 
 3. Choose target languages, style, palette, and an optional design prompt.
 4. Select a vision provider and use **Check setup** before generating.
 5. Click **Analyze and plan**, then preview and edit the copy in each output language. Adjust templates, brand color and order without another AI call.
-6. **Regenerate copy** uses recorded visual evidence without resending images; **Recommend layouts** uses that evidence locally. **Analyze screenshots again** explicitly refreshes the vision cache.
+6. Changes automatically update the preview beside each screen: copy and layout edits render only the affected screens; brand color, style, language, device and order changes refresh all previews for the current language/device. Use **Retry preview** if rendering fails. AI designs offer **Optional adjustments**: **Regenerate copy** replaces copy in all languages using saved evidence; **Recommend layouts** resets templates locally while keeping copy; **Analyze screenshots again** calls the vision model and replaces the entire design.
 7. Click **Export PNG / ZIP** for validated multi-resolution downloads. Without a key, select **Manual design** and write your own copy.
 
 The five interface languages apply to the editor, template options, buttons and status messages. Publication languages are selected separately. Single-capture layouts remain the default; paired layouts are optional and should support the same selling point. See [the architecture and verification record](docs/VISION_UPGRADE.md).

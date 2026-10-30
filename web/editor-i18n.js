@@ -2,8 +2,8 @@
 const editorMessages = {
   "en": {
     "manualMode": "Manual design (no API key)",
-    "changed": "Design changed. Export to download the latest version.",
-    "designReady": "Design ready. Edit copy, layout and order, then export.",
+    "changed": "Changes preview automatically. Export to download the latest version.",
+    "designReady": "Edit copy and layout to preview automatically, then export.",
     "refine": "Preview and refine",
     "copyLocale": "Copy and preview language",
     "previewDevice": "Preview device",
@@ -89,12 +89,18 @@ const editorMessages = {
     "productHint": "Start with an app name and description. Design prompts are optional.",
     "captureHint": "Add real PNG, JPEG or WebP captures and choose export formats.",
     "styleHint": "Choose one palette for every device and language.",
-    "modelHint": "Configure a model to analyze your screenshots, or choose manual design."
+    "modelHint": "Configure a model to analyze your screenshots, or choose manual design.",
+    "livePreview": "Live preview · updates automatically",
+    "retryPreview": "Retry preview",
+    "optionalRework": "Optional adjustments",
+    "copyHelp": "Rewrites copy for all screens and languages using saved visual evidence. Replaces your copy edits; calls the model.",
+    "layoutHelp": "Resets templates for all screens using saved visual evidence. Runs locally and keeps your copy.",
+    "reanalyzeHelp": "Runs image analysis again and replaces the entire design, including your edits. Calls the vision model."
   },
   "zh": {
     "manualMode": "手动设计（无需密钥）",
-    "changed": "方案已修改，请批量导出最新版本。",
-    "designReady": "方案已就绪。可修改文案、布局和顺序，再批量导出。",
+    "changed": "修改会自动更新预览，导出后可下载最新版本。",
+    "designReady": "修改文案和布局即可自动预览，确认后导出。",
     "refine": "预览与微调",
     "copyLocale": "编辑与预览语言",
     "previewDevice": "预览设备",
@@ -180,12 +186,18 @@ const editorMessages = {
     "productHint": "填写名称与产品简介即可开始。设计提示词是可选项。",
     "captureHint": "添加真实 PNG、JPEG 或 WebP 截图，并选择导出规格。",
     "styleHint": "选择一套配色，所有设备与语言保持一致。",
-    "modelHint": "配置模型分析截图，或选择手动设计。"
+    "modelHint": "配置模型分析截图，或选择手动设计。",
+    "livePreview": "成品预览 · 修改后自动更新",
+    "retryPreview": "重试预览",
+    "optionalRework": "更多调整（可选）",
+    "copyHelp": "根据已有视觉证据重写所有截图、所有语言的文案，会覆盖手动修改并调用模型。",
+    "layoutHelp": "根据已有视觉证据重新选择所有截图的模板，在本地完成，保留文案。",
+    "reanalyzeHelp": "重新调用视觉模型分析原图，替换整套设计，包括手动修改。"
   },
   "ja": {
     "manualMode": "手動デザイン（API キー不要）",
-    "changed": "変更済みです。最新版をエクスポートしてください。",
-    "designReady": "デザインが完成しました。文言・配置・順序を調整してエクスポートできます。",
+    "changed": "変更は自動でプレビューされます。最新版をダウンロードするには書き出してください。",
+    "designReady": "コピーとレイアウトの変更を自動プレビューし、確認後に書き出します。",
     "refine": "プレビューと調整",
     "copyLocale": "編集・プレビュー言語",
     "previewDevice": "プレビュー端末",
@@ -271,12 +283,18 @@ const editorMessages = {
     "productHint": "アプリ名と説明を入力してください。デザイン指示は任意です。",
     "captureHint": "実際の PNG・JPEG・WebP 画像を追加し、出力形式を選択します。",
     "styleHint": "すべての端末と言語で統一する配色を選択します。",
-    "modelHint": "画像を解析するモデルを設定するか、手動デザインを選択します。"
+    "modelHint": "画像を解析するモデルを設定するか、手動デザインを選択します。",
+    "livePreview": "プレビュー · 変更時に自動更新",
+    "retryPreview": "プレビューを再試行",
+    "optionalRework": "その他の調整（任意）",
+    "copyHelp": "保存済みの視覚的根拠で全画面・全言語のコピーを再作成します。手動編集を上書きし、モデルを呼び出します。",
+    "layoutHelp": "保存済みの視覚的根拠で全画面のテンプレートを再選択します。ローカルで実行し、コピーは保持します。",
+    "reanalyzeHelp": "視覚モデルで元の画像を再分析し、手動編集を含むデザイン全体を置き換えます。"
   },
   "ko": {
     "manualMode": "수동 디자인 (API 키 불필요)",
-    "changed": "디자인이 변경되었습니다. 최신 버전을 내보내세요.",
-    "designReady": "디자인이 준비되었습니다. 문구, 레이아웃, 순서를 조정한 후 내보내세요.",
+    "changed": "변경 사항은 자동으로 미리 보기에 반영됩니다. 최신 버전은 내보내기로 다운로드하세요.",
+    "designReady": "문구와 레이아웃을 수정하면 자동으로 미리 보기가 갱신됩니다. 확인 후 내보내세요.",
     "refine": "미리 보기 및 조정",
     "copyLocale": "편집 및 미리 보기 언어",
     "previewDevice": "미리 보기 기기",
@@ -362,12 +380,18 @@ const editorMessages = {
     "productHint": "앱 이름과 설명을 입력하세요. 디자인 지시는 선택 사항입니다.",
     "captureHint": "실제 PNG, JPEG, WebP 캡처를 추가하고 내보내기 형식을 선택하세요.",
     "styleHint": "모든 기기와 언어에 사용할 색상 구성을 선택하세요.",
-    "modelHint": "캡처를 분석할 모델을 설정하거나 수동 디자인을 선택하세요."
+    "modelHint": "캡처를 분석할 모델을 설정하거나 수동 디자인을 선택하세요.",
+    "livePreview": "미리 보기 · 변경 시 자동 업데이트",
+    "retryPreview": "미리 보기 재시도",
+    "optionalRework": "추가 조정 (선택 사항)",
+    "copyHelp": "저장된 시각적 근거로 모든 화면과 언어의 문구를 다시 작성합니다. 직접 수정한 문구를 덮어쓰며 모델을 호출합니다.",
+    "layoutHelp": "저장된 시각적 근거로 모든 화면의 템플릿을 다시 선택합니다. 로컬에서 실행하며 문구는 유지합니다.",
+    "reanalyzeHelp": "시각 모델로 원본을 다시 분석하고 직접 수정한 내용을 포함해 전체 디자인을 교체합니다."
   },
   "es": {
     "manualMode": "Diseño manual (sin clave API)",
-    "changed": "Diseño modificado. Exporta para descargar la última versión.",
-    "designReady": "Diseño listo. Ajusta textos, distribución y orden, y exporta.",
+    "changed": "Los cambios se previsualizan automáticamente. Exporta para descargar la última versión.",
+    "designReady": "Edita texto y diseño para ver los cambios automáticamente y después exporta.",
     "refine": "Vista previa y ajustes",
     "copyLocale": "Idioma del texto y la vista previa",
     "previewDevice": "Dispositivo de vista previa",
@@ -453,6 +477,12 @@ const editorMessages = {
     "productHint": "Empieza con el nombre y la descripción. Las instrucciones de diseño son opcionales.",
     "captureHint": "Añade capturas reales PNG, JPEG o WebP y elige los formatos.",
     "styleHint": "Elige una paleta para todos los dispositivos e idiomas.",
-    "modelHint": "Configura un modelo para analizar las capturas o elige diseño manual."
+    "modelHint": "Configura un modelo para analizar las capturas o elige diseño manual.",
+    "livePreview": "Vista previa · actualización automática",
+    "retryPreview": "Reintentar vista previa",
+    "optionalRework": "Ajustes opcionales",
+    "copyHelp": "Reescribe el texto de todas las capturas e idiomas con la evidencia guardada. Sustituye tus cambios y llama al modelo.",
+    "layoutHelp": "Restablece las plantillas de todas las capturas con la evidencia guardada. Se ejecuta localmente y conserva el texto.",
+    "reanalyzeHelp": "Vuelve a analizar las imágenes con el modelo visual y sustituye todo el diseño, incluidos tus cambios."
   }
 };

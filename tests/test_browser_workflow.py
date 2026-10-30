@@ -62,7 +62,7 @@ class BrowserWorkflowTests(unittest.TestCase):
     def wait_preview(self):
         self.page.wait_for_function("['ready','error'].includes(document.getElementById('preview-status')?.dataset.state)",timeout=60000)
         self.assertEqual(self.page.locator('#preview-status').get_attribute('data-state'),'ready',self.page.locator('#preview-status').inner_text())
-        self.assertEqual(self.page.locator('#live-design-preview img').count(),2)
+        self.assertEqual(self.page.locator('.design-rendered-preview:not([hidden])').count(),2)
 
     def edit_and_export(self):
         self.page.wait_for_selector('#design-editor')
@@ -103,7 +103,7 @@ class BrowserWorkflowTests(unittest.TestCase):
             self.page.check('#manual-mode');self.page.click('#generate')
             self.page.wait_for_selector('#design-editor')
             self.assertEqual(self.page.locator('.design-screen-body').count(),2)
-            self.assertEqual(self.page.locator('.design-source img').count(),2)
+            self.assertEqual(self.page.locator('.design-original img').count(),2)
             positions=self.page.locator('.design-screen-body').first.evaluate("node=>({source:node.querySelector('.design-source').getBoundingClientRect().left,configuration:node.querySelector('.design-configuration').getBoundingClientRect().left})")
             self.assertLess(positions['source'],positions['configuration'])
             self.edit_and_export()
@@ -125,12 +125,138 @@ class BrowserWorkflowTests(unittest.TestCase):
         for language in ('zh','en','ja','ko','es'):
             self.page.select_option('#language',language)
             labels=self.page.evaluate('(language)=>editorMessages[language]',language)
-            for key in ('regenerateCopy','recommendLayouts','reanalyze','exportDesign'):
-                self.assertEqual(self.page.get_by_role('button',name=labels[key],exact=True).count(),1)
+            self.assertEqual(self.page.get_by_role('button',name=labels['exportDesign'],exact=True).count(),1)
+            self.assertEqual(self.page.locator('.design-rework').count(),0)
+            self.assertEqual(self.page.locator('.design-source figcaption').first.inner_text(),labels['livePreview'])
             self.assertEqual(self.page.get_by_label(labels['editTemplate'],exact=True).count(),2)
             self.assertEqual(self.page.locator('[data-i18n=manualMode]').inner_text(),labels['manualMode'])
             self.assertEqual(self.page.locator('[data-copy-key=title_en][data-screen-index="1"]').input_value(),'Keep my copy')
             self.assertEqual(self.page.get_by_label(labels['editTemplate'],exact=True).first.locator('option[value=duo]').inner_text(),labels['duo'])
+        self.assertEqual(self.errors,[])
+
+    def test_edits_refresh_rendered_images_and_preview_failure_can_retry(self):
+        requests=[]
+        self.page.on('request',lambda request:requests.append(request.post_data_json) if request.url.endswith('/api/preview') else None)
+        with patch.object(pipeline,'analyze',side_effect=AssertionError('Preview must not call AI')):
+            self.page.check('#manual-mode');self.page.click('#generate');self.wait_preview()
+            image=self.page.locator('.design-rendered-preview').first
+            before=image.get_attribute('src')
+            title=self.page.locator('[data-copy-key=title_en][data-screen-index="1"]')
+            subtitle=self.page.locator('[data-copy-key=subtitle_en][data-screen-index="1"]')
+            title.fill('Code tools')
+            self.assertEqual(self.page.locator('#preview-status').get_attribute('data-state'),'loading')
+            subtitle.fill('Build on your phone')
+            self.wait_preview()
+            self.assertNotEqual(image.get_attribute('src'),before)
+            self.assertEqual(self.page.locator('.design-screen').first.locator('.design-rendered-preview').count(),1)
+            self.assertTrue(self.page.locator('#retry-preview').is_hidden())
+
+            self.page.route('**/api/preview',lambda route:route.fulfill(status=500,json={'error':'Preview failed'}),times=1)
+            title.fill('Edit anywhere')
+            self.page.wait_for_function("document.getElementById('preview-status').dataset.state === 'error'")
+            self.assertTrue(self.page.locator('#retry-preview').is_visible())
+            self.assertIn('preview-stale',image.get_attribute('class'))
+            self.page.click('#retry-preview');self.wait_preview()
+            self.assertEqual(requests[-1]['preview_indices'],[0])
+            self.assertNotIn('preview-stale',image.get_attribute('class'))
+            self.assertEqual(title.input_value(),'Edit anywhere')
+        self.assertEqual(self.errors,[])
+
+    def test_local_edits_render_one_screen_and_global_changes_render_all(self):
+        requests=[]
+        self.page.on('request',lambda request:requests.append(request.post_data_json) if request.url.endswith('/api/preview') else None)
+        self.page.evaluate("""() => {
+            const target=document.querySelector('.export-targets input[value="iphone_landscape"]');
+            target.checked=true;target.dispatchEvent(new Event('change',{bubbles:true}));
+        }""")
+        self.page.check('#manual-mode');self.page.click('#generate');self.wait_preview()
+        self.assertEqual(requests[-1]['preview_indices'],[0,1])
+        self.page.evaluate("window.untouchedPreview=document.querySelectorAll('.design-rendered-preview')[1]")
+        unchanged=self.page.locator('.design-rendered-preview').nth(1).get_attribute('src')
+        for key,value in (('title_en','Edit code'),('subtitle_en','Find your symbols')):
+            self.page.locator(f'[data-copy-key={key}][data-screen-index="1"]').fill(value)
+            self.wait_preview()
+            self.assertEqual(requests[-1]['preview_indices'],[0])
+            self.assertEqual(self.page.locator('.design-rendered-preview').nth(1).get_attribute('src'),unchanged)
+        self.page.get_by_label('Template',exact=True).first.select_option('detail');self.wait_preview()
+        self.assertEqual(requests[-1]['preview_indices'],[0])
+        self.assertTrue(self.page.evaluate("window.untouchedPreview===document.querySelectorAll('.design-rendered-preview')[1]"))
+        self.page.locator('.design-configuration').first.locator('details').last.locator('summary').click()
+        self.page.get_by_label('Detail region',exact=True).select_option('top');self.wait_preview()
+        self.assertEqual(requests[-1]['preview_indices'],[0])
+        self.page.get_by_label('Brand accent',exact=True).fill('#dd3344');self.wait_preview()
+        self.assertEqual(requests[-1]['preview_indices'],[0,1])
+        self.page.get_by_label('Copy and preview language',exact=True).select_option('zh');self.wait_preview()
+        self.assertEqual(requests[-1]['preview_indices'],[0,1])
+        self.assertEqual(requests[-1]['preview_locale'],'zh-CN')
+        self.page.get_by_label('Preview device',exact=True).select_option('iphone_landscape');self.wait_preview()
+        self.assertEqual(requests[-1]['preview_indices'],[0,1])
+        self.assertEqual(requests[-1]['preview_target'],'iphone_landscape')
+        self.page.get_by_label('Move up 2',exact=True).click();self.wait_preview()
+        self.assertEqual(requests[-1]['preview_indices'],[0,1])
+        self.assertEqual(requests[-1]['proposal']['screens'][0]['file'],'terminal.png')
+        self.assertEqual(self.errors,[])
+
+    def test_batched_edits_and_superseded_response_do_not_lose_pending_screens(self):
+        requests=[]
+        self.page.on('request',lambda request:requests.append(request.post_data_json) if request.url.endswith('/api/preview') else None)
+        self.page.check('#manual-mode');self.page.click('#generate');self.wait_preview()
+        requests.clear()
+        # Both edits occur within one debounce interval.
+        self.page.evaluate("""() => {
+            document.querySelectorAll('[data-copy-key=title_en]').forEach((field,index)=>{
+                field.value='Code '+index;field.dispatchEvent(new Event('input',{bubbles:true}));
+            });
+        }""")
+        self.wait_preview()
+        self.assertEqual(len(requests),1)
+        self.assertEqual(requests[-1]['preview_indices'],[0,1])
+        # Hold an actual successful response after transport completes, so abort
+        # alone cannot protect against it committing over the next response.
+        self.page.evaluate("""() => {
+            const original=window.fetch;
+            window.holdNextPreview=true;
+            window.fetch=async(...args)=>{
+                if(args[0]==='/api/preview' && window.holdNextPreview){
+                    window.holdNextPreview=false;
+                    const response=await original(...args);
+                    return new Promise(resolve=>{
+                        window.releaseHeldPreview=()=>resolve(response);
+                        window.heldPreviewReady=true;
+                    });
+                }
+                return original(...args);
+            };
+        }""")
+        self.page.locator('[data-copy-key=title_en][data-screen-index="1"]').fill('First edit')
+        self.page.wait_for_function('window.heldPreviewReady === true')
+        self.assertEqual(requests[-1]['preview_indices'],[0])
+        self.page.locator('[data-copy-key=title_en][data-screen-index="2"]').fill('Second edit')
+        self.wait_preview()
+        self.assertEqual(requests[-1]['preview_indices'],[0,1])
+        latest=self.page.locator('.design-rendered-preview').evaluate_all('(images)=>images.map(image=>image.src)')
+        self.page.evaluate('async()=>{window.releaseHeldPreview();await new Promise(resolve=>setTimeout(resolve,0));}')
+        self.assertEqual(self.page.locator('.design-rendered-preview').evaluate_all('(images)=>images.map(image=>image.src)'),latest)
+        self.assertEqual(self.page.locator('#preview-status').get_attribute('data-state'),'ready')
+        self.assertEqual(self.errors,[])
+
+    def test_ai_rework_is_collapsed_and_explains_overwrites(self):
+        self.page.check('#manual-mode');self.page.click('#generate');self.wait_preview()
+        # Attach the evidence an AI plan supplies; no provider request is needed.
+        self.page.evaluate("""() => {
+            editingProposal.screens.forEach(screen=>screen.analysis={evidence:'Visible code editor',page_type:'editor'});
+            showDesignEditor();
+        }""")
+        self.wait_preview()
+        for language in ('en','zh','ja','ko','es'):
+            self.page.select_option('#language',language)
+            labels=self.page.evaluate('(language)=>editorMessages[language]',language)
+            self.assertFalse(self.page.locator('.design-rework').evaluate('(node)=>node.open'))
+            self.assertTrue(self.page.get_by_role('button',name=labels['exportDesign'],exact=True).is_visible())
+            self.page.locator('.design-rework > summary').click()
+            for label,help_key in (('regenerateCopy','copyHelp'),('recommendLayouts','layoutHelp'),('reanalyze','reanalyzeHelp')):
+                self.assertTrue(self.page.get_by_role('button',name=labels[label],exact=True).is_visible())
+                self.assertTrue(self.page.get_by_text(labels[help_key],exact=True).is_visible())
         self.assertEqual(self.errors,[])
 
     def test_document_pages_render_source_content(self):
@@ -161,9 +287,11 @@ class BrowserWorkflowTests(unittest.TestCase):
         self.page.fill('#api-key',match.group(1).strip().strip('`\"\''))
         self.page.click('#generate');self.page.wait_for_selector('#design-editor',timeout=180000)
         self.wait_preview()
+        self.page.locator('.design-rework > summary').click()
         self.page.get_by_role('button',name='Regenerate copy',exact=True).click()
         self.page.wait_for_function("document.getElementById('generate').disabled === false",timeout=180000)
         self.assertTrue(self.page.locator('#error').evaluate('(e)=>e.classList.contains("hidden")'))
+        self.page.locator('.design-rework > summary').click()
         self.page.get_by_role('button',name='Recommend layouts',exact=True).click()
         self.page.wait_for_function("document.getElementById('generate').disabled === false",timeout=30000)
         self.wait_preview()
