@@ -56,7 +56,8 @@ class TypographyTests(unittest.TestCase):
         with patch.object(renderer.features, 'check', return_value=False):
             for text in ('العربية', 'हिन्दी', 'বাংলা', 'ไทย', 'עברית'):
                 with self.subTest(text=text), self.assertRaisesRegex(ValueError, 'libraqm shaping'):
-                    renderer.text_font_path(FONTS / 'Inter.ttf', text)
+                    renderer.validate_text_layout(text)
+            renderer.validate_text_layout('Code')
             self.assertEqual(renderer.text_font_path(FONTS / 'Inter.ttf', 'Code'), FONTS / 'Inter.ttf')
 
     def test_cjk_font_metrics_are_used_for_fitting(self):

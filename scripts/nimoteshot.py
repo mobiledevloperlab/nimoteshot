@@ -5,6 +5,11 @@ import getpass
 import sys
 from pathlib import Path
 
+# Preserve multilingual diagnostics on Windows consoles and captured CI streams.
+for stream in (sys.stdout, sys.stderr):
+    if hasattr(stream, 'reconfigure'):
+        stream.reconfigure(encoding='utf-8', errors='backslashreplace')
+
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 

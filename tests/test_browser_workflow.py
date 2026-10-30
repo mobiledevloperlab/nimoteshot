@@ -255,7 +255,12 @@ class BrowserWorkflowTests(unittest.TestCase):
             previous=image.get_attribute('src')
             for language,text,sub in SAMPLES:
                 with self.subTest(language=language):
-                    title.fill(text);subtitle.fill(sub);self.wait_preview()
+                    title.fill(text);subtitle.fill(sub)
+                    if pipeline.renderer.needs_complex_layout(text+sub) and not self.page.evaluate('state.options.text_shaping'):
+                        self.page.wait_for_function("document.getElementById('preview-status').dataset.state === 'error'")
+                        self.assertEqual(self.page.locator('#preview-status').inner_text(),self.page.evaluate('editorMessages.en.errorShaping'))
+                        continue
+                    self.wait_preview()
                     self.assertEqual(requests[-1]['preview_indices'],[0])
                     self.assertEqual(requests[-1]['preview_locale'],'en-US')
                     self.assertNotEqual(image.get_attribute('src'),previous)
@@ -313,12 +318,14 @@ class BrowserWorkflowTests(unittest.TestCase):
         requests=[]
         self.page.on('request',lambda request:requests.append(request.post_data_json) if request.url.endswith('/api/preview') else None)
         self.assertEqual(self.page.locator('#locale-list input').count(),len(pipeline.OUTPUT_LOCALES))
+        shaping=self.page.evaluate('state.options.text_shaping')
+        available={locale:options for locale,options in pipeline.OUTPUT_LOCALES.items() if not options['requires_shaping'] or shaping}
         self.page.evaluate("""() => document.querySelectorAll('#locale-list input:not(:disabled)').forEach(field=>{
             field.checked=true;field.dispatchEvent(new Event('change',{bubbles:true}));
         })""")
         self.page.check('#manual-mode');self.page.click('#generate');self.wait_preview()
-        self.assertEqual(self.page.locator('#copy-language option').count(),len(pipeline.OUTPUT_LOCALES))
-        for locale,options in pipeline.OUTPUT_LOCALES.items():
+        self.assertEqual(self.page.locator('#copy-language option').count(),len(available))
+        for locale,options in available.items():
             with self.subTest(locale=locale):
                 code=options['code']
                 self.page.locator('#copy-language').select_option(code);self.wait_preview()
@@ -327,7 +334,7 @@ class BrowserWorkflowTests(unittest.TestCase):
                 title.fill(options['placeholder_title']+'\nGit');self.wait_preview()
                 self.assertEqual(requests[-1]['preview_locale'],locale)
                 self.assertEqual(requests[-1]['preview_indices'],[0])
-        for locale,options in pipeline.OUTPUT_LOCALES.items():
+        for locale,options in available.items():
             self.page.locator('#copy-language').select_option(options['code']);self.wait_preview()
             self.assertEqual(self.page.locator(f'[data-copy-key=title_{options["code"]}][data-screen-index="1"]').input_value(),options['placeholder_title']+'\nGit')
         self.assertEqual(self.errors,[])
@@ -348,6 +355,21 @@ class BrowserWorkflowTests(unittest.TestCase):
         title.fill('Outils mobiles');self.wait_preview()
         self.page.locator('#copy-language').select_option('en');self.wait_preview()
         self.assertEqual(self.page.locator('[data-copy-key=title_en][data-screen-index="1"]').input_value(),'Keep my edits')
+        self.assertEqual(self.errors,[])
+
+    def test_unavailable_complex_languages_have_setup_guidance_before_generation(self):
+        def without_shaping(route):
+            response=route.fetch();data=response.json();data['text_shaping']=False
+            route.fulfill(response=response,json=data)
+        self.page.route('**/api/options',without_shaping)
+        self.page.reload();self.page.wait_for_function("document.getElementById('generate').disabled === false")
+        for locale,options in pipeline.OUTPUT_LOCALES.items():
+            field=self.page.locator(f'#locale-list input[value="{locale}"]')
+            self.assertEqual(field.is_disabled(),locale=='en-US' or options['requires_shaping'])
+            if options['requires_shaping']:
+                self.assertFalse(field.is_checked())
+        self.assertTrue(self.page.locator('#language-availability').is_visible())
+        self.assertTrue(self.page.locator('#language-availability a').get_attribute('href').startswith('/docs/guide'))
         self.assertEqual(self.errors,[])
 
     def test_ai_rework_is_collapsed_and_explains_overwrites(self):

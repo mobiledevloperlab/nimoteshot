@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Detect optional Raqm/FriBiDi support before enabling complex-script output, preserve UTF-8 diagnostics on Windows, and avoid reverse-DNS waits during loopback startup.
+- 在启用复杂文字输出前检测可选排版能力，保持 Windows 日志的 UTF-8 输出，并避免本机服务启动时等待反向 DNS 查询。
+
 - Add 17 output-language versions shared by the picker, closed copy schema, AI prompts, preview and PNG/ZIP export. Select fonts by actual Unicode coverage and support IME composition; bundle licensed fonts for additional major writing systems.
 - Render only affected previews for per-screen edits, preserve pending changes across interrupted requests, group optional rework controls, and safely restart verified idle studios or choose an available local port.
 - Rebuild the five READMEs around the real live-editing demo, quick start and contribution paths; keep provider setup in a separate guide.

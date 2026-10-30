@@ -2401,3 +2401,5 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, .button.prima
 
 .docs-figure { margin: 24px 0; }
 .docs-figure img { display: block; width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line); }
+
+#language-availability { grid-column: 1 / -1; margin: 8px 0; color: var(--muted); font-size: 13px; }

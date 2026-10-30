@@ -90,16 +90,22 @@ def font_characters(path):
         return frozenset(face.getBestCmap() or {})
 
 
+def needs_complex_layout(text):
+    return any(unicodedata.bidirectional(char) in ('R','AL')
+               or any(script in unicodedata.name(char,'') for script in ('DEVANAGARI','BENGALI','THAI'))
+               for char in text)
+
+
+def validate_text_layout(text):
+    if needs_complex_layout(text) and not features.check('raqm'):
+        raise ValueError('Complex text requires Pillow with libraqm shaping support')
+
+
 def text_font_path(preferred, text, weight='Regular'):
     # Language selectors choose copy variants, not which scripts a user may type.
     characters={ord(char) for char in text if not char.isspace()
                 and unicodedata.category(char) != 'Cf'
                 and not 0xFE00 <= ord(char) <= 0xFE0F}
-    complex_text=any(unicodedata.bidirectional(char) in ('R','AL')
-                     or any(script in unicodedata.name(char,'') for script in ('DEVANAGARI','BENGALI','THAI'))
-                     for char in text)
-    if complex_text and not features.check('raqm'):
-        raise ValueError('Complex text requires Pillow with libraqm shaping support')
     directory=ROOT/'store_screenshots/assets/fonts'
     candidates=[Path(preferred), directory/f'NotoSansCJKsc-{weight}.otf', directory/'Inter.ttf',
                 *(directory/f'NotoSans{script}.ttf' for script in ('Arabic','Devanagari','Thai','Hebrew','Bengali'))]
@@ -117,6 +123,7 @@ def load_font(path, size, weight):
 
 
 def fit_text(draw, lines, font_path, max_width, initial, minimum, weight='Bold'):
+    validate_text_layout(''.join(lines))
     font_path=text_font_path(font_path,''.join(lines),weight)
     for size in range(initial,minimum-1,-1):
         f=load_font(font_path,size,weight)
@@ -125,6 +132,7 @@ def fit_text(draw, lines, font_path, max_width, initial, minimum, weight='Bold')
 
 
 def font(c,key,size,text=''):
+    validate_text_layout(text)
     weight='Bold' if key=='bold' else 'Regular'
     path=text_font_path(ROOT/c['fonts'][key],text,weight)
     return load_font(path,size,weight)

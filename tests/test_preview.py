@@ -86,6 +86,10 @@ class PreviewTests(unittest.TestCase):
             for target in self.payload['targets']:
                 with self.subTest(language=language, target=target):
                     status, result = self.request(preview_indices=[0], preview_target=target)
+                    if server.renderer.needs_complex_layout(title+subtitle) and not server.renderer.features.check('raqm'):
+                        self.assertEqual(status, 400, result)
+                        self.assertIn('libraqm shaping', result['error'])
+                        continue
                     self.assertEqual(status, 200, result)
                     self.assertEqual(result['locale'], 'en-US')
                     self.assertEqual(result['indices'], [0])

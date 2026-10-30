@@ -7,6 +7,7 @@ import json
 import os
 import secrets
 import socket
+from socketserver import TCPServer
 import time
 from http.server import ThreadingHTTPServer
 
@@ -20,7 +21,9 @@ class StudioHTTPServer(ThreadingHTTPServer):
     def server_bind(self):
         if os.name == 'nt' and hasattr(socket, 'SO_EXCLUSIVEADDRUSE'):
             self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
-        super().server_bind()
+        # Loopback startup does not need a potentially blocking reverse-DNS lookup.
+        TCPServer.server_bind(self)
+        self.server_name, self.server_port = self.server_address[:2]
 
 
 def runtime_token_path(root):

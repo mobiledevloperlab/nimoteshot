@@ -125,13 +125,19 @@ function renderLocales() {
   $('locale-list').replaceChildren();
   Object.keys(localeCodes).forEach(id => {
     const locked=id==='en-US';
+    const unavailable=state.options.text_shaping===false&&state.options.output_locales?.[id]?.requires_shaping;
     const label = locked ? words().englishDefault : languageLabel(id);
     const option = document.createElement('label'); option.className = 'locale-option';
     if (locked) option.classList.add('locked');
-    const input = document.createElement('input'); input.type = 'checkbox'; input.value = id; input.checked = locked || selected.has(id); input.disabled = Boolean(locked);
+    const input = document.createElement('input'); input.type = 'checkbox'; input.value = id; input.checked = locked || (!unavailable&&selected.has(id)); input.disabled = Boolean(locked||unavailable);
+    if(unavailable)option.title=ui('shapingUnavailable');
     input.addEventListener('change', () => localStorage.setItem('nimoteshot-locales', JSON.stringify(Array.from(document.querySelectorAll('#locale-list input:checked'), item => item.value))));
     option.append(input, document.createTextNode(label)); $('locale-list').append(option);
   });
+  if(state.options.text_shaping===false){
+    const note=document.createElement('p');note.id='language-availability';note.textContent=ui('shapingUnavailable')+' ';
+    const link=document.createElement('a');link.textContent=ui('textSetup');link.href=state.language==='zh'?'/docs/guide-zh#语言支持':'/docs/guide#languages';link.target='_blank';link.rel='noopener';note.append(link);$('locale-list').append(note);
+  }
 }
 
 function selectedProvider() { return state.options.models.providers.find(item => item.id === $('provider').value); }

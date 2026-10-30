@@ -142,7 +142,7 @@ class Handler(BaseHTTPRequestHandler):
                 else:
                     sources[item["id"]] = "none"
             self.json_response({"models": MODELS, "styles": STYLES, "credential_source": sources,
-                                "profiles": describe(), "templates": TEMPLATES, "output_locales": OUTPUT_LOCALES})
+                                "profiles": describe(), "templates": TEMPLATES, "output_locales": OUTPUT_LOCALES, "text_shaping": renderer.features.check('raqm')})
         elif path.startswith("/api/docs/"):
             slug = path.removeprefix("/api/docs/")
             name = PUBLIC_DOCUMENTS.get(slug)

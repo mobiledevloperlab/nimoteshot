@@ -97,10 +97,12 @@ const editorMessages = {
     "layoutHelp": "Resets templates for all screens using saved visual evidence. Runs locally and keeps your copy.",
     "reanalyzeHelp": "Runs image analysis again and replaces the entire design, including your edits. Calls the vision model.",
     "errorFont": "Some characters or script combinations are not covered by the bundled fonts. Adjust the text and retry.",
-    "errorShaping": "This text needs complex-script shaping. Install the official Pillow wheel with libraqm support, then restart the service.",
+    "errorShaping": "This text needs complex-script layout support. Enable Pillow Raqm/FriBiDi support using the text setup guide, then restart the service.",
     "copyLocaleHelp": "Each output language keeps its own copy. Switching shows that version; fonts follow the text you enter. Choose additional output languages in Product context.",
     "outputLanguagesHint": "English is always included. Select the additional languages you want to edit, preview and export.",
-    "addedLanguage": "A new language starts with placeholder copy. Edit it or regenerate copy before exporting."
+    "addedLanguage": "A new language starts with placeholder copy. Edit it or regenerate copy before exporting.",
+    "shapingUnavailable": "Some languages need additional text-layout support on this system.",
+    "textSetup": "Text setup"
   },
   "zh": {
     "manualMode": "手动设计（无需密钥）",
@@ -199,10 +201,12 @@ const editorMessages = {
     "layoutHelp": "根据已有视觉证据重新选择所有截图的模板，在本地完成，保留文案。",
     "reanalyzeHelp": "重新调用视觉模型分析原图，替换整套设计，包括手动修改。",
     "errorFont": "部分字符或混合文字尚未被内置字体覆盖，请调整文字后重试。",
-    "errorShaping": "这段文字需要复杂文字排版支持。请安装包含 libraqm 的官方 Pillow 安装包，再重启服务。",
+    "errorShaping": "这段文字需要复杂文字排版支持。请按文字配置说明启用 Pillow 的 Raqm/FriBiDi 支持，再重启服务。",
     "copyLocaleHelp": "每种输出语言的文案独立保存。切换后显示该版本，字体按输入文字自动匹配。更多输出语言请在“产品信息”中勾选。",
     "outputLanguagesHint": "英文始终包含；勾选需要编辑、预览和导出的其他语言。",
-    "addedLanguage": "新增语言已填入占位文案，请编辑或重新生成文案后再导出。"
+    "addedLanguage": "新增语言已填入占位文案，请编辑或重新生成文案后再导出。",
+    "shapingUnavailable": "部分语言需要为当前系统补充文字排版支持。",
+    "textSetup": "查看配置说明"
   },
   "ja": {
     "manualMode": "手動デザイン（API キー不要）",
@@ -301,10 +305,12 @@ const editorMessages = {
     "layoutHelp": "保存済みの視覚的根拠で全画面のテンプレートを再選択します。ローカルで実行し、コピーは保持します。",
     "reanalyzeHelp": "視覚モデルで元の画像を再分析し、手動編集を含むデザイン全体を置き換えます。",
     "errorFont": "一部の文字または文字体系の組み合わせに対応する内蔵フォントがありません。テキストを調整して再試行してください。",
-    "errorShaping": "この文字には複雑な文字組版が必要です。libraqm 対応の公式 Pillow パッケージをインストールし、サービスを再起動してください。",
+    "errorShaping": "この文字には複雑な文字組版が必要です。文字設定ガイドに従い Pillow の Raqm/FriBiDi を有効にして、サービスを再起動してください。",
     "copyLocaleHelp": "出力言語ごとに文言を個別に保持します。切り替えるとその言語版を表示し、フォントは入力文字から選びます。出力言語の追加は製品情報で選択してください。",
     "outputLanguagesHint": "英語は常に含まれます。編集・プレビュー・書き出しする追加言語を選択してください。",
-    "addedLanguage": "追加言語は仮の文言で始まります。編集するか文言を再作成してから書き出してください。"
+    "addedLanguage": "追加言語は仮の文言で始まります。編集するか文言を再作成してから書き出してください。",
+    "shapingUnavailable": "一部の言語には、この環境で追加の文字組版サポートが必要です。",
+    "textSetup": "文字設定"
   },
   "ko": {
     "manualMode": "수동 디자인 (API 키 불필요)",
@@ -403,10 +409,12 @@ const editorMessages = {
     "layoutHelp": "저장된 시각적 근거로 모든 화면의 템플릿을 다시 선택합니다. 로컬에서 실행하며 문구는 유지합니다.",
     "reanalyzeHelp": "시각 모델로 원본을 다시 분석하고 직접 수정한 내용을 포함해 전체 디자인을 교체합니다.",
     "errorFont": "일부 문자나 문자 조합을 지원하는 내장 글꼴이 없습니다. 문구를 수정한 후 다시 시도하세요.",
-    "errorShaping": "이 문구는 복합 문자 조판이 필요합니다. libraqm을 지원하는 공식 Pillow 패키지를 설치한 후 서비스를 다시 시작하세요.",
+    "errorShaping": "이 문구는 복합 문자 조판이 필요합니다. 문자 설정 안내에 따라 Pillow의 Raqm/FriBiDi 지원을 활성화한 후 서비스를 다시 시작하세요.",
     "copyLocaleHelp": "출력 언어별 문구는 별도로 저장됩니다. 전환하면 해당 버전이 표시되며 글꼴은 입력 문자에 맞게 선택됩니다. 추가 출력 언어는 제품 정보에서 선택하세요.",
     "outputLanguagesHint": "영어는 항상 포함됩니다. 편집, 미리 보기 및 내보내기에 사용할 추가 언어를 선택하세요.",
-    "addedLanguage": "새 언어는 임시 문구로 시작합니다. 편집하거나 문구를 다시 생성한 후 내보내세요."
+    "addedLanguage": "새 언어는 임시 문구로 시작합니다. 편집하거나 문구를 다시 생성한 후 내보내세요.",
+    "shapingUnavailable": "일부 언어는 현재 시스템에 추가 문자 조판 지원이 필요합니다.",
+    "textSetup": "문자 설정"
   },
   "es": {
     "manualMode": "Diseño manual (sin clave API)",
@@ -505,9 +513,11 @@ const editorMessages = {
     "layoutHelp": "Restablece las plantillas de todas las capturas con la evidencia guardada. Se ejecuta localmente y conserva el texto.",
     "reanalyzeHelp": "Vuelve a analizar las imágenes con el modelo visual y sustituye todo el diseño, incluidos tus cambios.",
     "errorFont": "Algunos caracteres o combinaciones de escrituras no están cubiertos por las fuentes incluidas. Ajusta el texto y reintenta.",
-    "errorShaping": "Este texto necesita composición de escritura compleja. Instala el paquete oficial de Pillow con soporte para libraqm y reinicia el servicio.",
+    "errorShaping": "Este texto necesita composición de escritura compleja. Activa Raqm/FriBiDi en Pillow con la guía de configuración de texto y reinicia el servicio.",
     "copyLocaleHelp": "Cada idioma de salida conserva su propio texto. Al cambiar se muestra esa versión; la fuente se adapta al texto introducido. Selecciona más idiomas de salida en Producto.",
     "outputLanguagesHint": "El inglés siempre se incluye. Selecciona los idiomas adicionales que quieras editar, previsualizar y exportar.",
-    "addedLanguage": "El nuevo idioma comienza con texto provisional. Edítalo o regenera los textos antes de exportar."
+    "addedLanguage": "El nuevo idioma comienza con texto provisional. Edítalo o regenera los textos antes de exportar.",
+    "shapingUnavailable": "Algunos idiomas requieren soporte adicional de composición de texto en este sistema.",
+    "textSetup": "Configurar texto"
   }
 };

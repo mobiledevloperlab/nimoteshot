@@ -3,7 +3,8 @@
     "code": "en",
     "fonts": null,
     "placeholder_title": "Your feature",
-    "placeholder_subtitle": "Describe what is visible"
+    "placeholder_subtitle": "Describe what is visible",
+    "requires_shaping": false
   },
   "zh-CN": {
     "code": "zh",
@@ -12,7 +13,8 @@
       "bold": "store_screenshots/assets/fonts/NotoSansCJKsc-Bold.otf"
     },
     "placeholder_title": "你的功能",
-    "placeholder_subtitle": "描述可见功能"
+    "placeholder_subtitle": "描述可见功能",
+    "requires_shaping": false
   },
   "zh-TW": {
     "code": "zh_tw",
@@ -21,7 +23,8 @@
       "bold": "store_screenshots/assets/fonts/NotoSansCJKsc-Bold.otf"
     },
     "placeholder_title": "你的功能",
-    "placeholder_subtitle": "描述可見功能"
+    "placeholder_subtitle": "描述可見功能",
+    "requires_shaping": false
   },
   "ja-JP": {
     "code": "ja",
@@ -30,7 +33,8 @@
       "bold": "store_screenshots/assets/fonts/NotoSansCJKsc-Bold.otf"
     },
     "placeholder_title": "あなたの機能",
-    "placeholder_subtitle": "見えている機能を説明"
+    "placeholder_subtitle": "見えている機能を説明",
+    "requires_shaping": false
   },
   "ko-KR": {
     "code": "ko",
@@ -39,78 +43,91 @@
       "bold": "store_screenshots/assets/fonts/NotoSansCJKsc-Bold.otf"
     },
     "placeholder_title": "내 기능",
-    "placeholder_subtitle": "보이는 기능을 설명하세요"
+    "placeholder_subtitle": "보이는 기능을 설명하세요",
+    "requires_shaping": false
   },
   "es-ES": {
     "code": "es",
     "fonts": null,
     "placeholder_title": "Tu función",
-    "placeholder_subtitle": "Describe lo que se ve"
+    "placeholder_subtitle": "Describe lo que se ve",
+    "requires_shaping": false
   },
   "fr-FR": {
     "code": "fr",
     "fonts": null,
     "placeholder_title": "Vos outils",
-    "placeholder_subtitle": "Décrivez les outils visibles"
+    "placeholder_subtitle": "Décrivez les outils visibles",
+    "requires_shaping": false
   },
   "de-DE": {
     "code": "de",
     "fonts": null,
     "placeholder_title": "Deine Werkzeuge",
-    "placeholder_subtitle": "Sichtbare Funktionen beschreiben"
+    "placeholder_subtitle": "Sichtbare Funktionen beschreiben",
+    "requires_shaping": false
   },
   "pt-BR": {
     "code": "pt",
     "fonts": null,
     "placeholder_title": "Suas ferramentas",
-    "placeholder_subtitle": "Descreva as funções visíveis"
+    "placeholder_subtitle": "Descreva as funções visíveis",
+    "requires_shaping": false
   },
   "ru-RU": {
     "code": "ru",
     "fonts": null,
     "placeholder_title": "Ваши инструменты",
-    "placeholder_subtitle": "Опишите видимые функции"
+    "placeholder_subtitle": "Опишите видимые функции",
+    "requires_shaping": false
   },
   "el-GR": {
     "code": "el",
     "fonts": null,
     "placeholder_title": "Εργαλεία",
-    "placeholder_subtitle": "Περιγράψτε όσα βλέπετε"
+    "placeholder_subtitle": "Περιγράψτε όσα βλέπετε",
+    "requires_shaping": false
   },
   "vi-VN": {
     "code": "vi",
     "fonts": null,
     "placeholder_title": "Công cụ của bạn",
-    "placeholder_subtitle": "Mô tả các công cụ hiển thị"
+    "placeholder_subtitle": "Mô tả các công cụ hiển thị",
+    "requires_shaping": false
   },
   "ar-SA": {
     "code": "ar",
     "fonts": null,
     "placeholder_title": "أدواتك",
-    "placeholder_subtitle": "صف الأدوات المرئية"
+    "placeholder_subtitle": "صف الأدوات المرئية",
+    "requires_shaping": true
   },
   "hi-IN": {
     "code": "hi",
     "fonts": null,
     "placeholder_title": "आपके उपकरण",
-    "placeholder_subtitle": "दिखाई देने वाले उपकरण"
+    "placeholder_subtitle": "दिखाई देने वाले उपकरण",
+    "requires_shaping": true
   },
   "bn-BD": {
     "code": "bn",
     "fonts": null,
     "placeholder_title": "আপনার সরঞ্জাম",
-    "placeholder_subtitle": "দৃশ্যমান সরঞ্জাম বর্ণনা করুন"
+    "placeholder_subtitle": "দৃশ্যমান সরঞ্জাম বর্ণনা করুন",
+    "requires_shaping": true
   },
   "th-TH": {
     "code": "th",
     "fonts": null,
     "placeholder_title": "เครื่องมือ",
-    "placeholder_subtitle": "อธิบายเครื่องมือที่เห็น"
+    "placeholder_subtitle": "อธิบายเครื่องมือที่เห็น",
+    "requires_shaping": true
   },
   "he-IL": {
     "code": "he",
     "fonts": null,
     "placeholder_title": "הכלים שלך",
-    "placeholder_subtitle": "תארו את הכלים הגלויים"
+    "placeholder_subtitle": "תארו את הכלים הגלויים",
+    "requires_shaping": true
   }
 }

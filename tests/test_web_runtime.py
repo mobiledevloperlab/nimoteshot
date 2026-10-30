@@ -9,6 +9,7 @@ import sys
 import stat
 import tempfile
 import threading
+import time
 import unittest
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -150,6 +151,12 @@ class WebRuntimeTests(unittest.TestCase):
         self.assertEqual(server.JOBS, {})
         plan.assert_not_called()
 
+    def test_loopback_startup_does_not_wait_for_reverse_dns(self):
+        with patch('socket.getfqdn', side_effect=AssertionError('Local startup must not query DNS')):
+            httpd = self.bind()
+        self.assertEqual(httpd.server_name, '127.0.0.1')
+        self.assertGreater(httpd.server_port, 0)
+
     def test_invalid_ports_and_non_loopback_hosts_are_rejected_before_binding(self):
         for host, port in (('0.0.0.0', 8765), ('127.0.0.1', -1), ('localhost', 65536), ('localhost', True)):
             with self.subTest(host=host, port=port), self.assertRaises(ValueError):
@@ -176,7 +183,7 @@ class WebRuntimeTests(unittest.TestCase):
             process = subprocess.Popen(
                 [sys.executable, '-u', str(server.ROOT / 'scripts/nimoteshot.py'),
                  'web', '--no-browser', '--port', str(port)], cwd=server.ROOT,
-                env=environment, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+                env=environment, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, encoding='utf-8', errors='replace')
 
             def cleanup():
                 if process.poll() is None:
@@ -195,11 +202,18 @@ class WebRuntimeTests(unittest.TestCase):
                     output.put(line.strip())
                     if line.startswith('NimoteShot ready at '):
                         break
+                output.put(None)
             reader = threading.Thread(target=read, daemon=True)
             reader.start()
             lines = []
+            deadline = time.monotonic() + 60
             while True:
-                line = output.get(timeout=20)
+                try:
+                    line = output.get(timeout=max(0.1, deadline-time.monotonic()))
+                except queue.Empty:
+                    self.fail('Studio startup timed out: '+repr(lines))
+                if line is None:
+                    self.fail('Studio exited before readiness: '+repr(lines))
                 lines.append(line)
                 if line.startswith('NimoteShot ready at '):
                     reader.join(timeout=2)

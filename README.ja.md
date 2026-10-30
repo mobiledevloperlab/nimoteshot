@@ -69,6 +69,8 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 
 操作画面は英語・簡体字中国語・日本語・韓国語・スペイン語です。フォントで表現できない文字の組み合わせや、複雑な文字の組版機能がない環境では明確なエラーを表示します。
 
+一部の macOS / Windows の Pillow 環境では、複雑な文字のために FriBiDi の追加設定が必要です。利用できない言語は出力選択で無効になり、設定リンクを表示します。英語・中国語・日本語・韓国語などは引き続き使えます。[Pillow の設定手順](https://pillow.readthedocs.io/en/stable/installation/building-from-source.html)を参照し、有効化後に再起動してください。
+
 ## 形式・モデル・CLI
 
 iPhone・iPad・Android の縦横、4 基本スタイル、24 カテゴリパレット、編集可能なテンプレートに対応。各タスクは原画面、SHA-256 マニフェスト、設定、プレビュー、PNG、ZIP を `store_screenshots/runs/<task-id>/` に保存します。[出力サイズ](store_screenshots/targets.json)も確認できます。

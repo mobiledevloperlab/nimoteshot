@@ -105,6 +105,8 @@ python scripts/nimoteshot.py web
 
 应用名称、标题和副标题按实际字符选择内置字体，预览与导出共用同一套文字渲染。输入法组词完成后才触发更新。复杂文字使用 [Pillow 的 libraqm 排版能力](https://pillow.readthedocs.io/en/stable/reference/ImageFont.html)；缺少排版能力或字体无法覆盖的字符组合会明确提示，避免静默显示缺字方框。
 
+部分 macOS/Windows 的 Pillow 安装需要单独配置 FriBiDi 才能处理复杂文字。工作台会禁用缺少排版能力的语言并提供配置入口，英文、中日韩等受支持文字仍可正常使用。可用 `python -c "from PIL import features; print(features.check('raqm'))"` 检查，按 [Pillow 安装指南](https://pillow.readthedocs.io/en/stable/installation/building-from-source.html)启用后重启服务。
+
 ## 格式与设计
 
 | 能力 | 支持范围 |

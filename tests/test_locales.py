@@ -53,9 +53,11 @@ class OutputLocaleTests(unittest.TestCase):
             self.assertEqual(result['screens'][0]['title_' + options['code']], ['Updated'])
         self.assertEqual(result['screens'][0]['design'], self.proposal['screens'][0]['design'])
 
-    def test_all_output_locales_export_real_portrait_landscape_pngs_and_valid_zip(self):
+    def test_available_output_locales_export_real_portrait_landscape_pngs_and_valid_zip(self):
+        available = {locale: options for locale, options in pipeline.OUTPUT_LOCALES.items()
+                     if not options['requires_shaping'] or pipeline.renderer.features.check('raqm')}
         config = pipeline.build_config('20000101-000000-abcdef', '代码 Studio', [self.source], self.proposal,
-                                       locales=tuple(pipeline.LOCALES), targets=('iphone_portrait', 'iphone_landscape'))
+                                       locales=tuple(locale for locale in available if locale!='en-US'), targets=('iphone_portrait', 'iphone_landscape'))
         config['source_dir'] = str(self.source.parent)
         presets = {'iphone_portrait': {'layout': 'portrait', 'sizes': [[320, 640]]},
                    'iphone_landscape': {'layout': 'landscape', 'sizes': [[640, 320]]}}
@@ -67,7 +69,21 @@ class OutputLocaleTests(unittest.TestCase):
             with zipfile.ZipFile(archive) as package:
                 self.assertIsNone(package.testzip())
                 pngs = [name for name in package.namelist() if name.endswith('.png')]
-                self.assertEqual(len(pngs), 34)
+                self.assertEqual(len(pngs), 2*len(available))
                 languages = {name.split('/')[1] for name in pngs}
-                self.assertEqual(languages, set(pipeline.OUTPUT_LOCALES))
-            self.assertEqual(len(list((directory / 'previews').rglob('*.png'))), 34)
+                self.assertEqual(languages, set(available))
+            self.assertEqual(len(list((directory / 'previews').rglob('*.png'))), 2*len(available))
+
+    def test_missing_shaping_rejects_complex_export_without_creating_a_zip(self):
+        config = pipeline.build_config('20000101-000000-abcdef', 'App', [self.source], self.proposal,
+                                       locales=('ar-SA',), targets=('iphone_portrait',))
+        config['source_dir'] = str(self.source.parent)
+        presets = {'iphone_portrait': {'layout': 'portrait', 'sizes': [[320, 640]]}}
+        with tempfile.TemporaryDirectory() as folder, patch.object(pipeline.renderer, 'targets', return_value=presets), \
+                patch.object(pipeline.renderer.features, 'check', return_value=False):
+            directory = Path(folder)
+            config['output_dir'] = str(directory / 'exports')
+            config['preview_dir'] = str(directory / 'previews')
+            with self.assertRaisesRegex(ValueError, 'libraqm shaping'):
+                export(config, directory, pipeline.renderer, lambda message: None)
+            self.assertEqual(list(directory.glob('*.zip')), [])

@@ -69,6 +69,8 @@ Cada idioma conserva sus propios textos. Las fuentes se eligen por los caractere
 
 La interfaz está disponible en inglés, chino simplificado, japonés, coreano y español. Las combinaciones de caracteres no cubiertas por las fuentes o la falta de composición de escritura compleja producen un error claro.
 
+Algunas instalaciones de Pillow en macOS / Windows necesitan configurar FriBiDi por separado para escrituras complejas. Los idiomas no disponibles se desactivan en el selector con un enlace de configuración; el inglés, chino, japonés, coreano y otras escrituras compatibles siguen funcionando. Consulta [la guía de Pillow](https://pillow.readthedocs.io/en/stable/installation/building-from-source.html) y reinicia después de activar el soporte.
+
 ## Formatos, modelos y CLI
 
 Incluye iPhone, iPad y Android en vertical y horizontal, cuatro estilos base, 24 paletas por categoría y plantillas editables. Cada tarea conserva originales, manifiesto SHA-256, configuración, vistas previas, PNG y ZIP en `store_screenshots/runs/<task-id>/`. Consulta los [tamaños de salida](store_screenshots/targets.json).

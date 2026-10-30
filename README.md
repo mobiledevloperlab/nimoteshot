@@ -105,6 +105,8 @@ English is included by default; choose the additional versions you need. The **i
 
 Bundled fonts are selected by actual character coverage for app names, titles and subtitles. Preview and export use the same text rendering. IME composition completes before a preview request is scheduled. Complex scripts use [Pillow's libraqm shaping](https://pillow.readthedocs.io/en/stable/reference/ImageFont.html); unavailable shaping or unsupported character combinations produce a clear error instead of silent missing-glyph boxes.
 
+Some macOS/Windows Pillow installations need a separate FriBiDi setup for complex scripts. Languages requiring unavailable shaping are disabled in the output picker with a setup link; English, Chinese, Japanese, Korean and other supported scripts remain usable. Check with `python -c "from PIL import features; print(features.check('raqm'))"` and follow [Pillow's installation guide](https://pillow.readthedocs.io/en/stable/installation/building-from-source.html) to enable it, then restart the studio.
+
 ## Formats and design
 
 | Capability | Included |
