@@ -17,7 +17,7 @@
 <p align="center"><a href="#クイックスタート">クイックスタート</a> · <a href="#画面からストア素材へ">ワークフロー</a> · <a href="#言語とフォント">言語</a> · <a href="#一緒に改善する">コントリビュート</a></p>
 
 <p align="center">
-  <img src="web/assets/redefine_promotion.png" alt="英語と中国語を混在させたタイトルと、その変更を反映する NimoteShot のライブプレビュー" width="560">
+  <img src="web/assets/redefine_promotion.png" alt="英語と中国語を混在させたタイトルと、その変更を反映する NimoteShot のライブプレビュー" width="560" style="border: 1px solid var(--color-border-default); border-radius: 12px; box-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);">
 </p>
 
 <p align="center"><em>タイトル・サブタイトル・レイアウトを結果の隣で編集。影響するプレビューだけをローカルで更新し、追加の AI 呼び出しは不要です。</em></p>
@@ -57,7 +57,7 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 ## 画面からストア素材へ
 
 <p align="center">
-  <img src="web/assets/snapshot.png" alt="NimoteShot Screenshot Builder の製品コンテキスト入力画面" width="760">
+  <img src="web/assets/snapshot.png" alt="NimoteShot Screenshot Builder の製品コンテキスト入力画面" width="760" style="border: 1px solid var(--color-border-default); border-radius: 12px; box-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);">
 </p>
 
 <p align="center"><em>製品情報を加え、実画面から完成度の高いストア素材へ進みます。</em></p>

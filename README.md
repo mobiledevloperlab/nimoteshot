@@ -17,7 +17,7 @@
 <p align="center"><a href="#quick-start">Get started</a> · <a href="#from-capture-to-store-artwork">See the workflow</a> · <a href="#languages">Languages</a> · <a href="#build-with-us">Contribute</a></p>
 
 <p align="center">
-  <img src="web/assets/redefine_promotion.png" alt="NimoteShot live screenshot editor showing mixed English and Chinese title edits beside the rendered App Store preview" width="560">
+  <img src="web/assets/redefine_promotion.png" alt="NimoteShot live screenshot editor showing mixed English and Chinese title edits beside the rendered App Store preview" width="560" style="border: 1px solid var(--color-border-default); border-radius: 12px; box-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);">
 </p>
 
 <p align="center"><em>Edit the title, subtitle or layout beside the result. Changes update the affected previews locally, without another AI call.</em></p>
@@ -78,7 +78,7 @@ If the port is occupied, a verified idle studio from this checkout is shut down 
 ## From capture to store artwork
 
 <p align="center">
-  <img src="web/assets/snapshot.png" alt="NimoteShot Screenshot Builder product-context step" width="760">
+  <img src="web/assets/snapshot.png" alt="NimoteShot Screenshot Builder product-context step" width="760" style="border: 1px solid var(--color-border-default); border-radius: 12px; box-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);">
 </p>
 
 <p align="center"><em>Start with product context, then move from real captures to polished store artwork.</em></p>

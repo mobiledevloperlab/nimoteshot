@@ -17,7 +17,7 @@
 <p align="center"><a href="#快速开始">快速开始</a> · <a href="#从真实界面到上架素材">查看效果</a> · <a href="#语言支持">语言支持</a> · <a href="#参与共建">参与共建</a></p>
 
 <p align="center">
-  <img src="web/assets/redefine_promotion.png" alt="NimoteShot 实时截图编辑器：在标题中编辑中英混排文字，旁边同步显示 App Store 截图预览" width="560">
+  <img src="web/assets/redefine_promotion.png" alt="NimoteShot 实时截图编辑器：在标题中编辑中英混排文字，旁边同步显示 App Store 截图预览" width="560" style="border: 1px solid var(--color-border-default); border-radius: 12px; box-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);">
 </p>
 
 <p align="center"><em>直接在结果旁修改标题、副标题和布局，只重新渲染受影响的预览，无需再次调用 AI。</em></p>
@@ -78,7 +78,7 @@ python scripts/nimoteshot.py web
 ## 从真实界面到上架素材
 
 <p align="center">
-  <img src="web/assets/snapshot.png" alt="NimoteShot 截图生成器的产品信息步骤" width="760">
+  <img src="web/assets/snapshot.png" alt="NimoteShot 截图生成器的产品信息步骤" width="760" style="border: 1px solid var(--color-border-default); border-radius: 12px; box-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);">
 </p>
 
 <p align="center"><em>先补充产品信息，再把真实界面制作成精致的上架素材。</em></p>

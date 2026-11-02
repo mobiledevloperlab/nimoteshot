@@ -17,7 +17,7 @@
 <p align="center"><a href="#inicio-rápido">Inicio rápido</a> · <a href="#de-la-captura-a-la-imagen-de-tienda">Flujo</a> · <a href="#idiomas-y-fuentes">Idiomas</a> · <a href="#construyámoslo-juntos">Contribuir</a></p>
 
 <p align="center">
-  <img src="web/assets/redefine_promotion.png" alt="Editor de NimoteShot con un título en inglés y chino y su vista previa de App Store actualizada al lado" width="560">
+  <img src="web/assets/redefine_promotion.png" alt="Editor de NimoteShot con un título en inglés y chino y su vista previa de App Store actualizada al lado" width="560" style="border: 1px solid var(--color-border-default); border-radius: 12px; box-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);">
 </p>
 
 <p align="center"><em>Edita el título, subtítulo y diseño junto al resultado. Solo se actualizan las vistas afectadas, de forma local y sin otra llamada a la IA.</em></p>
@@ -57,7 +57,7 @@ El instalador prepara `.venv`, instala las dependencias e inicia el estudio. Abr
 ## De la captura a la imagen de tienda
 
 <p align="center">
-  <img src="web/assets/snapshot.png" alt="Paso de contexto del producto en Screenshot Builder de NimoteShot" width="760">
+  <img src="web/assets/snapshot.png" alt="Paso de contexto del producto en Screenshot Builder de NimoteShot" width="760" style="border: 1px solid var(--color-border-default); border-radius: 12px; box-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);">
 </p>
 
 <p align="center"><em>Añade primero el contexto del producto y pasa de capturas reales a material de tienda pulido.</em></p>

@@ -17,7 +17,7 @@
 <p align="center"><a href="#빠른-시작">빠른 시작</a> · <a href="#캡처에서-스토어-이미지까지">워크플로</a> · <a href="#언어와-글꼴">언어</a> · <a href="#함께-개선하기">기여하기</a></p>
 
 <p align="center">
-  <img src="web/assets/redefine_promotion.png" alt="영어와 중국어가 섞인 제목을 수정하면 옆의 스크린샷 미리 보기에 반영되는 NimoteShot 실시간 편집기" width="560">
+  <img src="web/assets/redefine_promotion.png" alt="영어와 중국어가 섞인 제목을 수정하면 옆의 스크린샷 미리 보기에 반영되는 NimoteShot 실시간 편집기" width="560" style="border: 1px solid var(--color-border-default); border-radius: 12px; box-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);">
 </p>
 
 <p align="center"><em>제목, 부제목, 레이아웃을 결과 옆에서 편집합니다. 해당 미리 보기만 로컬에서 갱신하며 추가 AI 호출은 없습니다.</em></p>
@@ -57,7 +57,7 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 ## 캡처에서 스토어 이미지까지
 
 <p align="center">
-  <img src="web/assets/snapshot.png" alt="NimoteShot Screenshot Builder의 제품 정보 입력 단계" width="760">
+  <img src="web/assets/snapshot.png" alt="NimoteShot Screenshot Builder의 제품 정보 입력 단계" width="760" style="border: 1px solid var(--color-border-default); border-radius: 12px; box-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);">
 </p>
 
 <p align="center"><em>제품 정보를 먼저 더한 뒤 실제 화면을 완성도 높은 스토어 이미지로 만듭니다.</em></p>
