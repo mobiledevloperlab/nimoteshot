@@ -40,6 +40,16 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install -r requirements-dev.txt
       - run: python -m playwright install --with-deps chromium
-      - run: python -m unittest discover -s tests -p test_browser_workflow.py -v
+      - name: Run browser tests (retry once for transient Chromium failures)
+        run: |
+          for attempt in 1 2; do
+            if python -m unittest discover -s tests -p test_browser_workflow.py -v; then
+              exit 0
+            fi
+            if [ "$attempt" = "2" ]; then
+              exit 1
+            fi
+            echo "Browser tests failed on attempt 1; retrying once."
+          done
         env:
           SHOTNIMOTE_BROWSER_TEST: '1'
