@@ -2,19 +2,25 @@
   <img src="web/assets/nimoteshot-logo.svg" alt="NimoteShot" width="320">
 </p>
 
-# NimoteShot — AI 앱스토어 스크린샷 생성기
+<h1 align="center">NimoteShot</h1>
 
-**실제 앱 화면, 편집 가능한 문구, 로컬 PNG 내보내기.**
+<p align="center"><strong>AI 앱스토어 스크린샷 생성기</strong></p>
 
-앱 캡처를 **App Store와 Google Play** 등록 이미지로 만드세요. 비전 모델로 문구를 작성하고, 실시간 편집기에서 텍스트와 레이아웃을 조정한 뒤 iPhone·iPad·Android용 이미지를 내보냅니다. 앱 출시를 준비하는 개인 개발자와 제품 팀을 위한 도구입니다.
+<p align="center">실제 앱 화면, 편집 가능한 문구, 로컬 PNG 내보내기.</p>
 
-**Python 3.11+ · Linux / macOS / Windows · 출력 언어 17개 · AGPLv3+**
+<p align="center">앱 캡처를 <strong>App Store와 Google Play</strong> 등록 이미지로 만드세요. 비전 모델로 문구를 작성하고, 실시간 편집기에서 텍스트와 레이아웃을 조정한 뒤 iPhone·iPad·Android용 이미지를 내보냅니다.</p>
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · 한국어 · [Español](README.es.md)
+<p align="center"><code>Python 3.11+</code> · Linux / macOS / Windows · 출력 언어 17개 · AGPLv3+</p>
 
-![영어와 중국어가 섞인 제목을 수정하면 옆의 스크린샷 미리 보기에 반영되는 NimoteShot 실시간 편집기](web/assets/redefine_promotion.png)
+<p align="center"><a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.ja.md">日本語</a> · 한국어 · <a href="README.es.md">Español</a></p>
 
-*제목, 부제목, 레이아웃을 결과 옆에서 편집합니다. 해당 미리 보기만 로컬에서 갱신하며 추가 AI 호출은 없습니다. 실제 실행 화면입니다.*
+<p align="center"><a href="#빠른-시작">빠른 시작</a> · <a href="#캡처에서-스토어-이미지까지">워크플로</a> · <a href="#언어와-글꼴">언어</a> · <a href="#함께-개선하기">기여하기</a></p>
+
+<p align="center">
+  <img src="web/assets/redefine_promotion.png" alt="영어와 중국어가 섞인 제목을 수정하면 옆의 스크린샷 미리 보기에 반영되는 NimoteShot 실시간 편집기" width="560">
+</p>
+
+<p align="center"><em>제목, 부제목, 레이아웃을 결과 옆에서 편집합니다. 해당 미리 보기만 로컬에서 갱신하며 추가 AI 호출은 없습니다.</em></p>
 
 ## NimoteShot을 사용하는 이유
 
@@ -49,6 +55,12 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 설치 프로그램이 `.venv`와 의존성을 준비하고 서비스를 시작합니다. **터미널에 표시된 실제 URL**을 여세요. 기본 주소는 `http://127.0.0.1:8765`입니다. **Manual design**에서 키 없이 편집기를 먼저 체험할 수 있습니다.
 
 ## 캡처에서 스토어 이미지까지
+
+<p align="center">
+  <img src="web/assets/snapshot.png" alt="NimoteShot Screenshot Builder의 제품 정보 입력 단계" width="760">
+</p>
+
+<p align="center"><em>제품 정보를 먼저 더한 뒤 실제 화면을 완성도 높은 스토어 이미지로 만듭니다.</em></p>
 
 1. 앱 이름, 설명 또는 공개 HTTPS 사이트를 입력하고 실제 화면 1~40장을 추가합니다.
 2. 출력 언어, 기기 크기, 디자인 방향을 선택한 뒤 AI 분석 또는 수동 디자인을 시작합니다.

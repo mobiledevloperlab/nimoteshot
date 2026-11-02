@@ -2,21 +2,25 @@
   <img src="web/assets/nimoteshot-logo.svg" alt="NimoteShot" width="320">
 </p>
 
-# NimoteShot — AI App Store Screenshot Generator
+<h1 align="center">NimoteShot</h1>
 
-**Real app screens. Editable copy. Local PNG exports.**
+<p align="center"><strong>AI App Store Screenshot Generator</strong></p>
 
-Create localized **App Store and Google Play screenshots** from your own app captures. Let a vision model draft the story, refine the copy and layout in a live editor, then export images for iPhone, iPad and Android. Built for indie developers and product teams preparing their next app release.
+<p align="center">Real app screens. Editable copy. Local PNG exports.</p>
 
-**Python 3.11+ · Linux / macOS / Windows · 17 output languages · AGPLv3+**
+<p align="center">Create localized <strong>App Store and Google Play screenshots</strong> from your own captures. Draft the story with a vision model, refine it in a live editor, then export for iPhone, iPad and Android.</p>
 
-English · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Español](README.es.md)
+<p align="center"><code>Python 3.11+</code> · Linux / macOS / Windows · 17 output languages · AGPLv3+</p>
 
-[Get started](#quick-start) · [See the workflow](#from-capture-to-store-artwork) · [Languages](#languages) · [Contribute](#build-with-us)
+<p align="center">English · <a href="README.zh-CN.md">简体中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a> · <a href="README.es.md">Español</a></p>
 
-![NimoteShot live screenshot editor showing mixed English and Chinese title edits beside the rendered App Store preview](web/assets/redefine_promotion.png)
+<p align="center"><a href="#quick-start">Get started</a> · <a href="#from-capture-to-store-artwork">See the workflow</a> · <a href="#languages">Languages</a> · <a href="#build-with-us">Contribute</a></p>
 
-*Edit the title, subtitle or layout beside the result. Changes update the affected previews locally, without another AI call. The image above is the working editor.*
+<p align="center">
+  <img src="web/assets/redefine_promotion.png" alt="NimoteShot live screenshot editor showing mixed English and Chinese title edits beside the rendered App Store preview" width="560">
+</p>
+
+<p align="center"><em>Edit the title, subtitle or layout beside the result. Changes update the affected previews locally, without another AI call.</em></p>
 
 ## Why use NimoteShot?
 
@@ -72,6 +76,12 @@ If the port is occupied, a verified idle studio from this checkout is shut down 
 </details>
 
 ## From capture to store artwork
+
+<p align="center">
+  <img src="web/assets/snapshot.png" alt="NimoteShot Screenshot Builder product-context step" width="760">
+</p>
+
+<p align="center"><em>Start with product context, then move from real captures to polished store artwork.</em></p>
 
 1. **Add your product.** Enter an app name and a short description or public HTTPS website. Upload 1–40 real captures.
 2. **Choose the output.** Select languages, device sizes and a design direction. Use AI analysis or start with manual design.

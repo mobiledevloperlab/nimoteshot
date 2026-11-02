@@ -2,19 +2,25 @@
   <img src="web/assets/nimoteshot-logo.svg" alt="NimoteShot" width="320">
 </p>
 
-# NimoteShot — AI アプリストア用スクリーンショットジェネレーター
+<h1 align="center">NimoteShot</h1>
 
-**実際の画面から、編集できる文言とローカル PNG 書き出しへ。**
+<p align="center"><strong>AI アプリストア用スクリーンショットジェネレーター</strong></p>
 
-アプリの実画面を **App Store と Google Play** 向けの素材に仕上げます。視覚モデルで文言を下書きし、ライブエディターでテキストとレイアウトを調整して、iPhone・iPad・Android 用の画像を書き出せます。アプリ公開を準備する個人開発者や製品チーム向けです。
+<p align="center">実際の画面から、編集できる文言とローカル PNG 書き出しへ。</p>
 
-**Python 3.11+ · Linux / macOS / Windows · 出力言語 17 種類 · AGPLv3+**
+<p align="center">アプリの実画面を <strong>App Store と Google Play</strong> 向けの素材に仕上げます。視覚モデルで文言を下書きし、ライブエディターでテキストとレイアウトを調整して、iPhone・iPad・Android 用の画像を書き出せます。</p>
 
-[English](README.md) · [简体中文](README.zh-CN.md) · 日本語 · [한국어](README.ko.md) · [Español](README.es.md)
+<p align="center"><code>Python 3.11+</code> · Linux / macOS / Windows · 出力言語 17 種類 · AGPLv3+</p>
 
-![英語と中国語を混在させたタイトルと、その変更を反映する NimoteShot のライブプレビュー](web/assets/redefine_promotion.png)
+<p align="center"><a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a> · 日本語 · <a href="README.ko.md">한국어</a> · <a href="README.es.md">Español</a></p>
 
-*タイトル・サブタイトル・レイアウトを結果の隣で編集。影響するプレビューだけをローカルで更新し、追加の AI 呼び出しは不要です。実際に動作している編集画面です。*
+<p align="center"><a href="#クイックスタート">クイックスタート</a> · <a href="#画面からストア素材へ">ワークフロー</a> · <a href="#言語とフォント">言語</a> · <a href="#一緒に改善する">コントリビュート</a></p>
+
+<p align="center">
+  <img src="web/assets/redefine_promotion.png" alt="英語と中国語を混在させたタイトルと、その変更を反映する NimoteShot のライブプレビュー" width="560">
+</p>
+
+<p align="center"><em>タイトル・サブタイトル・レイアウトを結果の隣で編集。影響するプレビューだけをローカルで更新し、追加の AI 呼び出しは不要です。</em></p>
 
 ## NimoteShot を使う理由
 
@@ -49,6 +55,12 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 インストーラーが `.venv` と依存関係を準備して起動します。**ターミナルに表示された URL** を開いてください。既定は `http://127.0.0.1:8765` です。まず **Manual design** で、キーなしで編集を試せます。
 
 ## 画面からストア素材へ
+
+<p align="center">
+  <img src="web/assets/snapshot.png" alt="NimoteShot Screenshot Builder の製品コンテキスト入力画面" width="760">
+</p>
+
+<p align="center"><em>製品情報を加え、実画面から完成度の高いストア素材へ進みます。</em></p>
 
 1. アプリ名、説明または公開 HTTPS サイトを入力し、実画面を 1～40 枚追加します。
 2. 出力言語、端末サイズ、デザイン方向を選び、AI 分析または手動デザインを開始します。

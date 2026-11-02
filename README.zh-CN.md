@@ -2,21 +2,25 @@
   <img src="web/assets/nimoteshot-logo.svg" alt="NimoteShot" width="320">
 </p>
 
-# NimoteShot — 开源 AI 应用商店截图生成器
+<h1 align="center">NimoteShot</h1>
 
-**真实界面，文案可改，多语言截图在本地导出。**
+<p align="center"><strong>开源 AI 应用商店截图生成器</strong></p>
 
-把自己的应用截图，制作成适用于 **App Store 和 Google Play** 的上架素材。让视觉模型起草卖点，在实时编辑器中调整文案与布局，再导出 iPhone、iPad、Android 所需的图片。适合准备发布应用的独立开发者与产品团队。
+<p align="center">真实界面，文案可改，多语言截图在本地导出。</p>
 
-**Python 3.11+ · Linux / macOS / Windows · 17 种输出语言 · AGPLv3+**
+<p align="center">把自己的应用截图制作成适用于 <strong>App Store 和 Google Play</strong> 的上架素材。让视觉模型起草卖点，在实时编辑器中调整文案与布局，再导出 iPhone、iPad、Android 所需的图片。</p>
 
-[English](README.md) · 简体中文 · [日本語](README.ja.md) · [한국어](README.ko.md) · [Español](README.es.md)
+<p align="center"><code>Python 3.11+</code> · Linux / macOS / Windows · 17 种输出语言 · AGPLv3+</p>
 
-[快速开始](#快速开始) · [查看效果](#从真实界面到上架素材) · [语言支持](#语言支持) · [参与共建](#参与共建)
+<p align="center"><a href="README.md">English</a> · 简体中文 · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a> · <a href="README.es.md">Español</a></p>
 
-![NimoteShot 实时截图编辑器：在标题中编辑中英混排文字，旁边同步显示 App Store 截图预览](web/assets/redefine_promotion.png)
+<p align="center"><a href="#快速开始">快速开始</a> · <a href="#从真实界面到上架素材">查看效果</a> · <a href="#语言支持">语言支持</a> · <a href="#参与共建">参与共建</a></p>
 
-*直接在结果旁修改标题、副标题和布局，只重新渲染受影响的预览，无需再次调用 AI。上图为实际运行中的编辑界面。*
+<p align="center">
+  <img src="web/assets/redefine_promotion.png" alt="NimoteShot 实时截图编辑器：在标题中编辑中英混排文字，旁边同步显示 App Store 截图预览" width="560">
+</p>
+
+<p align="center"><em>直接在结果旁修改标题、副标题和布局，只重新渲染受影响的预览，无需再次调用 AI。</em></p>
 
 ## 为什么使用 NimoteShot？
 
@@ -72,6 +76,12 @@ python scripts/nimoteshot.py web
 </details>
 
 ## 从真实界面到上架素材
+
+<p align="center">
+  <img src="web/assets/snapshot.png" alt="NimoteShot 截图生成器的产品信息步骤" width="760">
+</p>
+
+<p align="center"><em>先补充产品信息，再把真实界面制作成精致的上架素材。</em></p>
 
 1. **添加产品信息。** 填写应用名称、功能简介或公开 HTTPS 网站，上传 1–40 张真实界面截图。
 2. **选择输出方向。** 勾选语言、设备尺寸和设计风格，使用 AI 分析或手动设计。

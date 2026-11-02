@@ -2,19 +2,25 @@
   <img src="web/assets/nimoteshot-logo.svg" alt="NimoteShot" width="320">
 </p>
 
-# NimoteShot — Generador de capturas para App Store con IA
+<h1 align="center">NimoteShot</h1>
 
-**Pantallas reales. Textos editables. Exportación PNG local.**
+<p align="center"><strong>Generador de capturas para App Store con IA</strong></p>
 
-Convierte capturas de tu aplicación en imágenes para **App Store y Google Play**. Un modelo visual redacta el texto inicial; tú ajustas los textos y el diseño en un editor con vista previa y exportas imágenes para iPhone, iPad y Android. Para desarrolladores independientes y equipos que preparan su próximo lanzamiento.
+<p align="center">Pantallas reales. Textos editables. Exportación PNG local.</p>
 
-**Python 3.11+ · Linux / macOS / Windows · 17 idiomas de salida · AGPLv3+**
+<p align="center">Convierte capturas de tu aplicación en imágenes para <strong>App Store y Google Play</strong>. Un modelo visual redacta el texto inicial; tú lo ajustas en un editor con vista previa y exportas para iPhone, iPad y Android.</p>
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · Español
+<p align="center"><code>Python 3.11+</code> · Linux / macOS / Windows · 17 idiomas de salida · AGPLv3+</p>
 
-![Editor de NimoteShot con un título en inglés y chino y su vista previa de App Store actualizada al lado](web/assets/redefine_promotion.png)
+<p align="center"><a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a> · <a href="README.ja.md">日本語</a> · <a href="README.ko.md">한국어</a> · Español</p>
 
-*Edita el título, subtítulo y diseño junto al resultado. Solo se actualizan las vistas afectadas, de forma local y sin otra llamada a la IA. La imagen muestra el editor en funcionamiento.*
+<p align="center"><a href="#inicio-rápido">Inicio rápido</a> · <a href="#de-la-captura-a-la-imagen-de-tienda">Flujo</a> · <a href="#idiomas-y-fuentes">Idiomas</a> · <a href="#construyámoslo-juntos">Contribuir</a></p>
+
+<p align="center">
+  <img src="web/assets/redefine_promotion.png" alt="Editor de NimoteShot con un título en inglés y chino y su vista previa de App Store actualizada al lado" width="560">
+</p>
+
+<p align="center"><em>Edita el título, subtítulo y diseño junto al resultado. Solo se actualizan las vistas afectadas, de forma local y sin otra llamada a la IA.</em></p>
 
 ## Por qué usar NimoteShot
 
@@ -49,6 +55,12 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1
 El instalador prepara `.venv`, instala las dependencias e inicia el estudio. Abre la **URL que aparece en el terminal**; la predeterminada es `http://127.0.0.1:8765`. Elige **Manual design** para probar el editor sin una clave de modelo.
 
 ## De la captura a la imagen de tienda
+
+<p align="center">
+  <img src="web/assets/snapshot.png" alt="Paso de contexto del producto en Screenshot Builder de NimoteShot" width="760">
+</p>
+
+<p align="center"><em>Añade primero el contexto del producto y pasa de capturas reales a material de tienda pulido.</em></p>
 
 1. Introduce el nombre y una descripción o web HTTPS pública. Añade entre 1 y 40 capturas reales.
 2. Elige idiomas, tamaños y dirección visual. Inicia el análisis con IA o el diseño manual.
