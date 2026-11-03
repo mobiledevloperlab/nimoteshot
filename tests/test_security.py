@@ -73,19 +73,24 @@ class LocalHTTPTests(unittest.TestCase):
     def test_rebinding_host_blocks_reads_and_writes_before_provider_calls(self):
         with patch.object(server, 'check_connection') as check:
             for method, path in [('GET', '/api/options'), ('POST', '/api/check-model')]:
-                status, _ = self.request(method, path, '{}', {'Host': f'evil.example:{self.port}'})
+                # Rejection must precede body validation. Avoid sending unread
+                # bytes: closing with pending data can reset the TCP connection
+                # on Windows before the client receives the 403 response.
+                status, _ = self.request(method, path, headers={
+                    'Host': f'evil.example:{self.port}', 'Content-Length': '0',
+                })
                 self.assertEqual(status, 403)
             check.assert_not_called()
 
     def test_cross_origin_and_cross_site_blocked(self):
         for headers in ({'Origin': 'https://evil.example'}, {'Origin': 'null'}, {'Sec-Fetch-Site': 'cross-site'}):
-            self.assertEqual(self.request('POST', '/api/check-model', '{}', headers)[0], 403)
+            self.assertEqual(self.request('POST', '/api/check-model', headers={**headers, 'Content-Length': '0'})[0], 403)
 
     def test_invalid_json_shape_and_length_return_client_error(self):
         for body in ('[]', 'null', '"text"', '{'):
             self.assertEqual(self.request('POST', '/api/check-model', body)[0], 400)
-        self.assertEqual(self.request('POST', '/api/check-model', '{}', {'Content-Length': 'invalid'})[0], 400)
-        self.assertEqual(self.request('POST', '/api/check-model', '{}', {'Content-Length': '10001'})[0], 413)
+        self.assertEqual(self.request('POST', '/api/check-model', headers={'Content-Length': 'invalid'})[0], 400)
+        self.assertEqual(self.request('POST', '/api/check-model', headers={'Content-Length': '10001'})[0], 413)
 
     def test_same_origin_post_succeeds(self):
         with patch.object(server, 'check_connection', return_value={'ready': True}):
