@@ -93,8 +93,19 @@ function renderMarkdown(markdown, source) {
     }
     if (codeLines !== null) { codeLines.push(line); index += 1; continue; }
     const picture = /^!\[([^\]]*)\]\(([^)\s]+)\)$/.exec(line.trim());
-    if (picture) {
-      const image = document.createElement('img');image.alt = picture[1];image.src = resolveTarget(picture[2], source);image.loading = 'lazy';
+    // README showcase images use HTML for GitHub sizing. Read their attributes
+    // in an inert template and build a fresh image without copying HTML handlers.
+    let htmlPicture = null;
+    if (/^<img\b[^>]*>$/i.test(line.trim())) {
+      const template = document.createElement('template');
+      template.innerHTML = line.trim();
+      htmlPicture = template.content.querySelector('img[src]');
+    }
+    if (picture || htmlPicture) {
+      const image = document.createElement('img');
+      image.alt = picture ? picture[1] : htmlPicture.getAttribute('alt') || '';
+      image.src = resolveTarget(picture ? picture[2] : htmlPicture.getAttribute('src'), source);
+      image.loading = 'lazy';
       const figure = document.createElement('figure');figure.className = 'docs-figure';figure.append(image);fragment.append(figure);
       index += 1;continue;
     }

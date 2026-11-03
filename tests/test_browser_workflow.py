@@ -409,14 +409,38 @@ class BrowserWorkflowTests(unittest.TestCase):
                 self.assertGreater(len(self.page.locator('#doc-content').inner_text()), 500)
                 self.assertEqual(self.page.locator('.docs-sidebar a.active').count(), 1)
                 if slug in ('guide','guide-zh'):
-                    image=self.page.locator('.docs-figure img[src="/assets/redefine_promotion.png"]')
-                    self.assertEqual(image.count(),1)
-                    image.scroll_into_view_if_needed()
-                    self.page.wait_for_function("document.querySelector('.docs-figure img').naturalWidth > 0")
-                    self.assertEqual(image.get_attribute('alt').strip()!='',True)
+                    for asset in ('nimoteshot-logo.svg','redefine_promotion.png','snapshot.png'):
+                        image=self.page.locator(f'.docs-figure img[src="/assets/{asset}"]')
+                        self.assertEqual(image.count(),1)
+                        image.scroll_into_view_if_needed()
+                        self.page.wait_for_function('(image)=>image.complete && image.naturalWidth > 0',arg=image.element_handle())
+                        self.assertTrue(image.get_attribute('alt').strip())
                     self.assertEqual(self.page.locator('#'+('quick-start' if slug=='guide' else '快速开始')).count(),1)
                 self.assertFalse(self.page.evaluate('document.documentElement.scrollWidth > innerWidth + 1'))
         self.assertEqual(self.errors, [])
+
+    def test_document_images_support_markdown_and_html_without_copying_handlers(self):
+        self.page.goto(f'{self.url}/docs/guide')
+        self.page.wait_for_function("document.querySelectorAll('#doc-content > *').length > 2")
+        self.page.evaluate('''() => renderMarkdown(`
+![Markdown image](web/assets/snapshot.png)
+
+<p align="center">
+  <img src='web/assets/redefine_promotion.png' alt='Editor &amp; preview' onload='window.unsafeImageHandler=true' style='display:none' width='560'>
+</p>
+`, 'README.md')''')
+        images=self.page.locator('#doc-content .docs-figure img')
+        self.assertEqual(images.count(),2)
+        self.assertEqual(images.nth(0).get_attribute('src'),'/assets/snapshot.png')
+        self.assertEqual(images.nth(1).get_attribute('src'),'/assets/redefine_promotion.png')
+        self.assertEqual(images.nth(1).get_attribute('alt'),'Editor & preview')
+        for image in images.all():
+            image.scroll_into_view_if_needed()
+            self.page.wait_for_function('(image)=>image.complete && image.naturalWidth > 0',arg=image.element_handle())
+            self.assertIsNone(image.get_attribute('onload'))
+            self.assertIsNone(image.get_attribute('style'))
+        self.assertFalse(self.page.evaluate('window.unsafeImageHandler === true'))
+        self.assertEqual(self.errors,[])
 
     @unittest.skipUnless(os.environ.get('SHOTNIMOTE_LIVE_TEST') == '1','Live API testing is explicitly opt-in')
     def test_live_two_image_analysis_copy_layout_and_export(self):
